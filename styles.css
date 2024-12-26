@@ -2,7 +2,7 @@
     display: inline-block;
 }
 .dropdown button{
-    background-color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 60%);
     color: white;
     padding: 10px 15px;
     border: none;
@@ -25,7 +25,7 @@
     display: block;
 }
 .dropdown:hover button{
-    background-color: hsl(0, 0%, 70%);
+    background-color: hsl(0, 0%, 46%);
 }
 .dropdown a:hover{
     background-color: hsl(0, 0%, 90%);
