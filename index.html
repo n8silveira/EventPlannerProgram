@@ -10,22 +10,38 @@
 
         <P>Name:</P>
         <p>Days:</p>
-        <button id = b1> Monday </button>
-        <button> Tuesday </button>
-        <button> Wednesday </button>
-        <button> Thursday </button>
-        <button> Friday </button>
-        <button> Saturday </button>
-        <button> Sunday </button>
+        <button type = "button", button id = b1  onclick = "changeColor1()"> Monday </button>
+        <button type = "button", button id = b2  onclick = "changeColor2()"> Tuesday </button>
+        <button type = "button", button id = b3  onclick = "changeColor3()"> Wednesday </button>
+        <button type = "button", button id = b4  onclick = "changeColor4()"> Thursday </button>
+        <button type = "button", button id = b5  onclick = "changeColor5()"> Friday </button>
+        <button type = "button", button id = b6  onclick = "changeColor6()"> Saturday </button>
+        <button type = "button", button id = b7  onclick = "changeColor7()"> Sunday </button>
 
         <script>
-            function sayHello(){
-                alert("Hello");
+            function changeColor1(){
+                document.getElementById("b1").style.backgroundColor = "green";
             }
-            var b1 = document.getElementById("b1");
-            b1.onclick = function(){
-                alert("Hello");
+            function changeColor2(){
+                document.getElementById("b2").style.backgroundColor = "green";
             }
+            function changeColor3(){
+                document.getElementById("b3").style.backgroundColor = "green";
+            }
+            function changeColor4(){
+                document.getElementById("b4").style.backgroundColor = "green";
+            }
+            function changeColor5(){
+                document.getElementById("b5").style.backgroundColor = "green";
+            }
+            function changeColor6(){
+                document.getElementById("b6").style.backgroundColor = "green";
+            }
+            function changeColor7(){
+                document.getElementById("b7").style.backgroundColor = "green";
+            }
+            
+            
         </script>
     </body>
 
