@@ -1,0 +1,10 @@
+{
+    "eventId":"134jlj423jl20",
+    "eventName":"Bible talk",
+    "days": ["Monday","Tuesday","Wednesday"],
+    "plannerUsername":"josh",
+    "plannerPassword":"123",
+    "startTime":"9:00",
+    "endTime":"17:00",
+    "schedules": [{"josh":{}},{"nate":{}}]
+}
