@@ -1,144 +1,146 @@
 <html>
+    <h1> EPP.com </h1>
+    <a href="index.html">
+        <button> Home </button>
+    </a>
+    <a href="about.html">
+        <button> About </button>
+    </a>
+    <br><br>
     <body>
-        <h1>EPP.com</h1>
-        <a href="index.html">
-            <button>  Home  </button>
-        </a>
-        <a href="about.html">
-            <button>  About  </button>
-        </a>
-
-        <P>Name:</P> 
-        <p>Days:</p>
-        <button type = "button", style = "background-color: gainsboro;",button id = b1  onclick = "changeColor1()"> Monday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b2  onclick = "changeColor2()"> Tuesday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b3  onclick = "changeColor3()"> Wednesday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b4  onclick = "changeColor4()"> Thursday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b5  onclick = "changeColor5()"> Friday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b6  onclick = "changeColor6()"> Saturday </button>
-        <button type = "button", style = "background-color: gainsboro;",button id = b7  onclick = "changeColor7()"> Sunday </button>
-
+    <p id="error-message"></p>
+    <form id="form">
+        Event Name: <input type = "text" name = "eventName" id = "event-name">
+        <br><br>
+        Days:
+            <button type = "button", style = "background-color: gainsboro;",button id = b1  onclick = "changeColor1()"> Sunday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b2  onclick = "changeColor2()"> Monday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b3  onclick = "changeColor3()"> Tuesday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b4  onclick = "changeColor4()"> Wednesday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b5  onclick = "changeColor5()"> Thursday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b6  onclick = "changeColor6()"> Friday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b7  onclick = "changeColor7()"> Saturday </button>
         <script>
-            function changeColor1(){
-                if(document.getElementById("b1").style.backgroundColor == "gainsboro"){
+            function changeColor1() { // sunday
+                if (document.getElementById("b1").style.backgroundColor == "gainsboro") {
                     document.getElementById("b1").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b1").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b1").style.backgroundColor = "gainsboro";
             }
-            function changeColor3(){
-                if(document.getElementById("b3").style.backgroundColor == "gainsboro"){
-                    document.getElementById("b3").style.backgroundColor = "lightgreen";
-                }
-                else
-                document.getElementById("b3").style.backgroundColor = "gainsboro";
-            }
-            function changeColor2(){
-                if(document.getElementById("b2").style.backgroundColor == "gainsboro"){
+            function changeColor2() { // monday
+                if (document.getElementById("b2").style.backgroundColor == "gainsboro") {
                     document.getElementById("b2").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b2").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b2").style.backgroundColor = "gainsboro";
             }
-            function changeColor4(){
-                if(document.getElementById("b4").style.backgroundColor == "gainsboro"){
+            function changeColor3() { // tuesday
+                if (document.getElementById("b3").style.backgroundColor == "gainsboro") {
+                    document.getElementById("b3").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b3").style.backgroundColor = "gainsboro";
+                }
+            }
+            function changeColor4() { // wednesday
+                if (document.getElementById("b4").style.backgroundColor == "gainsboro") {
                     document.getElementById("b4").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b4").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b4").style.backgroundColor = "gainsboro";
             }
-            function changeColor5(){
-                if(document.getElementById("b5").style.backgroundColor == "gainsboro"){
+            function changeColor5() { // thursday
+                if (document.getElementById("b5").style.backgroundColor == "gainsboro") {
                     document.getElementById("b5").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b5").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b5").style.backgroundColor = "gainsboro";
             }
-            function changeColor6(){
-                if(document.getElementById("b6").style.backgroundColor == "gainsboro"){
+            function changeColor6() { // friday
+                if (document.getElementById("b6").style.backgroundColor == "gainsboro") {
                     document.getElementById("b6").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b6").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b6").style.backgroundColor = "gainsboro";
             }
-            function changeColor7(){
-                if(document.getElementById("b7").style.backgroundColor == "gainsboro"){
+            function changeColor7() { // saturday
+                if (document.getElementById("b7").style.backgroundColor == "gainsboro") {
                     document.getElementById("b7").style.backgroundColor = "lightgreen";
+                } else {
+                    document.getElementById("b7").style.backgroundColor = "gainsboro";
                 }
-                else
-                document.getElementById("b7").style.backgroundColor = "gainsboro";
             }
         </script>
-    <br></br>
-    <link rel ="stylesheet" href="styles.css">
-    <div class="dropdown">
-        <label for="time-options">No earlier than:</label>
-        <select name="time-options" id="time-options">/select>
-        <div class="content">
-            <option href="">12:00 AM</option>
-            <option href="">1:00 AM</option>
-            <option href="">2:00 AM</option>
-            <option href="">3:00 AM</option>
-            <option href="">4:00 AM</option>
-            <option href="">5:00 AM</option>
-            <option href="">6:00 AM</option>
-            <option href="">7:00 AM</option>
-            <option href="">8:00 AM</option>
-            <option href="">9:00 AM</option>
-            <option href="">10:00 AM</option>
-            <option href="">11:00 AM</option>
-            <option href="">12:00 PM</option>
-            <option href="">1:00 PM</option>
-            <option href="">2:00 PM</option>
-            <option href="">3:00 PM</option>
-            <option href="">4:00 PM</option>
-            <option href="">5:00 PM</option>
-            <option href="">6:00 PM</option>
-            <option href="">7:00 PM</option>
-            <option href="">8:00 PM</option>
-            <option href="">9:00 PM</option>
-            <option href="">10:00 PM</option>
-            <option href="">11:00 PM</option>
-            <option href="">12:00 AM</option>
+        <br></br>
+        <link rel ="stylesheet" href="styles.css">
+        <div class="dropdown">
+            <label for="time-options">No earlier than:</label>
+            <select name="time-options" id="earliest-times">
+                <div class="content">
+                    <option id='24e' href="">12:00 AM</option>
+                    <option id='1e' href="">1:00 AM</option>
+                    <option id='2e' href="">2:00 AM</option>
+                    <option id='3e' href="">3:00 AM</option>
+                    <option id='4e' href="">4:00 AM</option>
+                    <option id='5e' href="">5:00 AM</option>
+                    <option id='6e' href="">6:00 AM</option>
+                    <option id='7e' href="">7:00 AM</option>
+                    <option id='8e' href="">8:00 AM</option>
+                    <option id='9e' href="">9:00 AM</option>
+                    <option id='10e' href="">10:00 AM</option>
+                    <option id='11e' href="">11:00 AM</option>
+                    <option id='12e' href="">12:00 PM</option>
+                    <option id='13e' href="">1:00 PM</option>
+                    <option id='14e' href="">2:00 PM</option>
+                    <option id='15e' href="">3:00 PM</option>
+                    <option id='16e' href="">4:00 PM</option>
+                    <option id='17e' href="">5:00 PM</option>
+                    <option id='18e' href="">6:00 PM</option>
+                    <option id='19e' href="">7:00 PM</option>
+                    <option id='20e' href="">8:00 PM</option>
+                    <option id='21e' href="">9:00 PM</option>
+                    <option id='22e' href="">10:00 PM</option>
+                    <option id='23e' href="">11:00 PM</option>
+                    <option id='24e' href="">12:00 AM</option>
+                </div>
+            </select>
         </div>
-    </select></div>
-    <br></br>
-
-    <br></br>
-    <link rel ="stylesheet" href="styles.css">
-    <div class="dropdown">
-        <label for="time-options">No later than:</label>
-        <select name="time-options" id="time-options">/select>
-        <div class="content">
-            <option href="">12:00 AM</option>
-            <option href="">1:00 AM</option>
-            <option href="">2:00 AM</option>
-            <option href="">3:00 AM</option>
-            <option href="">4:00 AM</option>
-            <option href="">5:00 AM</option>
-            <option href="">6:00 AM</option>
-            <option href="">7:00 AM</option>
-            <option href="">8:00 AM</option>
-            <option href="">9:00 AM</option>
-            <option href="">10:00 AM</option>
-            <option href="">11:00 AM</option>
-            <option href="">12:00 PM</option>
-            <option href="">1:00 PM</option>
-            <option href="">2:00 PM</option>
-            <option href="">3:00 PM</option>
-            <option href="">4:00 PM</option>
-            <option href="">5:00 PM</option>
-            <option href="">6:00 PM</option>
-            <option href="">7:00 PM</option>
-            <option href="">8:00 PM</option>
-            <option href="">9:00 PM</option>
-            <option href="">10:00 PM</option>
-            <option href="">11:00 PM</option>
-            <option href="">12:00 AM</option>
+        <br></br>
+        <link rel ="stylesheet" href="styles.css">
+        <div class="dropdown">
+            <label for="time-options">No later than:</label>
+            <select name="time-options" id="latest-times">
+                <div class="content">
+                    <option id='24l' href="">12:00 AM</option>
+                    <option id='1l' href="">1:00 AM</option>
+                    <option id='2l' href="">2:00 AM</option>
+                    <option id='3l' href="">3:00 AM</option>
+                    <option id='4l' href="">4:00 AM</option>
+                    <option id='5l' href="">5:00 AM</option>
+                    <option id='6l' href="">6:00 AM</option>
+                    <option id='7l' href="">7:00 AM</option>
+                    <option id='8l' href="">8:00 AM</option>
+                    <option id='9l' href="">9:00 AM</option>
+                    <option id='10l' href="">10:00 AM</option>
+                    <option id='11l' href="">11:00 AM</option>
+                    <option id='12l' href="">12:00 PM</option>
+                    <option id='13l' href="">1:00 PM</option>
+                    <option id='14l' href="">2:00 PM</option>
+                    <option id='15l' href="">3:00 PM</option>
+                    <option id='16l' href="">4:00 PM</option>
+                    <option id='17l' href="">5:00 PM</option>
+                    <option id='18l' href="">6:00 PM</option>
+                    <option id='19l' href="">7:00 PM</option>
+                    <option id='20l' href="">8:00 PM</option>
+                    <option id='21l' href="">9:00 PM</option>
+                    <option id='22l' href="">10:00 PM</option>
+                    <option id='23l' href="">11:00 PM</option>
+                    <option id='24l' href="">12:00 AM</option>
+                </div>
+            </select>
         </div>
-    </select></div>
-    <br></br>
-
-    <button> Create Event </button>
+        <br></br>
+        <button id = "create-event"> Create Event </button>
+    </form>
     </body>    
 </html>

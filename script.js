@@ -1,35 +1,93 @@
-const express = require('express');
-const path = require('path');
-const port = 8080
+const form = document.getElementById('form') // entire first page
+const eventName = document.getElementById('event-name')
+const eventDays = document.getElementById('event-days')
+const earliestTime = document.getElementById('earliest-times')
+const latestTime = document.getElementById('latest-times')
+const errorMessage = document.getElementById('error-message')
 
-const app = express();
-
-// get endpoint listens on home route
-app.get('/api/user', (req, res) => { // callback: request, response
-    const users = [{
-        id: '123',
-        name: 'jawsh',
-    }, {
-        id: '765',
-        name: 'keyshawn',
-    }, {
-        id: '429',
-        name: 'that boy darren',
-    }];
-    res.json(users);
-});
-
-app.post('/', (req, res) => {
-    const {parcel} = req.body;
-    if (!parcel) {
-        return res.status(400).send({status: 'failed...'});
+form.addEventListener('createEvent', (e) => {
+    let errors = []
+    if (eventName) {
+        // if we have an input for 'Event Name', then we're in the signup
+        errors = getSignupFormErrors(eventName.value, eventDays.value, earliestTime.value, latestTime.value)
     }
-    res.status(200).send({status: 'received!'});
-});
+    // else {
+    //     // if we don't have an input for 'Event Name', then we're in the login
+    //     errors = getLoginFormErrors(eventName.value, eventDays.value)
+    // }
+    if (errors.length > 0) {
+        // checks if there are any errors in the array
+        e.preventDefault()// form will not be submitted until 'Create Event' is clicked
+        errorMessage.innerText = errors.join(". ")
+    }
+})
 
-app.listen(port, () => {
-    console.log(`server stay listening on port: ${port} lol`);
-});
+function getSignupFormErrors(name, days, early, late) {
+    let errors = []
+    // if user doesn't input an event name
+    if (name === '' || name == null) {
+        errors.push('You don\'t want to name your event?')
+        eventName.parentElement.classList.add('incorrect')
+    }
+    // if user doesn't select any days (all buttons are gray)
+    if (days === '' || days == null) {
+        errors.push('Days are required')
+        eventDays.parentElement.classList.add('incorrect')
+    }
+    if (early === '' || early == null) {
+        errors.push('Earliest time limit is required')
+        earliestTime.parentElement.classList.add('incorrect')
+    }
+    if (late === '' || late == null) {
+        errors.push('Latest time limit is required')
+        latestTime.parentElement.classList.add('incorrect')
+    }
+    return errors;
+}
+
+const allInputs = [eventName, eventDays, earliestTime, latestTime]
+allInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        // remove error styling if fixed
+        if (input.parentElement.classList.contains('incorrect')) {
+            input.parentElement.classList.remove('incorrect')
+            errorMessage.innerText = ''
+        }
+    })
+})
+
+// const express = require('express');
+// const path = require('path');
+// const port = 8080
+
+// const app = express();
+
+// // get endpoint listens on home route
+// app.get('/api/user', (req, res) => { // callback: request, response
+//     const users = [{
+//         id: '123',
+//         name: 'jawsh',
+//     }, {
+//         id: '765',
+//         name: 'keyshawn',
+//     }, {
+//         id: '429',
+//         name: 'that boy darren',
+//     }];
+//     res.json(users);
+// });
+
+// app.post('/', (req, res) => {
+//     const {parcel} = req.body;
+//     if (!parcel) {
+//         return res.status(400).send({status: 'failed...'});
+//     }
+//     res.status(200).send({status: 'received!'});
+// });
+
+// app.listen(port, () => {
+//     console.log(`server stay listening on port: ${port} lol`);
+// });
 
 /*  
     back-end: function of the code (making data representations for an event)
