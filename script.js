@@ -3,19 +3,22 @@ const eventName = document.getElementById('event-name')
 const eventDays = document.getElementById('event-days')
 const earliestTime = document.getElementById('earliest-times')
 const latestTime = document.getElementById('latest-times')
+const errorMessage = document.getElementById('error-message')
 
 form.addEventListener('createEvent', (e) => {
     let errors = []
     if (eventName) {
         // if we have an input for 'Event Name', then we're in the signup
         errors = getSignupFormErrors(eventName.value, eventDays.value, earliestTime.value, latestTime.value)
-    } else {
-        // if we don't have an input for 'Event Name', then we're in the login
-        errors = getLoginFormErrors(eventName.value, eventDays.value)
     }
+    // else {
+    //     // if we don't have an input for 'Event Name', then we're in the login
+    //     errors = getLoginFormErrors(eventName.value, eventDays.value)
+    // }
     if (errors.length > 0) {
         // checks if there are any errors in the array
         e.preventDefault()// form will not be submitted until 'Create Event' is clicked
+        errorMessage.innerText = errors.join(". ")
     }
 })
 
@@ -42,7 +45,16 @@ function getSignupFormErrors(name, days, early, late) {
     return errors;
 }
 
-
+const allInputs = [eventName, eventDays, earliestTime, latestTime]
+allInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        // remove error styling if fixed
+        if (input.parentElement.classList.contains('incorrect')) {
+            input.parentElement.classList.remove('incorrect')
+            errorMessage.innerText = ''
+        }
+    })
+})
 
 // const express = require('express');
 // const path = require('path');
