@@ -12,6 +12,7 @@ const db = knex({
         database: 'mydb'
     }
 })
+
 const app = express();
 
 let initialPath = __dirname
@@ -86,18 +87,6 @@ app.listen(port, (req, res) => {
 //     }
 //     res.status(200).send({status: 'received!'});
 // });
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 // const form = document.getElementById('form') // entire first page
 // const eventName = document.getElementById('event-name')

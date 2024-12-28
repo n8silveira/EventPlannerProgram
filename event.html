@@ -1,5 +1,6 @@
-<html lang="en">
-    <h1>EPP.com - Login</h1>
+<html>
+<h1>EPP.com - Login</h1>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,29 +8,40 @@
 
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <a href="index.html">
-        <button onclick="index.html"> Home </button>
-    </a>
-    <a href="about.html">
-        <button onclick="about.html"> About </button>
-    </a>
-    <div class="alert-box">
-        <p class="alert">Error</p>
-    </div>
-    
+
+<body onload="get()">
+    <a href="index.html"><button onclick="index.html"> Home </button></a>
+    <a href="about.html"><button onclick="about.html"> About </button></a>
+    <!-- <div class="alert-box"><p class="alert">Error</p></div> -->
+
+    <p id="savedText"> </p>
+    <p id="openedText"> </p>
+
     <div class="form">
         <br>
-        <input type="your-name" placeholder="Your Name" autocomplete="off" class="your-name" required>
-        <input type="password" placeholder="Password" autocomplete="off" class="password" required>
+        <input type="text" name="username" placeholder="Your Name" autocomplete="off" class="your-name" id="username" required>
+        <input type="password" name="password" placeholder="Password" autocomplete="off" class="password" id="password" required>
         <br><br>
-        <button class="submit-btn">Log In</button>
+        <button onclick="save()" class="submit-btn">Log In</button>
         <br>
         <p>Name/password are only for this event.<br>New to this event? Make up a password.<br>Returning? Use the same name/password.</p>
         <!-- <a href="#" class="link">don't have an account? Register one</a> -->
     </div>
     <!-- <p hidden id = invis> Invisible :D</p>
     <button>Visible</button> -->
-    <script src="script.js"> </script>
 </body>
+<!-- <script src="script.js"></script> -->
+
+<script>
+    var storedName = localStorage.getItem("storedName")
+    function save() {
+        var item = document.getElementById("username").value;
+        localStorage.setItem("storedName", item)
+        document.getElementsById("savedText").innerHTML = item + " SAVED";
+    }
+    function get() {
+        localStorage.getItem("storedName");
+        document.getElementById("openedText").innerHTML = storedItem + " OPENED";
+    }
+</script>
 </html>
