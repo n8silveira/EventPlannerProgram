@@ -13,10 +13,17 @@ app.use(express.json());
 //     }, i*100);
 // })
 
-app.post('/index.html', (req, res) => {
+app.post('/submit-form', (req, res) => {
     const data = req.body;
-    const fileName = `data-${Date.now()}.json`;
-    fs.writeFile('./index.html', JSON.stringify(data, null, 2), (err) => {
+    const path = './events';
+
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path);
+    }
+    // name new json file the event name user input
+    const fileName = `${path}/data-${Date.now()}.json`;
+
+    fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {
             console.error('Error saving file:', err);
             return res.status(500).json({ message: 'Error saving data '});
@@ -26,82 +33,77 @@ app.post('/index.html', (req, res) => {
     });
 });
 
-app.listen(5500, () => {
-    console.log('Server running on https://localhost:5500');
+app.listen(8080, () => {
+    console.log('Server running on https://localhost:8080');
 })
 
 
 
 
+// window.onload = () => {
+//     if (sessionStorage.name) {
+//         location.href = '/';
+//     }
+// }
 
+// // form validation
+// const name = document.querySelector('.name') || null;
+// const password = document.querySelector('.password')
+// const submitBtn = document.querySelector('.submit-btn')
 
+// if (name == null) { // login page is open
+//     submitBtn.addEventListener('click', () => {
+//         fetch('/event', { // FETCH: submit form
+//             method: 'post',
+//             headers: new Headers({'Content-Type': 'application/json'}),
+//             body: JSON.stringify({
+//                 password: password.value
+//             })
+//         })
+//         .then(res => res.json())
+//         // send data to server
+//         .then(data => {
+//             if (data.name) {
+//                 alert('event successful!');
+//             } else {
+//                 alert(data);
+//             }
+//         })
+//     })
+// } else {
+//     submitBtn.addEventListener('click', () => {
+//         fetch('/login', {
+//             method: 'post',
+//             headers: new Headers({'Content-Type': 'application/json'}),
+//             body: JSON.stringify({
+//                 name: name.value,
+//                 password: password.value
+//             })
+//         })
+//         .then(res => res.json())
+//         .then(data => {
+//             validateData(data)
+//         })
+//     })
+// }
 
+// const validateData = (data) => {
+//     if (!data.name) {
+//         alertBox(data);
+//     } else {
+//         sessionStorage.name = data.name;
+//         location.href = '/'
+//     }
+// }
 
+// const alertBox = (data) => {
+//     const alertContainer = document.querySelector('.alert-box');
+//     const alertMsg = document.querySelector('.alert');
+//     alertMsg.innerHTML = data;
 
-window.onload = () => {
-    if (sessionStorage.name) {
-        location.href = '/';
-    }
-}
+//     alertContainer.computedStyleMap.top = '5%';
+//     setTimeout(() => {
+//         alertContainer.computedStyleMap.top = null;
+//     }, 5000);
 
-// form validation
-const name = document.querySelector('.name') || null;
-const password = document.querySelector('.password')
-const submitBtn = document.querySelector('.submit-btn')
-
-if (name == null) { // login page is open
-    submitBtn.addEventListener('click', () => {
-        fetch('/event', { // FETCH: submit form
-            method: 'post',
-            headers: new Headers({'Content-Type': 'application/json'}),
-            body: JSON.stringify({
-                password: password.value
-            })
-        })
-        .then(res => res.json())
-        // send data to server
-        .then(data => {
-            if (data.name) {
-                alert('event successful!');
-            } else {
-                alert(data);
-            }
-        })
-    })
-} else {
-    submitBtn.addEventListener('click', () => {
-        fetch('/login', {
-            method: 'post',
-            headers: new Headers({'Content-Type': 'application/json'}),
-            body: JSON.stringify({
-                name: name.value,
-                password: password.value
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            validateData(data)
-        })
-    })
-}
-
-const validateData = (data) => {
-    if (!data.name) {
-        alertBox(data);
-    } else {
-        sessionStorage.name = data.name;
-        location.href = '/'
-    }
-}
-
-const alertBox = (data) => {
-    const alertContainer = document.querySelector('.alert-box');
-    const alertMsg = document.querySelector('.alert');
-    alertMsg.innerHTML = data;
-
-    alertContainer.computedStyleMap.top = '5%';
-    setTimeout(() => {
-        alertContainer.computedStyleMap.top = null;
-    }, 5000);
-
-}
+// }
