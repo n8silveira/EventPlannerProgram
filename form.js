@@ -1,10 +1,42 @@
-const form = [...document.querySelector('.form').children];
+const express = require('express');
+const fs = require('fs');
+const app = express();
 
-form.forEach((item, i) => {
-    setTimeout(() => {
-        item.style.opacity = 1;
-    }, i*100);
+app.use(express.json());
+
+// const form = [...document.querySelector('.form').children];
+
+// form.forEach((item, i) => {
+//     // modify when i click "create event", it saves a file called "name_of_event".json
+//     setTimeout(() => {
+//         item.style.opacity = 1;
+//     }, i*100);
+// })
+
+app.post('/index.html', (req, res) => {
+    const data = req.body;
+    const fileName = `data-${Date.now()}.json`;
+    fs.writeFile('./index.html', JSON.stringify(data, null, 2), (err) => {
+        if (err) {
+            console.error('Error saving file:', err);
+            return res.status(500).json({ message: 'Error saving data '});
+        }
+        console.log(`Data saved as ${fileName}`);
+        res.status(200).json({ message: `Data saved as ${fileName}` });
+    });
+});
+
+app.listen(5500, () => {
+    console.log('Server running on https://localhost:5500');
 })
+
+
+
+
+
+
+
+
 
 window.onload = () => {
     if (sessionStorage.name) {
@@ -30,7 +62,7 @@ if (name == null) { // login page is open
         // send data to server
         .then(data => {
             if (data.name) {
-                alert('login successful!');
+                alert('event successful!');
             } else {
                 alert(data);
             }
@@ -38,7 +70,7 @@ if (name == null) { // login page is open
     })
 } else {
     submitBtn.addEventListener('click', () => {
-        fetch('/event', {
+        fetch('/login', {
             method: 'post',
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify({

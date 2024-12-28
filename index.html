@@ -9,13 +9,13 @@
         Event Name: <input type = "text" name = "eventName" id = "event-name" placeholder = "Type Event Name Here">
         <br><br>
         Days:
-            <button type = "button", style = "background-color: gainsboro;",button id = b1  onclick = "changeColor(id)"> Sunday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b2  onclick = "changeColor(id)"> Monday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b3  onclick = "changeColor(id)"> Tuesday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b4  onclick = "changeColor(id)"> Wednesday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b5  onclick = "changeColor(id)"> Thursday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b6  onclick = "changeColor(id)"> Friday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b7  onclick = "changeColor(id)"> Saturday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b1  onclick = "changeColor(id)"> Sunday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b2  onclick = "changeColor(id)"> Monday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b3  onclick = "changeColor(id)"> Tuesday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b4  onclick = "changeColor(id)"> Wednesday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b5  onclick = "changeColor(id)"> Thursday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b6  onclick = "changeColor(id)"> Friday </button>
+            <button type = "button", style = "background-color: gainsboro;" id = b7  onclick = "changeColor(id)"> Saturday </button>
         <script>
             function changeColor(id) { 
                 if (document.getElementById(id).style.backgroundColor == "gainsboro") {
@@ -32,31 +32,31 @@
             <label for="time-options">No earlier than:</label>
             <select name="earliest-times" id="earliest-times">
                 <div class="content">
-                    <option id='24e' href="">12:00 AM</option>
-                    <option id='1e' href="">1:00 AM</option>
-                    <option id='2e' href="">2:00 AM</option>
-                    <option id='3e' href="">3:00 AM</option>
-                    <option id='4e' href="">4:00 AM</option>
-                    <option id='5e' href="">5:00 AM</option>
-                    <option id='6e' href="">6:00 AM</option>
-                    <option id='7e' href="">7:00 AM</option>
-                    <option id='8e' href="">8:00 AM</option>
-                    <option id='9e' href="">9:00 AM</option>
-                    <option id='10e' href="">10:00 AM</option>
-                    <option id='11e' href="">11:00 AM</option>
-                    <option id='12e' href="">12:00 PM</option>
-                    <option id='13e' href="">1:00 PM</option>
-                    <option id='14e' href="">2:00 PM</option>
-                    <option id='15e' href="">3:00 PM</option>
-                    <option id='16e' href="">4:00 PM</option>
-                    <option id='17e' href="">5:00 PM</option>
-                    <option id='18e' href="">6:00 PM</option>
-                    <option id='19e' href="">7:00 PM</option>
-                    <option id='20e' href="">8:00 PM</option>
-                    <option id='21e' href="">9:00 PM</option>
-                    <option id='22e' href="">10:00 PM</option>
-                    <option id='23e' href="">11:00 PM</option>
-                    <option id='24e' href="">12:00 AM</option>
+                    <option value='24e' href="">12:00 AM</option>
+                    <option value='1e' href="">1:00 AM</option>
+                    <option value='2e' href="">2:00 AM</option>
+                    <option value='3e' href="">3:00 AM</option>
+                    <option value='4e' href="">4:00 AM</option>
+                    <option value='5e' href="">5:00 AM</option>
+                    <option value='6e' href="">6:00 AM</option>
+                    <option value='7e' href="">7:00 AM</option>
+                    <option value='8e' href="">8:00 AM</option>
+                    <option value='9e' href="">9:00 AM</option>
+                    <option value='10e' href="">10:00 AM</option>
+                    <option value='11e' href="">11:00 AM</option>
+                    <option value='12e' href="">12:00 PM</option>
+                    <option value='13e' href="">1:00 PM</option>
+                    <option value='14e' href="">2:00 PM</option>
+                    <option value='15e' href="">3:00 PM</option>
+                    <option value='16e' href="">4:00 PM</option>
+                    <option value='17e' href="">5:00 PM</option>
+                    <option value='18e' href="">6:00 PM</option>
+                    <option value='19e' href="">7:00 PM</option>
+                    <option value='20e' href="">8:00 PM</option>
+                    <option value='21e' href="">9:00 PM</option>
+                    <option value='22e' href="">10:00 PM</option>
+                    <option value='23e' href="">11:00 PM</option>
+                    <option value='24e' href="">12:00 AM</option>
                 </div>
             </select>
         </div>
@@ -66,36 +66,80 @@
             <label for="time-options">No later than:</label>
             <select name="latest-times" id="latest-times">
                 <div class="content">
-                    <option id='24l' href="">12:00 AM</option>
-                    <option id='1l' href="">1:00 AM</option>
-                    <option id='2l' href="">2:00 AM</option>
-                    <option id='3l' href="">3:00 AM</option>
-                    <option id='4l' href="">4:00 AM</option>
-                    <option id='5l' href="">5:00 AM</option>
-                    <option id='6l' href="">6:00 AM</option>
-                    <option id='7l' href="">7:00 AM</option>
-                    <option id='8l' href="">8:00 AM</option>
-                    <option id='9l' href="">9:00 AM</option>
-                    <option id='10l' href="">10:00 AM</option>
-                    <option id='11l' href="">11:00 AM</option>
-                    <option id='12l' href="">12:00 PM</option>
-                    <option id='13l' href="">1:00 PM</option>
-                    <option id='14l' href="">2:00 PM</option>
-                    <option id='15l' href="">3:00 PM</option>
-                    <option id='16l' href="">4:00 PM</option>
-                    <option id='17l' href="">5:00 PM</option>
-                    <option id='18l' href="">6:00 PM</option>
-                    <option id='19l' href="">7:00 PM</option>
-                    <option id='20l' href="">8:00 PM</option>
-                    <option id='21l' href="">9:00 PM</option>
-                    <option id='22l' href="">10:00 PM</option>
-                    <option id='23l' href="">11:00 PM</option>
-                    <option id='24l' href="">12:00 AM</option>
+                    <option value='24l' href="">12:00 AM</option>
+                    <option value='1l' href="">1:00 AM</option>
+                    <option value='2l' href="">2:00 AM</option>
+                    <option value='3l' href="">3:00 AM</option>
+                    <option value='4l' href="">4:00 AM</option>
+                    <option value='5l' href="">5:00 AM</option>
+                    <option value='6l' href="">6:00 AM</option>
+                    <option value='7l' href="">7:00 AM</option>
+                    <option value='8l' href="">8:00 AM</option>
+                    <option value='9l' href="">9:00 AM</option>
+                    <option value='10l' href="">10:00 AM</option>
+                    <option value='11l' href="">11:00 AM</option>
+                    <option value='12l' href="">12:00 PM</option>
+                    <option value='13l' href="">1:00 PM</option>
+                    <option value='14l' href="">2:00 PM</option>
+                    <option value='15l' href="">3:00 PM</option>
+                    <option value='16l' href="">4:00 PM</option>
+                    <option value='17l' href="">5:00 PM</option>
+                    <option value='18l' href="">6:00 PM</option>
+                    <option value='19l' href="">7:00 PM</option>
+                    <option value='20l' href="">8:00 PM</option>
+                    <option value='21l' href="">9:00 PM</option>
+                    <option value='22l' href="">10:00 PM</option>
+                    <option value='23l' href="">11:00 PM</option>
+                    <option value='24l' href="">12:00 AM</option>
                 </div>
             </select>
         </div>
         <br></br>
         <button id = "create-event"> Create Event </button>
     </form>
+    <script>
+        document.getElementById('create-event').addEventListener('click', () => {
+            const eventNameInput = document.getElementById('event-name').value;
+            const sun = document.getElementById('b1').value;
+            const mon = document.getElementById('b2').value;
+            const tues = document.getElementById('b3').value;
+            const wed = document.getElementById('b4').value;
+            const thurs = document.getElementById('b5').value;
+            const fri = document.getElementById('b6').value;
+            const sat = document.getElementById('b7').value;
+            const firstTime = document.getElementById('earliest-times').value;
+            const lastTime = document.getElementById('latest-times').value;
+
+            const jsonData = { // format data as JSON
+                eventNameContent: eventNameInput,
+                dayButton1: sun,
+                dayButton2: mon,
+                dayButton3: tues,
+                dayButton4: wed,
+                dayButton5: thurs,
+                dayButton6: fri,
+                dayButton7: sat,
+                firstSelectedOption: firstTime,
+                lastSelectedOption: lastTime,
+                timestamp: new Date().toISOString(),
+            };
+
+            // send JSON to backend
+            fetch('/form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data saved:', data);
+            })
+            .catch(error => {
+                console.error('Error saving data:', error);
+            });
+        })
+    </script>
     </body>    
 </html>
