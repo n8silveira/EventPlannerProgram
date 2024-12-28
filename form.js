@@ -1,5 +1,7 @@
+const http = require('http');
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 
 app.use(express.json());
@@ -33,10 +35,13 @@ app.post('/submit-form', (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.listen(8080, () => {
     console.log('Server running on https://localhost:8080');
 })
-
 
 
 
