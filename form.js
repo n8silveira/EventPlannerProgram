@@ -6,15 +6,6 @@ const app = express();
 
 app.use(express.json());
 
-// const form = [...document.querySelector('.form').children];
-
-// form.forEach((item, i) => {
-//     // modify when i click "create event", it saves a file called "name_of_event".json
-//     setTimeout(() => {
-//         item.style.opacity = 1;
-//     }, i*100);
-// })
-
 app.post('/submit-form', (req, res) => {
     const data = req.body;
     const path = './events/';
@@ -44,7 +35,14 @@ app.listen(8080, () => {
 })
 
 
+// const form = [...document.querySelector('.form').children];
 
+// form.forEach((item, i) => {
+//     // modify when i click "create event", it saves a file called "name_of_event".json
+//     setTimeout(() => {
+//         item.style.opacity = 1;
+//     }, i*100);
+// })
 // window.onload = () => {
 //     if (sessionStorage.name) {
 //         location.href = '/';
