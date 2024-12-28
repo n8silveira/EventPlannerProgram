@@ -1,18 +1,22 @@
 <html>
+<!-- title of the page -->
     <head>
-        <title>EPP.com</title>
+        <title>EPP.com</title>  
     </head>
     <body>
+<!-- header of the page -->
         <h1>EPP.com</h1>
+<!-- these are the buttons that will take you to the home and about pages -->
         <button onclick="document.location = 'index.html'"> Home </button>
         <button onclick = "document.location = 'about.html'"> About </button>
         <br><br>
 
         <p id="error-message"></p>
+<!-- This is where you type the name for an event  -->
         <form id="form">
             Event Name: <input type="text" name="eventName" id="event-name" placeholder="Type Event Name Here">
             <br><br>
-
+<!-- These are the buttons that will allow you to select the days of the week that you want to have the event on. -->
             Days:
             <button type="button" style="background-color: gainsboro;" id="b1" value="Sunday" onclick="changeColor(id)">Sunday</button>
             <button type="button" style="background-color: gainsboro;" id="b2" value="Monday" onclick="changeColor(id)">Monday</button>
@@ -22,7 +26,7 @@
             <button type="button" style="background-color: gainsboro;" id="b6" value="Friday" onclick="changeColor(id)">Friday</button>
             <button type="button" style="background-color: gainsboro;" id="b7" value="Saturday" onclick="changeColor(id)">Saturday</button>
         <br></br>
-
+<!-- This is a dropdown menu that will allow the user to select the time interval they want their event on  -->
         <p>Times:</p>
         <label for="earliest-times">No earlier than:</label>
         <select name="earliest-times" id="earliest-times">
@@ -85,10 +89,10 @@
             <option value="24l">12:00 AM</option>
         </select>
         <br></br>
-
+<!-- This is the "create event" button -->
         <button id="create-event">Create Event</button>
     </form>
-
+<!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
     <script>
         function changeColor(id) { 
             if (document.getElementById(id).style.backgroundColor == "gainsboro") {
