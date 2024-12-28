@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.post('/submit-form', (req, res) => {
     const data = req.body;
-    const path = './events';
+    const path = './events/';
 
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path);

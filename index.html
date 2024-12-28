@@ -98,7 +98,7 @@
             }
         } 
 
-        document.getElementById('create-event').addEventListener('click', (event) => {
+        document.getElementById('create-event').addEventListener('click', (e) => {
             event.preventDefault();
 
             const jsonData = { // format data as JSON
@@ -109,7 +109,7 @@
             };
 
             // send JSON to backend
-            fetch('/submit-form', {
+            fetch('http://localhost:8080/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
