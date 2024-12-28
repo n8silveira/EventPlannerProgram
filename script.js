@@ -27,11 +27,11 @@ app.get('/', (req, res) => { // callback: request, response
     // res.json(users);
 });
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(initialPath, "login.html"));
+app.get('/event', (req, res) => {
+    res.sendFile(path.join(initialPath, "event.html"));
 })
 
-app.post('/login-user', (req, res) => {
+app.post('/event-user', (req, res) => {
     const {name, password} = req.body; // access variables
     if (!name.length || !password.length) {
         res.json('pls fill all the fields');
@@ -53,7 +53,7 @@ app.post('/login-user', (req, res) => {
     }
 })
 
-app.post('/login-user', (req, res) => {
+app.post('/event-user', (req, res) => {
     const {password} = req.body;
     db.select('name')
     .from('users')

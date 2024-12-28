@@ -19,7 +19,7 @@ const submitBtn = document.querySelector('.submit-btn')
 
 if (name == null) { // login page is open
     submitBtn.addEventListener('click', () => {
-        fetch('/login', { // FETCH: submit form
+        fetch('/event', { // FETCH: submit form
             method: 'post',
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify({
@@ -38,7 +38,7 @@ if (name == null) { // login page is open
     })
 } else {
     submitBtn.addEventListener('click', () => {
-        fetch('/login', {
+        fetch('/event', {
             method: 'post',
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify({
