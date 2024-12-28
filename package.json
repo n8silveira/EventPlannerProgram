@@ -1,0 +1,19 @@
+{
+  "name": "eventplannerprogram",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser":"^1.20.3",
+    "express.js": "^4.21.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.9",
+    "pg": "^8.13.1"
+  }
+}
