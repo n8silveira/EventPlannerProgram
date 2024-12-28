@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express'); // create server
 const path = require('path'); // know html, css file locations
 const bodyParser = require('body-parser'); // send or receive data
