@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -14,7 +13,7 @@ app.post('/submit-form', (req, res) => {
         fs.mkdirSync(path);
     }
     // name new json file the event name user input
-    const fileName = `${path}/data-${Date.now()}.json`;
+    const fileName = `${path}/${Date.now}.json`; // name should be the eventID.json
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {

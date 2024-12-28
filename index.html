@@ -100,12 +100,21 @@
             } else {
                 document.getElementById(id).style.backgroundColor = "gainsboro";
             }
-        } 
+        }
+        function create_random_url(string_length) {
+            var random_string = ''
+            var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmonpqrstuvwxyz'
+            for (var i, i = 0; i < characters.length; i++) {
+                random_string += characters.charAt(Math.floor(Math.random() * characters.length))
+            }
+            return random_string
+        }
 
         document.getElementById('create-event').addEventListener('click', (e) => {
             event.preventDefault();
 
             const jsonData = { // format data as JSON
+                eventID: create_random_url(),
                 eventName: document.getElementById('event-name').value,
                 earliestTime: document.getElementById('earliest-times').value,
                 latestTime: document.getElementById('latest-times').value,
