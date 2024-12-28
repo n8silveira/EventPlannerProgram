@@ -13,63 +13,23 @@
         Event Name: <input type = "text" name = "eventName" id = "event-name">
         <br><br>
         Days:
-            <button type = "button", style = "background-color: gainsboro;",button id = b1  onclick = "changeColor1()"> Sunday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b2  onclick = "changeColor2()"> Monday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b3  onclick = "changeColor3()"> Tuesday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b4  onclick = "changeColor4()"> Wednesday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b5  onclick = "changeColor5()"> Thursday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b6  onclick = "changeColor6()"> Friday </button>
-            <button type = "button", style = "background-color: gainsboro;",button id = b7  onclick = "changeColor7()"> Saturday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b1  onclick = "changeColor(id)"> Sunday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b2  onclick = "changeColor(id)"> Monday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b3  onclick = "changeColor(id)"> Tuesday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b4  onclick = "changeColor(id)"> Wednesday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b5  onclick = "changeColor(id)"> Thursday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b6  onclick = "changeColor(id)"> Friday </button>
+            <button type = "button", style = "background-color: gainsboro;",button id = b7  onclick = "changeColor(id)"> Saturday </button>
         <script>
-            function changeColor1() { // sunday
-                if (document.getElementById("b1").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b1").style.backgroundColor = "lightgreen";
+            function changeColor(id) { 
+                if (document.getElementById(id).style.backgroundColor == "gainsboro") {
+                    document.getElementById(id).style.backgroundColor = "lightgreen";
                 } else {
-                    document.getElementById("b1").style.backgroundColor = "gainsboro";
+                    document.getElementById(id).style.backgroundColor = "gainsboro";
                 }
             }
-            function changeColor2() { // monday
-                if (document.getElementById("b2").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b2").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b2").style.backgroundColor = "gainsboro";
-                }
-            }
-            function changeColor3() { // tuesday
-                if (document.getElementById("b3").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b3").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b3").style.backgroundColor = "gainsboro";
-                }
-            }
-            function changeColor4() { // wednesday
-                if (document.getElementById("b4").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b4").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b4").style.backgroundColor = "gainsboro";
-                }
-            }
-            function changeColor5() { // thursday
-                if (document.getElementById("b5").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b5").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b5").style.backgroundColor = "gainsboro";
-                }
-            }
-            function changeColor6() { // friday
-                if (document.getElementById("b6").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b6").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b6").style.backgroundColor = "gainsboro";
-                }
-            }
-            function changeColor7() { // saturday
-                if (document.getElementById("b7").style.backgroundColor == "gainsboro") {
-                    document.getElementById("b7").style.backgroundColor = "lightgreen";
-                } else {
-                    document.getElementById("b7").style.backgroundColor = "gainsboro";
-                }
-            }
+            
+            
         </script>
         <br></br>
         <link rel ="stylesheet" href="styles.css">
@@ -140,9 +100,7 @@
             </select>
         </div>
         <br></br>
+        <button id = "create-event"> Create Event </button>
     </form>
-    <a href="login.html">
-        <button onclick="login.html", id = "create-event"> Create Event </button>
-    </a>
     </body>    
 </html>
