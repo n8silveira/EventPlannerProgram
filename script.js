@@ -1,38 +1,42 @@
 const express = require('express'); // create server
 const path = require('path'); // know html, css file locations
-const bodyParser = require('body-parser'); // send/receive data
+const bodyParser = require('body-parser'); // send or receive data
 const knex = require('knex'); // access database
 const port = 8080; // local host
 const db = knex({
-    client: 'pg',
+    client: 'pg', 
     connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        password: 'test',
-        database: 'loginformytvideo'
+        host: 'localhost',
+        user: 'silveira',
+        password: 'Sgalsftllmj2004!',
+        database: 'mydb'
     }
 })
 const app = express();
 
-let initialPath = path.join();
+let initialPath = __dirname
+// let initialPath = path.join(__dirname, "EventPlannerProgram");
+
 app.use(bodyParser.json());
 app.use(express.static(initialPath));
 
-// get endpoint listens on home route
+// get endpoint listens on homepage route
 app.get('/', (req, res) => { // callback: request, response
     res.sendFile(path.join(initialPath, "index.html"));
     // const users = [{ id: '123', name: 'josh'}];
     // res.json(users);
 });
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(initialPath, "login.html"));
 })
-app.post('/login', (req, res) => {
-    const {name, password} = req.body;
+
+app.post('/login-user', (req, res) => {
+    const {name, password} = req.body; // access variables
     if (!name.length || !password.length) {
         res.json('pls fill all the fields');
     } else {
-        db("users").insert({
+        db("users").insert({ // table: "users"
             name: name,
             password: password
         })
@@ -40,69 +44,16 @@ app.post('/login', (req, res) => {
         .then(data => {
             res.join(data[0])
         })
+        // catch error
         .catch(err => {
             if (err.detail.includes('already exists')) {
-                res.json('that already exists')
+                res.json('that already exists');
             }
         })
     }
 })
 
-const form = [...document.querySelector('.form').children];
-
-form.forEach((item, i) => {
-    setTimeout(() => {
-        item.style.opacity = 1;
-    }, i*100);
-})
-
-window.onload = () => {
-    if (sessionStorage.name) {
-        location.href = '/';
-    }
-}
-
-// form validation
-const name = document.querySelector('.name') || null;
-const password = document.querySelector('.password')
-const submitBtn = document.querySelector('.submit-btn')
-
-if (name == null) { // login page is open
-    submitBtn.addEventListener('click', () => {
-        fetch('/login', {
-            method: 'post',
-            headers: new Headers({'Content-Type': 'applications/json'}),
-            body: JSON.stringify({
-                password: password.value
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.name) {
-                alert('login successful!')
-            } else {
-                alert(data)
-            }
-        })
-    })
-} else {
-    submitBtn.addEventListener('click', () => {
-        fetch('/login', {
-            method: 'post',
-            headers: new Headers({'Content-Type': 'application/json'}),
-            body: JSON.stringify({
-                name: name.value,
-                password: password.value
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            validateData(data)
-        })
-    })
-}
-
-app.post('/login', (req, res) => {
+app.post('/login-user', (req, res) => {
     const {password} = req.body;
     db.select('name')
     .from('users')
@@ -122,43 +73,11 @@ app.listen(port, (req, res) => {
     console.log(`server stay listening on port: ${port}`);
 });
 
-const validateData = (data) => {
-    if (!data.name) {
-        alertBox(data);
-    } else {
-        sessionStorage.name = data.name;
-        location.href = '/'
-    }
-}
 
-const alertBox = (data) => {
-    const alertContainer = document.querySelector('.alert-box');
-    const alertMsg = document.querySelector('.alert');
-    alertMsg.innerHTML = data;
+// first person to login needs a password bc they're the event planner
+// event planner is only person capable of pressing "create event"
 
-    alertContainer.computedStyleMap.top = '5%';
-    setTimeout(() => {
-        alertContainer.computedStyleMap.top = null;
-    }, 5000);
 
-}
-
-const greeting = document.querySelector('.greeting');
-
-window.onload = () => {
-    if (!sessionStorage.name) {
-        location.href = '/login';
-    } else {
-        greeting.innerHTML = `hello ${sessionStorage.name}`;
-    }
-}
-
-const logOut = document.querySelector('.logout');
-
-logOut.onclick = () => {
-    sessionStorage.clear();
-    location.reload();
-}
 
 // app.post('/', (req, res) => {
 //     const {parcel} = req.body;
@@ -239,9 +158,6 @@ logOut.onclick = () => {
 //         }
 //     })
 // })
-
-
-
 
 
 // /*  
