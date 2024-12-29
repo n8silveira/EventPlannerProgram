@@ -1,0 +1,31 @@
+[
+    {
+      "name": "Joshua Bradely",
+      "role": "Project Manager / Fullstack",
+      "photo": "photo",
+      "github": "https://github.com/jawshipai",
+      "about": " Hey! I'm Josh, and I love to do game development. My favorite programming languages are Java, C#, C, and Python! I’m currently working on an indie game called GAGA Ball, and in the future I hope to do something in machine learning / AI or Game development"
+    },
+    {
+        "name": " Nathaniel Silveira",
+        "role": "Back-End Developer",
+        "photo": "photo",
+        "github": "https://github.com/n8silveira",
+        "about": "Hello, my name is Nate and I love editing and animating my own videos! My favorite programming languages in C, Python and JavaScript, and I am currently working on a personal website to gather all of my projects in one place! Once I finish school, I'd love to be a full-time software engineer"
+      },
+      {
+        "name": "Keyshawn Jeannot",
+        "role": "Full-stack",
+        "photo": "phtot",
+        "github": "https://github.com/The1keyy",
+        "about": " Hey, my name is Keyshawn! I’m a curious and adventurous individual who loves exploring new things, whether it’s experimenting with fashion, diving into philosophy books, or finding ways to make a meaningful impact in the world. Currently, I’m working on earning my Network+ certification, with a goal of becoming a cloud engineer within the next five years "
+      },
+      {
+        "name": "Darren Jean Francois",
+        "role": "Front-end developer",
+        "photo": "photo",
+        "github": "https://github.com/4622-wq",
+        "about": "Hey guys, my name is Darren and I like watch anime and occasionally draw. My favorite programming languages are Python and HTML! Right now, have a project about a turn based rpg. After school, I want to be a video game developer or a software engineer!"
+      }
+  ]
+  
