@@ -1,5 +1,3 @@
-// import { create_random_url } from './index.html';
-
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -15,7 +13,7 @@ app.post('/submit-form', (req, res) => {
         fs.mkdirSync(path);
     }
     // name new json file the event name user input
-    const fileName = `${path}/hello.json`; // name should be the eventID.json
+    const fileName = `${path}/${idTest}.json`; // name should be the "eventID".json
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {
@@ -35,6 +33,15 @@ app.listen(8080, () => {
     console.log('Server running on https://localhost:8080');
 })
 
+function create_random_url(string_length) {
+    var random_string = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+    for (var i = 0; i < string_length; i++) {
+        random_string += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return random_string;
+}
+const idTest = create_random_url(13);
 
 // const form = [...document.querySelector('.form').children];
 
