@@ -4,4 +4,4 @@ const teamContainer = document.getElementById("teamContainer");
 // fetch the aboutmedata .jason file
 fetch("aboutMeData.json")
     //convert the response so json can understand it
-    .then(respnse => respnse.json())
+    .then(response => response.json())
