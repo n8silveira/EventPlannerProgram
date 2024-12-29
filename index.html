@@ -10,8 +10,6 @@
         <button onclick="document.location = 'index.html'"> Home </button>
         <button onclick = "document.location = 'about.html'"> About </button>
         <br><br>
-
-        <p id="error-message"></p>
 <!-- This is where you type the name for an event  -->
         <form id="form">
             Event Name: <input type="text" name="eventName" id="event-name" placeholder="Type Event Name Here">
@@ -92,6 +90,7 @@
 <!-- This is the "create event" button -->
         <button id="create-event">Create Event</button>
     </form>
+    <div id="string_inner_container"></div>
 <!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
     <script>
         function changeColor(id) { 
@@ -101,21 +100,23 @@
                 document.getElementById(id).style.backgroundColor = "gainsboro";
             }
         }
+        // document.getElementById('string_inner_container').innerHTML = create_random_url(13);
         function create_random_url(string_length) {
-            var random_string = ''
-            var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmonpqrstuvwxyz'
-            for (var i, i = 0; i < characters.length; i++) {
-                random_string += characters.charAt(Math.floor(Math.random() * characters.length))
+            var random_string = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+            for (var i = 0; i < string_length; i++) {
+                random_string += characters.charAt(Math.floor(Math.random() * characters.length));
             }
-            return random_string
+            return random_string;
         }
-
+        const idTest = create_random_url(5)
         document.getElementById('create-event').addEventListener('click', (e) => {
             event.preventDefault();
 
             const jsonData = { // format data as JSON
-                eventID: create_random_url(),
+                eventID: idTest,
                 eventName: document.getElementById('event-name').value,
+                //days:,
                 earliestTime: document.getElementById('earliest-times').value,
                 latestTime: document.getElementById('latest-times').value,
                 timestamp: new Date().toISOString(),
