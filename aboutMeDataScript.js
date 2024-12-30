@@ -17,10 +17,12 @@ fetch("aboutMeData.json")
             // creating an img for the member's photo
             const img = document.createElement("img");
             img.src = member.photo;
-            img.alt = member.name; 
             card.appendChild(img);
 
             // creating a header for the member's name
+            const nameElm = document.createElement("h1");
+            nameElm.textContent = member.name;
+            card.appendChild(nameElem);
 
             // creating  member's role section
 
