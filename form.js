@@ -1,3 +1,4 @@
+// import idTest from './index.html';
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -5,25 +6,15 @@ const app = express();
 
 app.use(express.json());
 
-function create_random_url(string_length) {
-    var random_string = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-    for (var i = 0; i < string_length; i++) {
-        random_string += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return random_string;
-}
-const idTest = create_random_url(13);
-
 app.post('/submit-form', (req, res) => {
     const data = req.body;
-    const folderPath = './events/';
+    const path = './events/';
 
-    if (!fs.existsSync(folderPath)) {
-        fs.mkdirSync(folderPath);
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path);
     }
     // name new json file the event name user input
-    const fileName = `${folderPath}/${idTest}.json`; // name should be the "eventID".json
+    const fileName = `${path}/${Date.now()}.json`; // name should be the "eventID".json
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {
@@ -36,7 +27,6 @@ app.post('/submit-form', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    console.log('Serving index.html...');
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 

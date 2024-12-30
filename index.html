@@ -90,7 +90,6 @@
 <!-- This is the "create event" button -->
         <button id="create-event">Create Event</button>
     </form>
-    <div id="string_inner_container"></div>
 <!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
     <script src="form.js"></script>
     <script>
@@ -101,6 +100,15 @@
                 document.getElementById(id).style.backgroundColor = "gainsboro";
             }
         }
+        function create_random_url(string_length) {
+            var random_string = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+            for (var i = 0; i < string_length; i++) {
+                random_string += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return random_string;
+        }
+        const idTest = create_random_url(13);
         document.getElementById('create-event').addEventListener('click', (e) => {
             event.preventDefault();
 
