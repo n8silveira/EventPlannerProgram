@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
-app.use(express.json());
+// app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
 app.post('/submit-form', (req, res) => {
     const data = req.body;
@@ -28,6 +29,7 @@ app.post('/submit-form', (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.js'));
 });
 
 app.get('/about', (req, res) => {
@@ -36,80 +38,4 @@ app.get('/about', (req, res) => {
 
 app.listen(8080, () => {
     console.log('Server running on http://localhost:8080');
-})
-
-// const form = [...document.querySelector('.form').children];
-
-// form.forEach((item, i) => {
-//     // modify when i click "create event", it saves a file called "name_of_event".json
-//     setTimeout(() => {
-//         item.style.opacity = 1;
-//     }, i*100);
-// })
-// window.onload = () => {
-//     if (sessionStorage.name) {
-//         location.href = '/';
-//     }
-// }
-
-// // form validation
-// const name = document.querySelector('.name') || null;
-// const password = document.querySelector('.password')
-// const submitBtn = document.querySelector('.submit-btn')
-
-// if (name == null) { // login page is open
-//     submitBtn.addEventListener('click', () => {
-//         fetch('/event', { // FETCH: submit form
-//             method: 'post',
-//             headers: new Headers({'Content-Type': 'application/json'}),
-//             body: JSON.stringify({
-//                 password: password.value
-//             })
-//         })
-//         .then(res => res.json())
-//         // send data to server
-//         .then(data => {
-//             if (data.name) {
-//                 alert('event successful!');
-//             } else {
-//                 alert(data);
-//             }
-//         })
-//     })
-// } else {
-//     submitBtn.addEventListener('click', () => {
-//         fetch('/login', {
-//             method: 'post',
-//             headers: new Headers({'Content-Type': 'application/json'}),
-//             body: JSON.stringify({
-//                 name: name.value,
-//                 password: password.value
-//             })
-//         })
-//         .then(res => res.json())
-//         .then(data => {
-//             validateData(data)
-//         })
-//     })
-// }
-
-// const validateData = (data) => {
-//     if (!data.name) {
-//         alertBox(data);
-//     } else {
-//         sessionStorage.name = data.name;
-//         location.href = '/'
-//     }
-// }
-
-// const alertBox = (data) => {
-//     const alertContainer = document.querySelector('.alert-box');
-//     const alertMsg = document.querySelector('.alert');
-//     alertMsg.innerHTML = data;
-
-//     alertContainer.computedStyleMap.top = '5%';
-//     setTimeout(() => {
-//         alertContainer.computedStyleMap.top = null;
-//     }, 5000);
-
-// }
+});
