@@ -24,4 +24,4 @@ fetch("aboutMeData.json")
 
             //create a link to their GitHub
         });
-    }
+    })
