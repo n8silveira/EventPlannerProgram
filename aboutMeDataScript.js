@@ -12,7 +12,7 @@ fetch("aboutMeData.json")
         // making the loop that cover each member
         data.array.forEach(element => {
             const card = document.createElement("div");
-            card.classList.add("tream-card")
+            card.classList.add("team-card")
 
             // creating an img for the member's photo
             const img = document.createElement("img");
