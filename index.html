@@ -16,13 +16,13 @@
             <br><br>
 <!-- These are the buttons that will allow you to select the days of the week that you want to have the event on. -->
             Days:
-            <button type="button" style="background-color: gainsboro;" id="b1" value="Sunday" onclick="changeColor(id)">Sunday</button>
-            <button type="button" style="background-color: gainsboro;" id="b2" value="Monday" onclick="changeColor(id)">Monday</button>
-            <button type="button" style="background-color: gainsboro;" id="b3" value="Tuesday" onclick="changeColor(id)">Tuesday</button>
-            <button type="button" style="background-color: gainsboro;" id="b4" value="Wednesday" onclick="changeColor(id)">Wednesday</button>
-            <button type="button" style="background-color: gainsboro;" id="b5" value="Thursday" onclick="changeColor(id)">Thursday</button>
-            <button type="button" style="background-color: gainsboro;" id="b6" value="Friday" onclick="changeColor(id)">Friday</button>
-            <button type="button" style="background-color: gainsboro;" id="b7" value="Saturday" onclick="changeColor(id)">Saturday</button>
+            <button type="button" style="background-color: gainsboro;" id="b1" value="Sunday" data-selected="false" onclick="changeColor(id)">Sunday</button>
+            <button type="button" style="background-color: gainsboro;" id="b2" value="Monday" data-selected="false" onclick="changeColor(id)">Monday</button>
+            <button type="button" style="background-color: gainsboro;" id="b3" value="Tuesday" data-selected="false" onclick="changeColor(id)">Tuesday</button>
+            <button type="button" style="background-color: gainsboro;" id="b4" value="Wednesday" data-selected="false" onclick="changeColor(id)">Wednesday</button>
+            <button type="button" style="background-color: gainsboro;" id="b5" value="Thursday" data-selected="false" onclick="changeColor(id)">Thursday</button>
+            <button type="button" style="background-color: gainsboro;" id="b6" value="Friday" data-selected="false" onclick="changeColor(id)">Friday</button>
+            <button type="button" style="background-color: gainsboro;" id="b7" value="Saturday" data-selected="false" onclick="changeColor(id)">Saturday</button>
         <br></br>
 <!-- This is a dropdown menu that will allow the user to select the time interval they want their event on  -->
         <p>Times:</p>
@@ -94,10 +94,13 @@
     <script src="form.js"></script>
     <script>
         function changeColor(id) { 
-            if (document.getElementById(id).style.backgroundColor == "gainsboro") {
-                document.getElementById(id).style.backgroundColor = "lightgreen";
+            const button = document.getElementById(id);
+            if (button.style.backgroundColor === "gainsboro") {
+                button.style.backgroundColor = "lightgreen";
+                button.dataset.selected = "true";
             } else {
-                document.getElementById(id).style.backgroundColor = "gainsboro";
+                button.style.backgroundColor = "gainsboro";
+                button.dataset.selected = "false";
             }
         }
         function create_random_url(string_length) {
@@ -108,16 +111,21 @@
             }
             return random_string;
         }
-        const idTest = create_random_url(13);
         document.getElementById('create-event').addEventListener('click', (e) => {
             event.preventDefault();
+
+            const idTest = create_random_url(13);
+            const selectedDays = Array.from(document.querySelectorAll('button[data-selected="true"]')).map(button => button.value);
 
             const jsonData = { // format data as JSON
                 eventID: idTest,
                 eventName: document.getElementById('event-name').value,
-                //days:,
+                days: selectedDays,
+                // plannerUsername:, "your name" from event.html (login page)
+                // plannerPassword:, "password" from event.html (login page)
                 earliestTime: document.getElementById('earliest-times').value,
                 latestTime: document.getElementById('latest-times').value,
+                // schedules, collecting all users schedules
                 timestamp: new Date().toISOString(),
             };
 
