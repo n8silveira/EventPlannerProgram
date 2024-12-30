@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(8080, () => {
-    console.log('Server running on https://localhost:8080');
+    console.log('Server running on http://localhost:8080');
 })
 
 // const form = [...document.querySelector('.form').children];
