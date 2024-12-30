@@ -13,3 +13,4 @@ Joshua Bradley
 Keyshawn Jeannot
 Darren Jean Francois
 Nathaniel Silveira
+Barbara Joseph
