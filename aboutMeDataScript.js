@@ -16,5 +16,12 @@ fetch("aboutMeData.json")
 
             // creating an img for the member's photo
 
+            // creating a header for the member's name
+
+            // creating  member's role section
+
+            //creating a about text
+
+            //create a link to their GitHub
         });
     }
