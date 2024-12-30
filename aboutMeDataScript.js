@@ -12,15 +12,17 @@ fetch("aboutMeData.json")
         // making the loop that cover each member
         data.array.forEach(element => {
             const card = document.createElement("div");
-            card.classList.add("tream-card")
+            card.classList.add("team-card")
 
             // creating an img for the member's photo
             const img = document.createElement("img");
             img.src = member.photo;
-            img.alt = member.name; 
             card.appendChild(img);
 
             // creating a header for the member's name
+            const nameElm = document.createElement("h1");
+            nameElm.textContent = member.name;
+            card.appendChild(nameElem);
 
             // creating  member's role section
 
