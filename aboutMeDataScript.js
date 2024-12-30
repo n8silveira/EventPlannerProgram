@@ -15,6 +15,10 @@ fetch("aboutMeData.json")
             card.classList.add("tream-card")
 
             // creating an img for the member's photo
+            const img = document.createElement("img");
+            img.src = member.photo;
+            img.alt = member.name; 
+            card.appendChild(img);
 
             // creating a header for the member's name
 
