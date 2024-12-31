@@ -1,4 +1,3 @@
-// import idTest from './index.html';
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -10,12 +9,13 @@ app.use(express.static(path.join(__dirname)));
 app.post('/submit-form', (req, res) => {
     const data = req.body;
     const path = './events/';
+    const idTest = data.eventID;
 
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
     // name new json file the event name user input
-    const fileName = `${path}${Date.now()}.json`; // name should be the "eventID".json
+    const fileName = `${path}${idTest}.json`; // name should be the "eventID".json
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {

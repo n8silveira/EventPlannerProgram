@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function create_random_url(string_length) {
         var random_string = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (var i = 0; i < string_length; i++) {
             random_string += characters.charAt(Math.floor(Math.random() * characters.length));
         }
         return random_string;
     }
-
+    
     document.getElementById('create-event').addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             eventID: idTest,
             eventName: document.getElementById('event-name').value,
             days: selectedDays,
-            // plannerUsername:, "" // from event.html (login page)
-            // plannerPassword:, "" // from event.html (login page)
+            plannerUsername: "", // from event.html (login page)
+            plannerPassword: "",// from event.html (login page)
             earliestTime: document.getElementById('earliest-times').value,
             latestTime: document.getElementById('latest-times').value,
             // schedules, collecting all users schedules
