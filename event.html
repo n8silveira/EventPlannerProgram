@@ -17,7 +17,7 @@
     <p id="savedText"> </p>
     <p id="openedText"> </p>
 
-    <div class="form">
+    <div class="form" id = login_field>
         <br>
         <input type="text" name="username" placeholder="Your Name" autocomplete="off" class="your-name" id="username" required>
         <input type="password" name="password" placeholder="Password" autocomplete="off" class="password" id="password" required>
@@ -27,10 +27,188 @@
         <p>Name/password are only for this event.<br>New to this event? Make up a password.<br>Returning? Use the same name/password.</p>
         <!-- <a href="#" class="link">don't have an account? Register one</a> -->
     </div>
+    <div id = "successfulLogin_field" hidden>
+      Welcome back [insert name here]!
+    </div>
     <!-- <p hidden id = invis> Invisible :D</p>
     <button>Visible</button> -->
 </body>
 <!-- <script src="script.js"></script> -->
+
+<style>
+  #userscheduletable1 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-style: solid;
+    width:5%;
+    height:1.5%;
+    empty-cells:show;
+    position:fixed;
+    left: 85px;
+    bottom: 363px;
+    ;
+    
+  }
+   #userscheduletable2 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: dotted;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    left: 85px;
+    bottom: 352px;
+
+  }
+    #userscheduletable3 {
+    border-left-style: solid;
+    border-right-style: solid;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    left: 85px;
+    bottom: 341px;
+
+  }
+    #userscheduletable4 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    left: 85px;
+    
+    bottom: 330px;
+
+  }
+  
+   
+
+  #groupscheduletable1 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-style: solid;
+    width:5%;
+    height:1.5%;
+    empty-cells:show;
+    position:fixed;
+    right: 110px;
+    bottom: 363px;
+
+
+
+  }
+   #groupscheduletable2 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: dotted;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    right:110px;
+    bottom: 352px;
+
+
+  }
+    #groupscheduletable3 {
+    border-left-style: solid;
+    border-right-style: solid;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    right:110px;
+    bottom: 341px;
+
+  }
+    #groupscheduletable4 {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    empty-cells:show;
+    width:5%;
+    height:1.5%;
+    position:fixed;
+    right:110px;
+    bottom: 330px;
+  }
+</style>
+
+<table onclick = "changeColor(id)" id = "userscheduletable1" style = "background-Color:mistyrose" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table onclick = "changeColor(id)" id = "userscheduletable2" style = "background-Color:mistyrose" hidden>
+  <tr onclick>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table onclick = "changeColor(id)" id = "userscheduletable3" style = "background-Color:mistyrose" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table onclick = "changeColor(id)" id = "userscheduletable4" style = "background-Color:mistyrose" hidden>
+  <tr onclick>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+
+
+
+
+<table id = "groupscheduletable1" style = "background-Color:lightgrey" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table id = "groupscheduletable2" style = "background-Color:lightgrey" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table id = "groupscheduletable3" style = "background-Color:lightgrey" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+<table id = "groupscheduletable4" style = "background-Color:lightgrey" hidden>
+  <tr>
+    <td>
+      
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
 
 <script>
     var storedName = localStorage.getItem("storedName")
@@ -43,5 +221,74 @@
         localStorage.getItem("storedName");
         document.getElementById("openedText").innerHTML = storedItem + " OPENED";
     }
+    function successfulLogin(){
+      var x = document.getElementById("login_field")
+      var y = document.getElementById("successfulLogin_field")
+      if(y.style.display !== "block"){
+        x.style.display = "none";
+        y.style.display = "block";
+      }else{
+        x.style.display = "block";
+        y.style.display = "none";
+      }
+      
+    }
+   
+    function changeColor(id) { 
+            const button = document.getElementById(id);
+            if (button.style.backgroundColor === "mistyrose") {
+                button.style.backgroundColor = "lightgreen";
+                button.dataset.selected = "true";
+            } else {
+                button.style.backgroundColor = "mistyrose";
+                button.dataset.selected = "false";
+            }
+        }
+    function userschedule(){
+      var x = document.getElementById("userscheduletable1")
+      var y = document.getElementById("userscheduletable2")
+      var z = document.getElementById("userscheduletable3")
+      var w = document.getElementById("userscheduletable4")
+      
+      if(x.style.display !== "block"){
+        x.style.display = "block"
+        y.style.display = "block"
+        z.style.display = "block"
+        w.style.display = "block"
+      }else{
+        x.style.display = "none"
+        y.style.display = "none"
+        z.style.display = "none"
+        w.style.display = "none"
+      }
+
+  }
+  
+  function groupschedule(){
+      var x = document.getElementById("groupscheduletable1")
+      var y = document.getElementById("groupscheduletable2")
+      var z = document.getElementById("groupscheduletable3")
+      var w = document.getElementById("groupscheduletable4")
+      
+      if(x.style.display !== "block"){
+        x.style.display = "block"
+        y.style.display = "block"
+        z.style.display = "block"
+        w.style.display = "block"
+      }else{
+        x.style.display = "none"
+        y.style.display = "none"
+        z.style.display = "none"
+        w.style.display = "none"
+      }
+
+  }
+  
 </script>
+
+
+<button onclick="successfulLogin()">Successful login</button>
+<button onclick= "userschedule()"> user's schedule</button>
+<button onclick= "groupschedule()"> group's schedule</button>
+
 </html>
