@@ -43,10 +43,9 @@
     width:5%;
     height:1.5%;
     empty-cells:show;
-    position:fixed;
-    left: 85px;
-    bottom: 363px;
-    ;
+    position: relative;
+    left: 50px;
+    
     
   }
    #userscheduletable2 {
@@ -56,9 +55,9 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    left: 85px;
-    bottom: 352px;
+    position: relative;
+    left: 50px;
+
 
   }
     #userscheduletable3 {
@@ -67,9 +66,9 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    left: 85px;
-    bottom: 341px;
+    position: relative;
+    left: 50px;
+
 
   }
     #userscheduletable4 {
@@ -79,10 +78,9 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    left: 85px;
-    
-    bottom: 330px;
+    position: relative;
+    left: 50px;
+
 
   }
   
@@ -95,9 +93,9 @@
     width:5%;
     height:1.5%;
     empty-cells:show;
-    position:fixed;
-    right: 110px;
-    bottom: 363px;
+    position: relative;
+    top:-44px;
+    left: 350px;
 
 
 
@@ -109,9 +107,9 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    right:110px;
-    bottom: 352px;
+    position: relative;
+    top:-44px;
+    left: 350px;
 
 
   }
@@ -121,9 +119,10 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    right:110px;
-    bottom: 341px;
+    position: relative;
+    top:-44px;
+    left: 350px;
+
 
   }
     #groupscheduletable4 {
@@ -133,9 +132,10 @@
     empty-cells:show;
     width:5%;
     height:1.5%;
-    position:fixed;
-    right:110px;
-    bottom: 330px;
+    position: relative;
+    top: -44px;
+    left: 350px;
+
   }
 </style>
 
@@ -264,7 +264,7 @@
 
   }
   
-  function groupschedule(){
+  function schedules(){
       var x = document.getElementById("groupscheduletable1")
       var y = document.getElementById("groupscheduletable2")
       var z = document.getElementById("groupscheduletable3")
@@ -281,6 +281,22 @@
         z.style.display = "none"
         w.style.display = "none"
       }
+      var a = document.getElementById("userscheduletable1")
+      var b = document.getElementById("userscheduletable2")
+      var c = document.getElementById("userscheduletable3")
+      var d = document.getElementById("userscheduletable4")
+      
+      if(a.style.display !== "block"){
+        a.style.display = "block"
+        b.style.display = "block"
+        c.style.display = "block"
+        d.style.display = "block"
+      }else{
+        a.style.display = "none"
+        b.style.display = "none"
+        c.style.display = "none"
+        d.style.display = "none"
+      }
 
   }
   
@@ -288,7 +304,7 @@
 
 
 <button onclick="successfulLogin()">Successful login</button>
-<button onclick= "userschedule()"> user's schedule</button>
-<button onclick= "groupschedule()"> group's schedule</button>
+<button onclick= "schedules()"> schedule</button>
 
 </html>
+
