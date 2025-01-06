@@ -1,8 +1,0 @@
-{
-    "name":"key",
-    "password":"123",
-    "schedule": [
-        ["9am","12pm"],
-        ["1pm", "4pm"]
-    ]
-}
