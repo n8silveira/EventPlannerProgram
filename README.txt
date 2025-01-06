@@ -10,7 +10,7 @@ We plan on running this server either on github directly or AWS, stay tuned!
 
 Credits:
 Joshua Bradley
+Nathaniel Silveira
 Keyshawn Jeannot
 Darren Jean Francois
-Nathaniel Silveira
 Barbara Joseph

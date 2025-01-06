@@ -11,11 +11,22 @@ app.post('/submit-form', (req, res) => {
     const path = './events/';
     const idTest = data.eventID;
 
+    const eventFolder = `${path}${idTest}/`; // new folder for event
+
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
+    if (!fs.existsSync(eventFolder)) {
+        fs.mkdirSync(eventFolder);
+    }
+
+    const peopleFolder = `${eventFolder}people/` // new folder for individual people joining event
+    if (!fs.existsSync(peopleFolder)) {
+        fs.mkdirSync(peopleFolder);
+    }
+
     // name new json file the event name user input
-    const fileName = `${path}${idTest}.json`; // name should be the "eventID".json
+    const fileName = `${eventFolder}${idTest}.json`; // name should be the "eventID".json
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {
@@ -23,7 +34,10 @@ app.post('/submit-form', (req, res) => {
             return res.status(500).json({ message: 'Error saving data '});
         }
         console.log(`Data saved as ${fileName}`);
-        res.status(200).json({ message: `Data saved as ${fileName}` });
+        res.status(200).json({
+            message: `Data saved as ${fileName}`,
+            createdFolders: [eventFolder, peopleFolder]
+        });
     });
 });
 
