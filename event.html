@@ -22,7 +22,7 @@
         <input type="text" name="username" placeholder="Your Name" autocomplete="off" class="your-name" id="username" required>
         <input type="password" name="password" placeholder="Password" autocomplete="off" class="password" id="password" required>
         <br><br>
-        <button onclick="save()" class="submit-btn">Log In</button>
+        <button onclick="save()" class="submit-btn" id = "login">Log In</button>
         <br>
         <p>Name/password are only for this event.<br>New to this event? Make up a password.<br>Returning? Use the same name/password.</p>
         <!-- <a href="#" class="link">don't have an account? Register one</a> -->
@@ -38,122 +38,10 @@
     </div>
     <!-- <p hidden id = invis> Invisible :D</p>
     <button>Visible</button> -->
+    <script src="event.js"></script>
 </body>
 <!-- <script src="script.js"></script> -->
 
-<style>
-  #userscheduletable1 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-style: solid;
-    width:5%;
-    height:1.5%;
-    empty-cells:show;
-    position: fixed;
-    top: 272;
-    left: 57;
-    
-    
-  }
-   #userscheduletable2 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: dotted;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 283;
-    left: 57;
-
-
-  }
-    #userscheduletable3 {
-    border-left-style: solid;
-    border-right-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 294;
-    left: 57;
-
-
-  }
-    #userscheduletable4 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 305;
-    left: 57;
-
-
-  }
-  
-   
-
-  #groupscheduletable1 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-style: solid;
-    width:5%;
-    height:1.5%;
-    empty-cells:show;
-    position: fixed;
-    top: 272;
-    left: 358;
-
-
-
-  }
-   #groupscheduletable2 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: dotted;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 283;
-    left: 358;
-
-
-  }
-    #groupscheduletable3 {
-    border-left-style: solid;
-    border-right-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 294;
-    left: 358;
-
-
-  }
-    #groupscheduletable4 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 305;
-    left: 358;
-
-  }
-  
-  #eventplanneroptions{
-    position: fixed;
-    top:70;
-    right:25;
-  }
-</style>
 
 <table onclick = "changeColor(id)" id = "userscheduletable1" style = "background-Color:mistyrose" hidden>
   <tr>
