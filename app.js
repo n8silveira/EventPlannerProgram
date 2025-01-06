@@ -41,13 +41,43 @@ app.post('/submit-form', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+    console.log(req.body);
+    const {username, password, eventID} = req.body;
+
+    if (!username || !password || !eventID) {
+        return res.status(400).json({message: 'Fill in required fields.'});
+    }
+    const peopleFolder = `./events/${eventID}/people/`;
+
+    if (!fs.existsSync(peopleFolder)) {
+        return res.status(404).json({message: `Event with ID ${eventID} wasn't found...`});
+    }
+    const userFile = `${peopleFolder}${username}.json`;
+    const userData = {username, password};
+
+    fs.writeFile(userFile, JSON.stringify(userData, null, 2), (err) => {
+        if (err) {
+            console.error('Error saving user file:', err);
+            return res.status(500).json({ message: 'Error saving user data.' });
+        }
+        console.log(`User data saved for ${username} in ${userFile}`);
+        res.status(200).json({message: `User ${username} successfully logged in.`});
+    });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
-    res.sendFile(path.join(__dirname, 'index.js'));
+    // res.sendFile(path.join(__dirname, 'index.js'));
 });
 
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'about.html'));
+});
+
+app.get('/event', (req, res) => {
+    res.sendFile(path.join(__dirname, 'event.html'));
+    // res.sendFile(path.join(__dirname, 'event.js'));
 });
 
 app.listen(8080, () => {

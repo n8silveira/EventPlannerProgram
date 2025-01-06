@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log('Data saved:', data);
-            window.location.href = 'event.html'; // move to next page
+            // window.location.href = 'event.html'; // move to next page
+            window.location.href = `event.html?eventID=${idTest}`;
         })
         .catch(error => {
             console.error('Error saving data:', error);
