@@ -37,7 +37,7 @@
             <option value="6am">6:00 AM</option>
             <option value="7am">7:00 AM</option>
             <option value="8am">8:00 AM</option>
-            <option value="9am">9:00 AM</option>
+            <option value="9am" selected>9:00 AM</option>
             <option value="10am">10:00 AM</option>
             <option value="11am">11:00 AM</option>
             <option value="12pm">12:00 PM</option>
@@ -77,7 +77,7 @@
             <option value="2pm">2:00 PM</option>
             <option value="3pm">3:00 PM</option>
             <option value="4pm">4:00 PM</option>
-            <option value="5pm">5:00 PM</option>
+            <option value="5pm" selected >5:00 PM</option>
             <option value="6pm">6:00 PM</option>
             <option value="7pm">7:00 PM</option>
             <option value="8pm">8:00 PM</option>
@@ -88,10 +88,10 @@
         </select>
         <br></br>
 <!-- This is the "create event" button -->
-        <button id="create-event">Create Event</button>
+        <button type="button" id="create-event">Create Event</button>
     </form>
 <!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
-    <script src="form.js"></script>
+    <!-- <script src="app.js"></script> -->
     <script>
         function changeColor(id) { 
             const button = document.getElementById(id);
@@ -115,16 +115,28 @@
             event.preventDefault();
 
             const idTest = create_random_url(13);
+            const eventName = document.getElementById('event-name').value;
             const selectedDays = Array.from(document.querySelectorAll('button[data-selected="true"]')).map(button => button.value);
+            const earliestTime = document.getElementById('earliest-times').value || '9am';
+            const latestTime = document.getElementById('latest-times').value || '5pm';
+
+            if (!eventName || selectedDays.length === 0) {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block';
+                return;
+            }
+            document.getElementById('error-message').style.display = 'none';
+
+
 
             const jsonData = { // format data as JSON
                 eventID: idTest,
-                eventName: document.getElementById('event-name').value,
+                eventName: eventName,
                 days: selectedDays,
                 // plannerUsername:, "your name" from event.html (login page)
                 // plannerPassword:, "password" from event.html (login page)
-                earliestTime: document.getElementById('earliest-times').value,
-                latestTime: document.getElementById('latest-times').value,
+                earliestTime: earliestTime,
+                latestTime: latestTime,
                 // schedules, collecting all users schedules
                 timestamp: new Date().toISOString(),
             };
