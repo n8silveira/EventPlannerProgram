@@ -9,14 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.dataset.selected = "false";
         }
     }
-    function create_random_url(string_length) {
-        var random_string = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz00112233445566778899';
-        for (var i = 0; i < string_length; i++) {
-            random_string += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return random_string;
-    }
     const dayButtons = document.querySelectorAll('button[id^="b"]');
     dayButtons.forEach(button => {
         button.addEventListener('click', () => changeColor(button.id));
@@ -24,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('create-event').addEventListener('click', (e) => {
         e.preventDefault();
 
-        const idTest = create_random_url(13);
         const eventName = document.getElementById('event-name').value;
         const selectedDays = Array.from(document.querySelectorAll('button[data-selected="true"]')).map(button => button.value);
         
@@ -36,11 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('error-message').style.display = 'none';
 
         const jsonData = { // format data as JSON
-            eventID: idTest,
             eventName: eventName,
             days: selectedDays,
-            plannerUsername: "", // from event.html (login page)
-            plannerPassword: "",// from event.html (login page)
             earliestTime: document.getElementById('earliest-times').value || '9am',
             latestTime: document.getElementById('latest-times').value || '5pm',
             // schedules, collecting all users schedules
@@ -58,8 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log('Data saved:', data);
+            const eventID = data.eventID;
             // window.location.href = 'event.html'; // move to next page
-            window.location.href = `event.html?eventID=${idTest}`;
+            window.location.href = `event.html?eventID=${eventID}`;
         })
         .catch(error => {
             console.error('Error saving data:', error);

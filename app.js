@@ -1,3 +1,12 @@
+function create_random_url(string_length) {
+    var random_string = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz00112233445566778899';
+    for (var i = 0; i < string_length; i++) {
+        random_string += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return random_string;
+}
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -8,9 +17,10 @@ app.use(express.static(path.join(__dirname)));
 
 app.post('/submit-form', (req, res) => {
     const data = req.body;
-    const path = './events/';
-    const idTest = data.eventID;
+    const idTest = create_random_url(13);
+    data.eventID = idTest;
 
+    const path = './events/';
     const eventFolder = `${path}${idTest}/`; // new folder for event
 
     if (!fs.existsSync(path)) {
@@ -36,6 +46,7 @@ app.post('/submit-form', (req, res) => {
         console.log(`Data saved as ${fileName}`);
         res.status(200).json({
             message: `Data saved as ${fileName}`,
+            eventID: idTest,
             createdFolders: [eventFolder, peopleFolder]
         });
     });
