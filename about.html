@@ -1,20 +1,29 @@
-
-<html>
-    <h1> EPP.com - About </h1>
-   <!-- change this so it connect to server--> <button onclick="document.location = 'index.html'"> Home </button>
-       <!-- change this so it connect to server-->  <button onclick = "document.location = 'about.html'"> About </button>
-    <br>
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Team Cards Page">
+    <title>Team Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="about.css">
+</head>
 <body>
-    <!--- removing to test the dynamic function --- start--
-    <p>This website is capable of getting a list of people and their schedules and finding a time that convenient for everyone. The website would also be able to have the user create events with specifications and send unique links for people to fill out their schedule. </p>
-    <p> Front end: Keyshawn and Darren</p>
-    <p>Back end: Nate </p>
-    <p>project manager: Josh</p>
-  --end here--> 
+    <!-- Navigation Buttons -->
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="document.location = 'index.html'">Home</button>
+        <button class="btn btn-secondary" onclick="document.location = 'about.html'">About</button>
+    </div>
 
-  <!-- This empty container is where our JavaScript will place the team cards -->
-    <div id ="teamContainer" class="team-container"></div>
-    <!-- This script loads our JavaScript code which fetches team data and displays it on the page -->
+    <!-- Team Cards Container -->
+    <div class="team-container" id="teamContainer">
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
     <script src="about.js"></script>
 </body>
 </html>

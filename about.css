@@ -1,0 +1,47 @@
+body {
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Navigation buttons */
+.buttons {
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    margin-right: 10px;
+}
+
+/* Team card container styles */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Individual team card styles */
+.team-card {
+    background-color: #444;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 300px;
+    overflow: hidden;
+}
+
+.team-card img {
+    width: 100%;
+    height: auto;
+}
+
+.team-card h3 {
+    margin: 15px 0 5px;
+}
+
+.team-card p {
+    margin: 0 15px 15px;
+}
