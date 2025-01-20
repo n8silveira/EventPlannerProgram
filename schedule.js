@@ -36,7 +36,7 @@ function grabPeople(eventId) {
 }
 
 grabPeople("EMZADlYxV242q"); // after calling this...
-console.log(people); // desired output -> ["josh","barb","nate"]
+console.log(people); // desired output -> ["barb","josh","nate"]
  
 //Josh logic
 /*
