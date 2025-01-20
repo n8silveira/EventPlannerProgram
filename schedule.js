@@ -34,6 +34,18 @@ function grabPeople(eventId) {
    // for every file in events/eventId/people/, add their name and push it to people
    // ...
 }
+
+/*function findCompatibleTimesGraph(people,m):
+   const graph = new Map();
+
+    people.forEach(pair =>{
+      const{pairA, pairB} = 
+       
+
+    }
+
+    )
+*/
  
 //Josh logic
 /*
