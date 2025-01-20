@@ -9,13 +9,13 @@
     {
         "name": "Nathaniel Silveira",
         "role": "Back-End Developer",
-        "photo": "images/nate-photo.png",
+        "photo": "imagws/nate-photo.jpg",
         "github": "https://github.com/n8silveira",
         "about": "Hello, my name is Nate and I love editing and animating my own videos! My favorite programming languages are C, Python and JavaScript, and I am currently working on a personal website to gather all of my projects in one place! Once I finish school, I'd love to be a full-time software engineer"
     },
     {
         "name": "Barbara Joseph",
-        "role": " back-end developer",
+        "role": "Back-End Developer",
         "photo": "images/barbara-photo.jpg",
         "github": "https://github.com/bjosepxv?tab=overview&from=2025-01-01&to=2025-01-20",
         "about": " Hey! I'm Barbara, and I love designing. My favorite programming languages are Java  and Python! I’m currently working on designing a portfolio website and in the future I hope to become a data scientist or data analyst."
