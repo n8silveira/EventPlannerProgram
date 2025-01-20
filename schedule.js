@@ -28,6 +28,12 @@ function addPeople(name, availabilty){
    });
 }
 
+function grabPeople(eventId) {
+   // events/eventId/people/*
+   // ...
+   // for every file in events/eventId/people/, add their name and push it to people
+   // ...
+}
  
 //Josh logic
 /*
