@@ -10,15 +10,16 @@
         <link rel="stylesheet" href="about.css">
     </head>
     <body class="bg-light text dark">
-       <div class="container text-center mt-5">
+       <div class="container my-5">
             <!-- header of the page -->
-                    <h1>EPP.com</h1>
+            <h1 class="text-center mb-4">EPP.com</h1>
             <!-- these are the buttons that will take you to the home and about pages -->
-                    <button onclick="document.location = 'index.html'"> Home </button>
-                    <button onclick = "document.location = 'about.html'"> About </button>
-                    <br><br>
+            <div class="text-center mb-4">
+                <button class ="btn btn-primary mx-2" onclick="document.location = 'index.html'"> Home </button>
+                <button class = "btn btn- secondary mx-2" onclick = "document.location = 'about.html'"> About </button>
+            </div>
             <!-- This is where you type the name for an event  -->
-                    <form id="form">
+            <form id="form" class="p-4 bg-white shaow rounded">
                         Event Name: <input type="text" name="eventName" id="event-name" placeholder="Type Event Name Here">
                         <br><br>
             <!-- These are the buttons that will allow you to select the days of the week that you want to have the event on. -->
