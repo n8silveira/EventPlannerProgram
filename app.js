@@ -65,18 +65,37 @@ app.post('/login', (req, res) => {
         return res.status(404).json({message: `Event with ID ${eventID} wasn't found...`});
     }
     const userFile = `${peopleFolder}${username}.json`;
-    const userData = {username, password};
+    // check if userFile exists
+    if (fs.existsSync(userFile)) {
+        // read user file
+        fs.readFile(userFile, '', (err, data) => {
+            if (err) {
+                console.error('Error reading user file:', err);
+                return res.status(500).json({message: 'Error reading user data...'});
+            }
+            const userData = JSON.parse(data);
 
-    fs.writeFile(userFile, JSON.stringify(userData, null, 2), (err) => {
-        if (err) {
-            console.error('Error saving user file:', err);
-            return res.status(500).json({ message: 'Error saving user data.' });
-        }
-        console.log(`User data saved for ${username} in ${userFile}`);
-        res.status(200).json({message: `User ${username} successfully logged in.`});
-    });
-});
-
+            // check if password matches
+            if (userData.password != password) {
+                // if pass doesn't match
+                return res.status(300).json({message: `Incorrect password. Try again`});
+            }
+        });
+    } else {
+        // new user, save data
+        const userData = {username, password};
+        
+        fs.writeFile(userFile, JSON.stringify(userData, null, 2), (err) => {
+            if (err) {
+                console.error('Error saving user file:', err);
+                return res.status(500).json({ message: 'Error saving user data.' });
+            }
+            console.log(`User data saved for ${username} in ${userFile}`);
+            res.status(200).json({message: `User ${username} successfully logged in.`});
+        });
+    }
+});  
+    
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
     // res.sendFile(path.join(__dirname, 'index.js'));
