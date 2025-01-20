@@ -25,6 +25,27 @@ const schedule = [
     2300, 2315, 2330, 2345      // 11:00pm, 11:15pm, 11:30pm, 11:45pm
 ];
 
+// convert string input times ("4:45pm") -> int military times (1645)
+function convertToMilit(time) {
+    // format input into proper convention: 1) hour, 2) mins, 3) am/pm
+    const pattern = /^(\d{1,2}):(\d{2})([ap]m)$/i;
+    const parts = time.match(pattern); // turns format into array of strings
+
+    let hour = parseInt(parts[1], 10); // hour -> (int)
+    const minutes = parseInt(parts[2], 10); // minutes -> (int)
+    const meridiem = parts[3].toLowerCase(); // capture "am" or "pm"
+
+    if (meridiem == "pm" && hour != 12) {
+        hour += 12; // military hours
+    } else if (meridiem == "am" && hour == 12) {
+        hour = 0; // checks if midnight
+    }
+    let militTime = hour * 100 + minutes; // 12 * 100 = 1200
+    return militTime;
+};
+
+console.log(convertToMilit("8:45pm"));
+
 /*
 What is an algorithm that can sort n people and their schedules into m events?
 JOSH'S ALGORITHM:
@@ -102,3 +123,5 @@ if (timeOfDay == "pm"):
 slap it back on -> "14:00"
 return schedule.findItem(militTime)
 */
+
+// come up with all the methods that need to be written:
