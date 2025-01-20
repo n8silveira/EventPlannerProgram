@@ -25,6 +25,57 @@ const schedule = [
     2300, 2315, 2330, 2345      // 11:00pm, 11:15pm, 11:30pm, 11:45pm
 ];
 
+// see if time is AM or PM
+function checkMeridiem(time) {
+    let meridiem = ""; 
+    // iterate from end
+    for (let i = time.length - 1; i >= 0; i--) {
+        meridiem = time[i] + meridiem;
+        if (meridiem.length >= 2) { // get last two chars ("am"/"pm")
+            break;
+        }
+    }
+    return meridiem;
+};
+
+    // "hour:minutes[am/pm]" <- convention 
+    // ex. "1:00am" -> (int) 100
+    //     "12:45pm" -> (int) 1245
+    //     "4:45pm" -> (int) 1645
+    //     "8:15pm" -> (int) 2015
+
+// time: "1:00am" -> 100, "4:30pm" -> 1630
+function convertToMilit(time) {
+    let parts = time.split(":"); // ["4", "30pm"]
+    let hour = parts[0]; // "4"
+    let minutes = parts[1]; // "30pm"
+    const militTime = "";
+
+    const input = checkMeridiem(time);
+    if (input == "am") {
+        let removeMeridian = time.slice(0, -2); // "1:00"
+        let removeColon = removeMeridian.replace(":", ""); // "100"
+        militTime = Number(removeColon); // 100
+    } else if (input == "pm") {
+        if (time == "12:00pm" || time == "12:15pm" || time == "12:30pm" || time == "12:45pm") {
+            let removeColon = time.replace(":", "");
+            let removeMeridian = removeColon.slice(0, -2);
+            militTime = Number(removeMeridian);
+        } else {
+            hour = Number(hour); // "4" -> 4
+            hour = hour + 12; // 16
+            let removeMeridian = minutes.slice(0, -2); // "30"
+            hour = String(hour); // "16"
+            const stringTime = hour + removeMeridian; // "1630"
+            militTime = Number(stringTime); // 1630
+        }
+    }
+    return militTime;
+};
+
+convertToMilit("1:00am");
+
+
 /*
 What is an algorithm that can sort n people and their schedules into m events?
 JOSH'S ALGORITHM:
@@ -102,3 +153,5 @@ if (timeOfDay == "pm"):
 slap it back on -> "14:00"
 return schedule.findItem(militTime)
 */
+
+// come up with all the methods that need to be written:
