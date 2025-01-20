@@ -1,3 +1,5 @@
+// Meetitude – Blessed are those who coordinate well.
+
 let raw_people = []
 let people = [] // name, schedule (dict)
 
@@ -30,4 +32,5 @@ function generateEvent(eventId) {
     */
    
     // do algo
+
 }
