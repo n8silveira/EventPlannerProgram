@@ -9,6 +9,8 @@ fetch("aboutMe.json")
 
     //now data is the array of the team members from aboutMe.json//
     .then(data => {
+
+        data.reverse();
         // making the loop that cover each member
         data.forEach(element => {
             const card = document.createElement("div");
