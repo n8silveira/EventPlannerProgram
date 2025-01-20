@@ -10,97 +10,99 @@
         <link rel="stylesheet" href="about.css">
     </head>
     <body class="bg-light text dark">
-<!-- header of the page -->
-        <h1>EPP.com</h1>
-<!-- these are the buttons that will take you to the home and about pages -->
-        <button onclick="document.location = 'index.html'"> Home </button>
-        <button onclick = "document.location = 'about.html'"> About </button>
-        <br><br>
-<!-- This is where you type the name for an event  -->
-        <form id="form">
-            Event Name: <input type="text" name="eventName" id="event-name" placeholder="Type Event Name Here">
-            <br><br>
-<!-- These are the buttons that will allow you to select the days of the week that you want to have the event on. -->
-            Days:
-            <button type="button" style="background-color: gainsboro;" id="b1" value="Sunday" data-selected="false" onclick="changeColor(id)">Sunday</button>
-            <button type="button" style="background-color: gainsboro;" id="b2" value="Monday" data-selected="false" onclick="changeColor(id)">Monday</button>
-            <button type="button" style="background-color: gainsboro;" id="b3" value="Tuesday" data-selected="false" onclick="changeColor(id)">Tuesday</button>
-            <button type="button" style="background-color: gainsboro;" id="b4" value="Wednesday" data-selected="false" onclick="changeColor(id)">Wednesday</button>
-            <button type="button" style="background-color: gainsboro;" id="b5" value="Thursday" data-selected="false" onclick="changeColor(id)">Thursday</button>
-            <button type="button" style="background-color: gainsboro;" id="b6" value="Friday" data-selected="false" onclick="changeColor(id)">Friday</button>
-            <button type="button" style="background-color: gainsboro;" id="b7" value="Saturday" data-selected="false" onclick="changeColor(id)">Saturday</button>
-        <br></br>
-<!-- This is a dropdown menu that will allow the user to select the time interval they want their event on  -->
-        <p>Times:</p>
-        <label for="earliest-times">No earlier than:</label>
-        <select name="earliest-times" id="earliest-times">
-            <option value="12am">12:00 AM</option>
-            <option value="1am">1:00 AM</option>
-            <option value="2am">2:00 AM</option>
-            <option value="3am">3:00 AM</option>
-            <option value="4am">4:00 AM</option>
-            <option value="5am">5:00 AM</option>
-            <option value="6am">6:00 AM</option>
-            <option value="7am">7:00 AM</option>
-            <option value="8am">8:00 AM</option>
-            <option value="9am" selected>9:00 AM</option>
-            <option value="10am">10:00 AM</option>
-            <option value="11am">11:00 AM</option>
-            <option value="12pm">12:00 PM</option>
-            <option value="1pm">1:00 PM</option>
-            <option value="2pm">2:00 PM</option>
-            <option value="3pm">3:00 PM</option>
-            <option value="4pm">4:00 PM</option>
-            <option value="5pm">5:00 PM</option>
-            <option value="6pm">6:00 PM</option>
-            <option value="7pm">7:00 PM</option>
-            <option value="8pm">8:00 PM</option>
-            <option value="9pm">9:00 PM</option>
-            <option value="10pm">10:00 PM</option>
-            <option value="11pm">11:00 PM</option>
-            <option value="12am">12:00 AM</option>
-        </select>
-        <br></br>
+       <div class="container text-center mt-5">
+            <!-- header of the page -->
+                    <h1>EPP.com</h1>
+            <!-- these are the buttons that will take you to the home and about pages -->
+                    <button onclick="document.location = 'index.html'"> Home </button>
+                    <button onclick = "document.location = 'about.html'"> About </button>
+                    <br><br>
+            <!-- This is where you type the name for an event  -->
+                    <form id="form">
+                        Event Name: <input type="text" name="eventName" id="event-name" placeholder="Type Event Name Here">
+                        <br><br>
+            <!-- These are the buttons that will allow you to select the days of the week that you want to have the event on. -->
+                        Days:
+                        <button type="button" style="background-color: gainsboro;" id="b1" value="Sunday" data-selected="false" onclick="changeColor(id)">Sunday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b2" value="Monday" data-selected="false" onclick="changeColor(id)">Monday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b3" value="Tuesday" data-selected="false" onclick="changeColor(id)">Tuesday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b4" value="Wednesday" data-selected="false" onclick="changeColor(id)">Wednesday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b5" value="Thursday" data-selected="false" onclick="changeColor(id)">Thursday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b6" value="Friday" data-selected="false" onclick="changeColor(id)">Friday</button>
+                        <button type="button" style="background-color: gainsboro;" id="b7" value="Saturday" data-selected="false" onclick="changeColor(id)">Saturday</button>
+                    <br></br>
+            <!-- This is a dropdown menu that will allow the user to select the time interval they want their event on  -->
+                    <p>Times:</p>
+                    <label for="earliest-times">No earlier than:</label>
+                    <select name="earliest-times" id="earliest-times">
+                        <option value="12am">12:00 AM</option>
+                        <option value="1am">1:00 AM</option>
+                        <option value="2am">2:00 AM</option>
+                        <option value="3am">3:00 AM</option>
+                        <option value="4am">4:00 AM</option>
+                        <option value="5am">5:00 AM</option>
+                        <option value="6am">6:00 AM</option>
+                        <option value="7am">7:00 AM</option>
+                        <option value="8am">8:00 AM</option>
+                        <option value="9am" selected>9:00 AM</option>
+                        <option value="10am">10:00 AM</option>
+                        <option value="11am">11:00 AM</option>
+                        <option value="12pm">12:00 PM</option>
+                        <option value="1pm">1:00 PM</option>
+                        <option value="2pm">2:00 PM</option>
+                        <option value="3pm">3:00 PM</option>
+                        <option value="4pm">4:00 PM</option>
+                        <option value="5pm">5:00 PM</option>
+                        <option value="6pm">6:00 PM</option>
+                        <option value="7pm">7:00 PM</option>
+                        <option value="8pm">8:00 PM</option>
+                        <option value="9pm">9:00 PM</option>
+                        <option value="10pm">10:00 PM</option>
+                        <option value="11pm">11:00 PM</option>
+                        <option value="12am">12:00 AM</option>
+                    </select>
+                    <br></br>
 
-        <!-- <link rel ="stylesheet" href="styles.css">
-        <div class="dropdown"> -->
-        <label for="latest-times">No later than:</label>
-        <select name="latest-times" id="latest-times">
-            <option value="12am">12:00 AM</option>
-            <option value="1am">1:00 AM</option>
-            <option value="2am">2:00 AM</option>
-            <option value="3am">3:00 AM</option>
-            <option value="4am">4:00 AM</option>
-            <option value="5am">5:00 AM</option>
-            <option value="6am">6:00 AM</option>
-            <option value="7am">7:00 AM</option>
-            <option value="8am">8:00 AM</option>
-            <option value="9am">9:00 AM</option>
-            <option value="10am">10:00 AM</option>
-            <option value="11am">11:00 AM</option>
-            <option value="12pm">12:00 PM</option>
-            <option value="1pm">1:00 PM</option>
-            <option value="2pm">2:00 PM</option>
-            <option value="3pm">3:00 PM</option>
-            <option value="4pm">4:00 PM</option>
-            <option value="5pm" selected >5:00 PM</option>
-            <option value="6pm">6:00 PM</option>
-            <option value="7pm">7:00 PM</option>
-            <option value="8pm">8:00 PM</option>
-            <option value="9pm">9:00 PM</option>
-            <option value="10pm">10:00 PM</option>
-            <option value="11pm">11:00 PM</option>
-            <option value="12am">12:00 AM</option>
-        </select>
-        <br></br>
-<!-- This is the "create event" button -->
-        <button type="button" id="create-event">Create Event</button>
-    </form>
-    <div id="error-message" style="color: red; display: none;">Please fill in all required fields!</div>
-<!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+                    <!-- <link rel ="stylesheet" href="styles.css">
+                    <div class="dropdown"> -->
+                    <label for="latest-times">No later than:</label>
+                    <select name="latest-times" id="latest-times">
+                        <option value="12am">12:00 AM</option>
+                        <option value="1am">1:00 AM</option>
+                        <option value="2am">2:00 AM</option>
+                        <option value="3am">3:00 AM</option>
+                        <option value="4am">4:00 AM</option>
+                        <option value="5am">5:00 AM</option>
+                        <option value="6am">6:00 AM</option>
+                        <option value="7am">7:00 AM</option>
+                        <option value="8am">8:00 AM</option>
+                        <option value="9am">9:00 AM</option>
+                        <option value="10am">10:00 AM</option>
+                        <option value="11am">11:00 AM</option>
+                        <option value="12pm">12:00 PM</option>
+                        <option value="1pm">1:00 PM</option>
+                        <option value="2pm">2:00 PM</option>
+                        <option value="3pm">3:00 PM</option>
+                        <option value="4pm">4:00 PM</option>
+                        <option value="5pm" selected >5:00 PM</option>
+                        <option value="6pm">6:00 PM</option>
+                        <option value="7pm">7:00 PM</option>
+                        <option value="8pm">8:00 PM</option>
+                        <option value="9pm">9:00 PM</option>
+                        <option value="10pm">10:00 PM</option>
+                        <option value="11pm">11:00 PM</option>
+                        <option value="12am">12:00 AM</option>
+                    </select>
+                    <br></br>
+            <!-- This is the "create event" button -->
+                    <button type="button" id="create-event">Create Event</button>
+                </form>
+                <div id="error-message" style="color: red; display: none;">Please fill in all required fields!</div>
+            <!-- Bootstrap JS -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
-    <script src="index.js"></script>
+            <!-- This function toggles the button's (Sunday-Saturday) color between lightgreen and gainsboro. -->
+                <script src="index.js"></script>
+       </div>       
     </body>    
 </html>
