@@ -6,7 +6,6 @@ function grabPeople(eventID) {
     const folderPath = path.join(__dirname, 'events', eventID, 'people');
     const people = [];
    
-   
     if (!fs.existsSync(folderPath)) {
         console.error('The "people" folder does not exist.');
         return [];
@@ -22,7 +21,7 @@ function grabPeople(eventID) {
         try {
             const personData = JSON.parse(data); 
             if (personData.username) {
-                people.push(personData.username); 
+                people.push(personData.username);
             }
         } catch (err) {
             console.error(`Error parsing file ${file}:`, err);
@@ -30,22 +29,53 @@ function grabPeople(eventID) {
     });
     return people;
 }
-const grab = grabPeople("EMZADlYxV242q"); // after calling this...
-console.log(grab); // desired output -> ["barb","josh","nate"]
 
+// convert string input times ("4:45pm") -> int military times (1645)
+function convertToMilit(time) {
+    // format input into proper convention: 1) hour, 2) mins, 3) am/pm
+    const pattern = /^(\d{1,2}):(\d{2})([ap]m)$/i;
+    const parts = time.match(pattern); // turns format into array of strings
 
+    let hour = parseInt(parts[1], 10); // hour -> (int)
+    const minutes = parseInt(parts[2], 10); // minutes -> (int)
+    const meridiem = parts[3].toLowerCase(); // capture "am" or "pm"
 
-//Josh logic
-/*
-Input: List of people with schedules, number of events(m)
-convert each person's schedule into integer intervals
-bulid a digraph:
-for each pair of people:
-if their schedules overlap, draw an edge between A and B.
-4. Group people:
-   Use an algorithm to form groups of compatible people.
-5. Distribute groups into m Bible Talks:
-   Ensure groups are evenly distributed across BTs.
-   Avoid assigning the same time slot to multiple BTs.
-6. Output the list of Bible Talks with assigned people and time slots.
-*/
+    if (meridiem == "pm" && hour != 12) {
+        hour += 12; // military hours
+    } else if (meridiem == "am" && hour == 12) {
+        hour = 0; // checks if midnight
+    }
+    let militTime = hour * 100 + minutes; // 12 * 100 = 1200
+    return militTime;
+};
+
+let raw_people = []
+
+function generateEvent(eventId) {
+    // grab all the people from events/eventId/people/*
+    raw_people = grabPeople(eventId);
+    console.log(raw_people);
+    const people = [];
+
+    //convert all times into 24-hour time
+    raw_people.forEach(person => {
+        const {name, schedule} = person;
+
+        const timeSlots = [];
+
+        
+
+        // unpack their schedule and then use convertToMilit(time)
+        schedule.forEach(timeSlot => {
+            const [startTime, endTime] = timeSlot.split("-"); // take out hyphen
+            const militStartTime = convertToMilit(startTime); // update start time
+            const militEndTime = convertToMilit(endTime); // update end time
+            timeSlots.push([militStartTime, militEndTime]);
+        });
+        people.push({name, schedule: timeSlots});
+    });
+    return people;
+}
+const eventID = "EMZADlYxV242q";
+const people = generateEvent(eventID);
+console.log(people);
