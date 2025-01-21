@@ -1,4 +1,3 @@
-
 // Get the div in the "aboutMe.json" page where the team cards will go
 const teamContainer = document.getElementById("teamContainer");
 
@@ -8,7 +7,6 @@ fetch("aboutMe.json")
   .then(data => {
     // Loop through each team member and create a card
     data.forEach(element => {
-
       const card = document.createElement("div");
       card.classList.add("team-card", "col-md-4", "text-center", "p-3");
 

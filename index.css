@@ -1,103 +1,101 @@
 body {
-    background-color: #f8f8f8; 
-    font-family: 'Poppins', sans-serif; 
-    color: #2f2f2f; 
-    margin: 0;
-    padding: 0;
-  }
-  
-  .text-burgundy {
-    color: #800020; 
-    font-weight: bold;
-    font-size: 2.5rem;
-  }
-  
-  
-  .btn-secondary  {
-    background-color: #002e5d; 
-    border-color: #002e5d;
-    color: white;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #003a73; 
-  }
-  
-  .btn-primary {
-    background-color: #6C757D; 
-    border-color: #6C757D ;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #5a6268; 
-  }
-  
-  /* Form Styling */
-  form {
-    background-color: #ffffff; 
-    border: 2px solid #002e5d; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    padding: 20px;
-  }
-  
-  .form-label {
-    color: #002e5d; 
-    font-weight: bold;
-  }
-  
-  .form-control,
-  .form-select {
-    border-radius: 8px; 
-    border: 1px solid #cccccc; 
-  }
-  
+  background-color: #f8f8f8; 
+  font-family: 'Poppins', sans-serif; 
+  color: #2f2f2f; 
+  margin: 0;
+  padding: 0;
+}
 
-  .btn-outline-secondary {
-    border-color: #cccccc; 
-    color: #555555; 
-    border-radius: 8px;
-  }
-  
-  .btn-outline-secondary:hover {
-    background-color: #e0e0e0; 
-    color: black;
-  }
-  
-  .btn-outline-secondary[data-selected="true"] {
-    background-color: #98fb98; 
-    color: black;
-  }
-  
-  .btn-success {
-    background-color: #ffd700; 
-    border-color: #ffd700;
-    color: black;
-    font-weight: bold;
-  }
-  
-  .btn-success:hover {
-    background-color: #ffc300; 
-  }
-  
+.text-burgundy {
+  color: #800020; 
+  font-weight: bold;
+  font-size: 2.5rem;
+}
 
-  .container {
-    max-width: 800px; 
-    margin: auto;
-  }
+.btn-secondary {
+  background-color: #002e5d; 
+  border-color: #002e5d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #003a73; 
+}
+
+.btn-primary {
+  background-color: #6C757D; 
+  border-color: #6C757D;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #5a6268; 
+}
+
+/* Form Styling */
+form {
+  background-color: #ffffff; 
+  border: 2px solid #002e5d; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+}
+
+.form-label {
+  color: #002e5d; 
+  font-weight: bold;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px; 
+  border: 1px solid #cccccc; 
+}
+
+.btn-outline-secondary {
+  border-color: #cccccc; 
+  color: #555555; 
+  border-radius: 8px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #e0e0e0; 
+  color: black;
+}
+
+.btn-outline-secondary[data-selected="true"] {
+  background-color: #98fb98; 
+  color: black;
+}
+
+.btn-success {
+  background-color: #ffd700; 
+  border-color: #ffd700;
+  color: black;
+  font-weight: bold;
+}
+
+.btn-success:hover {
+  background-color: #ffc300; 
+}
+
+.container {
+  max-width: 800px; 
+  margin: auto;
+}
 
 #b1 {
-    margin-bottom: 20;
- }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 15px;
-    }
-  /* Stack buttons vertically when scren get smaller*/
-    .btn {
-      margin-bottom: 10px; 
-    }
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
   }
+  /* Stack buttons vertically when screen gets smaller */
+  .btn {
+    margin-bottom: 10px; 
+  }
+}
+
   

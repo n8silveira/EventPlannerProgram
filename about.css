@@ -1,43 +1,40 @@
 /* Team Card Styling */
 .team-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  .team-card img {
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .btn-linkedin {
-    background-color: #0077b5;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-  }
-  
-  .btn-linkedin:hover {
-    background-color: #005983;
-    color: white;
-  }
-  
-  .btn-github {
-    background-color: #333333;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-  }
-  
-  .btn-github:hover {
-    background-color: #1a1a1a;
-    color: white;
-  }
-  
+.team-card img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.btn-linkedin {
+  background-color: #0077b5;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.btn-linkedin:hover {
+  background-color: #005983;
+  color: white;
+}
+
+.btn-github {
+  background-color: #333333;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.btn-github:hover {
+  background-color: #1a1a1a;
+  color: white;
+}
 
 
  
