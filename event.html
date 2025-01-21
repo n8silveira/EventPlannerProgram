@@ -204,6 +204,7 @@ function howmanyevents(){
    if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
               //by checking the current index of s (if it's not 1, it's a double digit)
    s = startTime[0]+ startTime[1];
+   s = parseInt(s);
    }else{
      s = parseInt(startTime[0]);
    }
@@ -211,6 +212,7 @@ function howmanyevents(){
    var e = endTime.indexOf(":");
    if (e!= 1){
    e = endTime[0]+ endTime[1];
+   e = parseInt(e); // this  turns the string into an integer
    }else{
      e = parseInt(endTime[0]);
    }
@@ -297,7 +299,7 @@ function howmanyevents(){
    
  
  function slowDown(){
-   generateScheduleTables(["Monday", "Tuesday", "Friday"], "7:00 PM", "11:00 PM");
+   generateScheduleTables(["Monday", "Tuesday", "Friday"], "10:00 PM", "11:00 PM");
  }
  
 
