@@ -56,11 +56,11 @@ function grabPeople(eventID){
       } catch (err) {
           console.error(`Error parsing file ${file}:`, err);
       }
-      console.log('returning people:', people);
+
       return people;
   });
    
-
+}
 const grab = grabPeople("EMZADlYxV242q"); // after calling this...
 console.log(grab); // desired output -> ["barb","josh","nate"]
 
