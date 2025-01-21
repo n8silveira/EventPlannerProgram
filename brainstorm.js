@@ -44,7 +44,42 @@ function convertToMilit(time) {
     return militTime;
 };
 
-console.log(convertToMilit("8:45pm"));
+let raw_people = []
+
+function generateEvent(eventId) {
+    // grab all the people from events/eventId/people/*
+    raw_people = grabPeople(eventId);
+    const people = [];
+
+    //convert all times into 24-hour time
+    raw_people.forEach(person => {
+        const {name, schedule} = person;
+        const timeSlots = [];
+
+        // unpack their schedule and then use convertToMilit(time)
+        schedule.forEach(timeSlot => {
+            const [startTime, endTime] = timeSlot.split("-"); // take out hyphen
+            const militStartTime = convertToMilit(startTime); // update start time
+            const militEndTime = convertToMilit(endTime); // update end time
+            timeSlots.push([militStartTime, militEndTime]);
+        });
+        people.push({name, schedule: timeSlots});
+    });
+    return people;
+}
+const eventID = "EMZADlYxV242q";
+const people = generateEvent(eventID);
+console.log(people);
+/* at this point:
+    name: "Josh"
+    schedule: [[900,1030],[1130,1200],[1300,1700]]
+    */
+   
+    // do algo
+
+
+
+
 
 /*
 What is an algorithm that can sort n people and their schedules into m events?
