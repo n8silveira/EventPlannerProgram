@@ -84,10 +84,6 @@ form {
   margin: auto;
 }
 
-#b1 {
-  margin-bottom: 20px;
-}
-
 @media (max-width: 768px) {
   .container {
     padding: 15px;
