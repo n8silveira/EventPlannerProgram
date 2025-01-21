@@ -1,6 +1,4 @@
-let people = [];
-
-function convertToBlockTime(startTime,endTime){
+/*/function convertToBlockTime(startTime,endTime){
    const blockTime = (time) => {
       //01:30 
       let[hours, minutes] = time.split(":").map(Number);
@@ -27,14 +25,47 @@ function addPeople(name, availabilty){
       
    });
 }
+*/
 
-function grabPeople(eventId) {
+const fs = require('fs');
+const path = require('path');
+
+function grabPeople(eventID){
    // events/eventId/people/*
-   // ...
+  const folderPath = path.join(__dirname, 'events', eventID, 'people');
+  const people = [];
+   
+   
+   if (!fs.existsSync(folderPath)) {
+      console.error('The "people" folder does not exist.');
+      return [];
+  }
    // for every file in events/eventId/people/, add their name and push it to people
-   // ...
-}
- 
+   const files = fs.readdirSync(folderPath);
+   
+   //find out how to open a file in 
+   files.forEach((file) => {
+      const filePath = path.join(folderPath, file);
+      const data = fs.readFileSync(filePath, 'utf8'); 
+
+      try {
+          const personData = JSON.parse(data); 
+          if (personData.username) {
+              people.push(personData.username); 
+          }
+      } catch (err) {
+          console.error(`Error parsing file ${file}:`, err);
+      }
+      console.log('returning people:', people);
+      return people;
+  });
+   
+
+const grab = grabPeople("EMZADlYxV242q"); // after calling this...
+console.log(grab); // desired output -> ["barb","josh","nate"]
+
+
+
 //Josh logic
 /*
 Input: List of people with schedules, number of events(m)
