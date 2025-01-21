@@ -194,6 +194,11 @@ function howmanyevents(){
 </div>
 <script>
  function generateScheduleTables(days = [], startTime, endTime){
+   //"sPM" and "ePM" stand for "startTime-PM" and "endTime-PM"
+   //these variables are meant to check if the start and end times are in the AM or PM
+   // 0 is false, 1 is true
+   var sPM = 0;
+   var ePM = 0;
 //This sets "s" (the start time) and "e" (the end time) to the number befor the semi-colon
    var s = startTime.indexOf(":");
    if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
@@ -209,11 +214,26 @@ function howmanyevents(){
    }else{
      e = parseInt(endTime[0]);
    }
+   
+   //this checks if the time is in the "PM"
+   for (let i = 5; i < 8; i++){
+     if (startTime[i] == "P"){
+       sPM = 1; 
+       console.log("this works");
+     }
+     if (endTime[i] == "P"){
+       ePM = 1;
+       console.log("this also works");
+     }
+   }
+   
    //This creates n amount of tables based on the start and end times
    // for (i = s; i < e; i++){
    
+//This if statement checks if the startime and endtime are both AM or PM
+   if((sPM == 0 && ePM == 0)||(sPM == 1 && ePM == 1)){  
    //This loop sets the day and which day the following schedule is for
-   for (let i = 0; i != days.length; i++){
+    for (let i = 0; i != days.length; i++){
         var dow = days[i]; // dow (day.of.week) is the day associated with the current index of the "days" list
         const day = document.createElement("table"); //creates a table
         day.id = `${dow}`; //gives the table an id
@@ -273,15 +293,14 @@ function howmanyevents(){
    }
    }    
    }
-   
+ }
    
  
  function slowDown(){
-   generateScheduleTables(["Monday", "Tuesday", "Friday"], "7:00 AM", "11:00 AM");
+   generateScheduleTables(["Monday", "Tuesday", "Friday"], "7:00 PM", "11:00 PM");
  }
  
 
 </script>
 </html>
-
 
