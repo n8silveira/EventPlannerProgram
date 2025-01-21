@@ -68,7 +68,7 @@ app.post('/login', (req, res) => {
     // check if userFile exists
     if (fs.existsSync(userFile)) {
         // read user file
-        fs.readFile(userFile, '', (err, data) => {
+        fs.readFile(userFile, 'utf8', (err, data) => {
             if (err) {
                 console.error('Error reading user file:', err);
                 return res.status(500).json({message: 'Error reading user data...'});
@@ -76,10 +76,12 @@ app.post('/login', (req, res) => {
             const userData = JSON.parse(data);
 
             // check if password matches
-            if (userData.password != password) {
-                // if pass doesn't match
-                return res.status(300).json({message: `Incorrect password. Try again`});
+            if (userData.password !== password) {
+                // incorrect password
+                return res.status(401).json({message: `Incorrect password... Try again`});
             }
+            // correct password
+            return res.status(200).json({message: `User ${username} successfully logged in!`});
         });
     } else {
         // new user, save data

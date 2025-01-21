@@ -31,14 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(userData),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.message);
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Successfully logged in:', data);
-            alert('You have successfully logged in.');
+            alert('You have successfully logged in!');
         })
         .catch(error => {
-            console.error('Error saving data:', error);
-            alert('ERROR.');
+            console.error('Error logging in:', error);
+            alert('Incorrect password...');
         });
     });
 });
