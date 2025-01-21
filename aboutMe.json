@@ -5,11 +5,19 @@
     "photo": "images/josh-photo.png",
     "github": "https://github.com/jawshipai",
     "linkedin": "https://www.linkedin.com/in/joshua-bradley-943a8620a",
-    "about": "Hey! I'm Josh, and I love to do game development. My favorite programming languages are Java, C#, C, and Python! I’m currently working on an indie game called GAGA Ball, and in the future I hope to do something in machine learning / AI or Game development"
+    "about": "Hey! I'm Josh, and I love to do game development. My favorite programming languages are Java, C#, C, and Python! I’m currently working on an indie game called GAGA Ball, and in the future I hope to do something in machine learning / AI or Game development."
+  },
+  {
+    "name": "Nathaniel Silveira",
+    "role": "Back-End Developer",
+    "photo": "images/nate-pic.png",
+    "github": "https://github.com/n8silveira",
+    "linkedin": "https://www.linkedin.com/in/nathaniel-silveira-106804149/",
+    "about": "Hello, my name is Nate and I love editing and animating my own videos! My favorite programming languages are C, Python and JavaScript, and I am currently working on a personal website to gather all of my projects in one place! Once I finish school, I'd love to be a full-time software engineer."
   },
   {
   "name": "Keyshawn Jeannot",
-  "role": "Front-end Developer",
+  "role": "Front-End Developer",
   "photo": "images/key-photo.jpg",
   "github": "https://github.com/The1keyy",
   "linkedin": "https://www.linkedin.com/in/keyshawnjeannot",
@@ -17,7 +25,7 @@
   },
   {
     "name": "Darren Jean Francois",
-    "role": "Front-end Developer",
+    "role": "Front-End Developer",
     "photo": "images/darren-photo.png",
     "github": "https://github.com/4622-wq",
     "linkedin": "https://www.linkedin.com/in/djayy-jean-francois-116558343/",
@@ -30,13 +38,5 @@
     "github": "https://github.com/bjosepxv?tab=overview&from=2025-01-01&to=2025-01-20",
     "linkedin": "https://www.linkedin.com/in/barbara-joseph-5561b3251",
     "about": "Hey! I'm Barbara, and I love designing. My favorite programming languages are Java and Python! I’m currently working on designing a portfolio website and in the future I hope to become a data scientist or data analyst."
-  },
-  {
-    "name": "Nathaniel Silveira",
-    "role": "Back-End Developer",
-    "photo": "images/nate-pic.png",
-    "github": "https://github.com/n8silveira",
-    "linkedin": "https://www.linkedin.com/in/nathaniel-silveira-106804149/",
-    "about": "Hello, my name is Nate and I love editing and animating my own videos! My favorite programming languages are C, Python and JavaScript, and I am currently working on a personal website to gather all of my projects in one place! Once I finish school, I'd love to be a full-time software engineer"
   }
 ]
