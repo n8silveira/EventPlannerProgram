@@ -115,7 +115,7 @@
     function save() {
         var item = document.getElementById("username").value;
         localStorage.setItem("storedName", item)
-        document.getElementById("savedText").innerHTML = item + " SAVED";
+        document.getElementsById("savedText").innerHTML = item + " SAVED";
     }
     function get() {
         localStorage.getItem("storedName");
@@ -186,5 +186,100 @@ function howmanyevents(){
 <button onclick= "schedules()"> schedule</button>
 <button onclick = "howmanyevents()"> How Many Events</button>
 
+<div>
+  <button onclick= "slowDown()">
+    Generate Schedules
+  </button>
+</div>
+<script>
+ function generateScheduleTables(days = [], startTime, endTime){
+//This sets "s" (the start time) and "e" (the end time) to the number befor the semi-colon
+   var s = startTime.indexOf(":");
+   if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
+              //by checking the current index of s (if it's not 1, it's a double digit)
+   s = startTime[0]+ startTime[1];
+   }else{
+     s = parseInt(startTime[0]);
+   }
+   
+   var e = endTime.indexOf(":");
+   if (e!= 1){
+   e = endTime[0]+ endTime[1];
+   }else{
+     e = parseInt(endTime[0]);
+   }
+   //This creates n amount of tables based on the start and end times
+   // for (i = s; i < e; i++){
+   
+   //This loop sets the day and which day the following schedule is for
+   for (let i = 0; i != days.length; i++){
+        var dow = days[i]; // dow (day.of.week) is the day associated with the current index of the "days" list
+        const day = document.createElement("table"); //creates a table
+        day.id = `${dow}`; //gives the table an id
+        day.style = "float:left"; //makes the tables go towards the left
+        //day.textContent = "";
+        //table.textContent = "";
+        document.body.appendChild(day); //adds the table (which is still empty) to the page
+        //const test = document.createElement("div");
+
+//this creates the 'template' for the table
+        let template = `
+        <table   id = "table-table-1">
+ 
+  <tr>
+    <th>   </th> <th style = "font-size:12px"> ${dow} </th>
+  </tr>
+ 
+ 
+</table>
+`;
+      day.innerHTML = template;  // this adds the template to empty table
+      
+      //this loop creates the schedule for the associated day 
+      //This works the same as the previous loop, except the conditions are different and the
+      //template is different
+      for (let j = s; j != e; j++){
+        var time = j;
+        const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        //table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+        let template2 = `    
+        <table   id = "table-table-1">
+ 
+
+ 
+  <tr>
+   <td style = "text-align:right; font-size:10px"> <sup> ${time} AM</sup> </td> <td style = "border:solid;  height = "5x" width = 10px> </td>
+ </tr>
+ 
+ <tr style = "background-color:lightgrey">
+   <td  style = "padding:5px"> </td> <td style = "border-bottom: dotted; border-left: solid; border-right: solid; border-top: solid;" height = "5px"></td>
+ </tr>
+ 
+ <tr style = "background-color:lightgrey">
+   <td style= "padding:5px"> </td> <td style = "border:solid" height = "5px"></td>
+ </tr>
+ 
+  <tr style = "background-color:lightgrey">
+   <td style = "text-align:right;font-size:12px"> <sub><small>${time + 1} AM</small></sub> </td> <td height = "5px" style = "border:solid"></td>
+ </tr>
+ 
+</table>
+`;
+      day.innerHTML += template2; 
+   }
+   }    
+   }
+   
+   
+ 
+ function slowDown(){
+   generateScheduleTables(["Monday", "Tuesday", "Friday"], "7:00 AM", "11:00 AM");
+ }
+ 
+
+</script>
 </html>
 
