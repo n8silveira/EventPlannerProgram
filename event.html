@@ -42,67 +42,63 @@
 </body>
 <!-- <script src="script.js"></script> -->
 
+<div id = "userschedule-div-1">
+  <table  style = " border:solid" id = "userschedule-table" hidden>
+       <tr id = "user-schedule-row1" style="background-Color:mistyrose" onclick= "changeColor(id)" >
+      <td height = "10x">
+        
+      </td>
+    </tr>
+    <tr id = "user-schedule-row2" style="background-Color:mistyrose" onclick= "changeColor(id)">
+      <td  style = "border-bottom: dotted;" height = "10px" width = "15px">
+        
+      </td>
+    </tr>
+    <tr id = "user-schedule-row3" style="background-Color:mistyrose" onclick= "changeColor(id)">
+      <td height = "10px">
+        
+      </td>
+    </tr>
+       <tr id = "user-schedule-row4" style="background-Color:mistyrose" onclick= "changeColor(id)">
+      <td height = "10px">
+        
+      </td>
+    </tr>
+    
+  </table>
+  </div>
 
-<table onclick = "changeColor(id)" id = "userscheduletable1" style = "background-Color:mistyrose" hidden>
-  <tr>
-    <td>
-      
-    </td>
-  </tr>
-</table>
-<table onclick = "changeColor(id)" id = "userscheduletable2" style = "background-Color:mistyrose" hidden>
-  <tr onclick>
-    <td>
-      
-    </td>
-  </tr>
-</table>
-<table onclick = "changeColor(id)" id = "userscheduletable3" style = "background-Color:mistyrose" hidden>
-  <tr>
-    <td>
-      
-    </td>
-  </tr>
-</table>
-<table onclick = "changeColor(id)" id = "userscheduletable4" style = "background-Color:mistyrose" hidden>
-  <tr onclick>
-    <td>
-      
-    </td>
-  </tr>
-</table>
+  
 
 
 
 
-<table id = "groupscheduletable1" style = "background-Color:lightgrey" hidden>
-  <tr>
-    <td>
+
+  <div id = "groupchedule-div-1">
+    <table  style = " border:solid" id = "groupchedule-table" hidden>
+         <tr style="background-Color:lightgrey">
+        <td height = "10px" width = "15px">
+          
+        </td>
+      </tr>
+      <tr style="background-Color:lightgrey">
+        <td style = "border-bottom: dotted;" height = "10px" width = "15px">
+          
+        </td>
+      </tr>
+      <tr style="background-Color:lightgrey">
+        <td height = "10px" width = "15px">
+          
+        </td>
+      </tr>
+         <tr style="background-Color:lightgrey">
+        <td height = "10px" width = "15px">
+          
+        </td>
+      </tr>
       
-    </td>
-  </tr>
-</table>
-<table id = "groupscheduletable2" style = "background-Color:lightgrey" hidden>
-  <tr>
-    <td>
-      
-    </td>
-  </tr>
-</table>
-<table id = "groupscheduletable3" style = "background-Color:lightgrey" hidden>
-  <tr>
-    <td>
-      
-    </td>
-  </tr>
-</table>
-<table id = "groupscheduletable4" style = "background-Color:lightgrey" hidden>
-  <tr>
-    <td>
-      
-    </td>
-  </tr>
-</table>
+    </table>
+    </div>
 
 
 
@@ -150,37 +146,24 @@
         }
         
   function schedules(){
-      var x = document.getElementById("groupscheduletable1")
-      var y = document.getElementById("groupscheduletable2")
-      var z = document.getElementById("groupscheduletable3")
-      var w = document.getElementById("groupscheduletable4")
+      var x = document.getElementById("groupchedule-table")
       
       if(x.style.display !== "block"){
         x.style.display = "block"
-        y.style.display = "block"
-        z.style.display = "block"
-        w.style.display = "block"
+
       }else{
         x.style.display = "none"
-        y.style.display = "none"
-        z.style.display = "none"
-        w.style.display = "none"
+
       }
-      var a = document.getElementById("userscheduletable1")
-      var b = document.getElementById("userscheduletable2")
-      var c = document.getElementById("userscheduletable3")
-      var d = document.getElementById("userscheduletable4")
+      var a = document.getElementById("userschedule-table")
+  
       
       if(a.style.display !== "block"){
         a.style.display = "block"
-        b.style.display = "block"
-        c.style.display = "block"
-        d.style.display = "block"
+
       }else{
         a.style.display = "none"
-        b.style.display = "none"
-        c.style.display = "none"
-        d.style.display = "none"
+
       }
 
   }

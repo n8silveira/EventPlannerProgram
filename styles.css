@@ -1,170 +1,84 @@
 .dropdown{
-    display: inline-block;
+  display: inline-block;
 }
 .dropdown button{
-    background-color: hsl(0, 0%, 60%);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
+  background-color: hsl(0, 0%, 60%);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
 }
 .dropdown a{
-    display: block;
-    color: black;
-    text-decoration: none;
-    padding: 10px 15px;
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
 }
 .dropdown .content{
-    display: none;
-    position: absolute;
-    background-color: hsl(0, 0%, 95%);
-    min-width: 100px;
-    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
+  display: none;
+  position: absolute;
+  background-color: hsl(0, 0%, 95%);
+  min-width: 100px;
+  box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
 }
 .dropdown:hover .content{
-    display: block;
+  display: block;
 }
 .dropdown:hover button{
-    background-color: hsl(0, 0%, 46%);
+  background-color: hsl(0, 0%, 46%);
 }
 .dropdown a:hover{
-    background-color: hsl(0, 0%, 90%);
+  background-color: hsl(0, 0%, 90%);
 }
 #error-message {
-    color: #f06272;
+  color: #f06272;
 }
 
 .alert-box {
-    position:absolute;
-    top: 0%;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 150px;
-    max-width: 90%;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    text-transform: capitalize;
-    background: rgb(255, 119, 119);
-    border-top: 10px solid rgb(255, 37, 37);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    color: #fff;
-    font-family: 'roboto', sans-serif;
-    text-align: center;
-    transition: 1s;
+  position:absolute;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 150px;
+  max-width: 90%;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  text-transform: capitalize;
+  background: rgb(255, 119, 119);
+  border-top: 10px solid rgb(255, 37, 37);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #fff;
+  font-family: 'roboto', sans-serif;
+  text-align: center;
+  transition: 1s;
 }
 
 
-  #userscheduletable1 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-style: solid;
-    width:5%;
-    height:1.5%;
-    empty-cells:show;
-    position: fixed;
-    top: 272;
-    left: 57;
-    
-    
-  }
-   #userscheduletable2 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: dotted;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 283;
-    left: 57;
 
 
-  }
-    #userscheduletable3 {
-    border-left-style: solid;
-    border-right-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 294;
-    left: 57;
+ 
 
-
-  }
-    #userscheduletable4 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 305;
-    left: 57;
-
-
-  }
-  
-   
-
-  #groupscheduletable1 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-style: solid;
-    width:5%;
-    height:1.5%;
-    empty-cells:show;
-    position: fixed;
-    top: 272;
-    left: 358;
+#userschedule-table {
+  position: fixed;
+  top: 300;
+  left: 100;
 
 
 
-  }
-   #groupscheduletable2 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: dotted;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 283;
-    left: 358;
+}
+ #groupchedule-table {
+  position: fixed;
+  top: 300;
+  left: 375;
+ }
 
 
-  }
-    #groupscheduletable3 {
-    border-left-style: solid;
-    border-right-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 294;
-    left: 358;
 
-
-  }
-    #groupscheduletable4 {
-    border-left-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    empty-cells:show;
-    width:5%;
-    height:1.5%;
-    position: fixed;
-    top: 305;
-    left: 358;
-
-  }
-  
-  #eventplanneroptions{
-    position: fixed;
-    top:70;
-    right:25;
-    margin-left:100px;
-  }
+#eventplanneroptions{
+  position: fixed;
+  top:70;
+  right:25;
+  margin-left:100px;
+}
