@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Successfully logged in:', data);
             alert('You have successfully logged in!');
+            activateButtons(username);
         })
         .catch(error => {
             console.error('Error logging in:', error);
@@ -49,3 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function activateButtons(username) {
+    // take id tags from event.html
+    const successfulLoginField = document.getElementById('successfulLogin_field');
+    successfulLoginField.hidden = false;
+    successfulLoginField.textContent = `Welcome back, ${username}!`;
+
+    const eventPlannerOptions = document.getElementById('eventplanneroptions');
+    eventPlannerOptions.hidden = false;
+
+    const loginField = document.getElementById('login_field');
+    loginField.hidden = true;
+}
+// next step: first person to log into event is "eventplanner"
+// if someone is eventplanner and they log in is only when "how many events do u want?" shows up 
