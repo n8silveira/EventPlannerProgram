@@ -19,17 +19,28 @@ function grabPeople(eventID) {
         const data = fs.readFileSync(filePath, 'utf8'); 
 
         try {
-            const personData = JSON.parse(data); 
-            if (personData.username) {
-                people.push(personData.username);
+            const personData = JSON.parse(data);
+            // add better check later
+            if (!personData.schedule) {
+                throw new Error("theres no schedule bro");
             }
+            const person = {
+                name: personData.username,
+                schedule: personData.schedule
+            };
+            people.push(person);
         } catch (err) {
             console.error(`Error parsing file ${file}:`, err);
         }
     });
     return people;
 }
-
+function printPeople() {
+    people.forEach(person => {
+        const {name, schedule} = person;
+        console.log(name + ": " + schedule);
+    });
+}
 // convert string input times ("4:45pm") -> int military times (1645)
 function convertToMilit(time) {
     // format input into proper convention: 1) hour, 2) mins, 3) am/pm
@@ -63,8 +74,6 @@ function generateEvent(eventId) {
 
         const timeSlots = [];
 
-        
-
         // unpack their schedule and then use convertToMilit(time)
         schedule.forEach(timeSlot => {
             const [startTime, endTime] = timeSlot.split("-"); // take out hyphen
@@ -78,4 +87,4 @@ function generateEvent(eventId) {
 }
 const eventID = "EMZADlYxV242q";
 const people = generateEvent(eventID);
-console.log(people);
+// const people = grabPeople(eventID);
