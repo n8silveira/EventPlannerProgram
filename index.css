@@ -84,6 +84,15 @@ form {
   margin: auto;
 }
 
+button[id^="b"] {
+  background-color: white; /* Original color */
+  color: black; /* Default text color */
+  border: 1px solid #cccccc; /* Default border */
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+
 @media (max-width: 768px) {
   .container {
     padding: 15px;
