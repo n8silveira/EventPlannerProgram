@@ -22,7 +22,7 @@ fetch("aboutMe.json")
       // Create a header for the member's name
       const nameElm = document.createElement("h3");
       nameElm.textContent = element.name;
-      nameElm.classList.add("text-primary");
+      nameElm.classList.add("text-dark-blue");
       card.appendChild(nameElm);
 
       // Create a paragraph for the member's role
