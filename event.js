@@ -31,18 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(userData),
         })
-        .then(response => {
+        .then(async (response) => {
+            const responseData = await response.json();
             if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.message);
-                });
+                throw new Error(errorData.message);
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Successfully logged in:', data);
-            alert('You have successfully logged in!');
-            activateButtons(username);
+            alert(responseData.message);
+            if (responseData.isPlanner) {
+                activateEventPlanner(username);
+            } else {
+                activateNormalUser(username);
+            }
         })
         .catch(error => {
             console.error('Error logging in:', error);
@@ -51,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function activateButtons(username) {
+function activateEventPlanner(username) {
     // take id tags from event.html
     const successfulLoginField = document.getElementById('successfulLogin_field');
     successfulLoginField.hidden = false;
-    successfulLoginField.textContent = `Welcome back, ${username}!`;
+    successfulLoginField.textContent = `Welcome back, ${username}! You're the event planner`;
 
     const eventPlannerOptions = document.getElementById('eventplanneroptions');
     eventPlannerOptions.hidden = false;
@@ -65,3 +64,11 @@ function activateButtons(username) {
 }
 // next step: first person to log into event is "eventplanner"
 // if someone is eventplanner and they log in is only when "how many events do u want?" shows up 
+function activateNormalUser(username) {
+    const successfulLoginField = document.getElementById('successfulLogin_field');
+    successfulLoginField.hidden = false;
+    successfulLoginField.textContent = `Welcome back, ${username}!`;
+
+    const loginField = document.getElementById('login_field');
+    loginField.hidden = true;
+}
