@@ -85,11 +85,11 @@ form {
 }
 
 button[id^="b"] {
-  background-color: white; /* Original color */
-  color: black; /* Default text color */
-  border: 1px solid #cccccc; /* Default border */
+  background-color: white; 
+  color: black; 
+  border: 1px solid #cccccc; 
   border-radius: 8px;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 
