@@ -59,42 +59,63 @@ app.post('/login', (req, res) => {
     if (!username || !password || !eventID) {
         return res.status(400).json({message: 'Fill in required fields.'});
     }
-    const peopleFolder = `./events/${eventID}/people/`;
+    const eventFolder = `./events/${eventID}`; // > events > EMZADIYxV242q
+    const peopleFolder = `${eventFolder}/people/`; // > EMZADIYxV242q > people
+    const plannerFile = `${peopleFolder}${username}.json`; // > people > darren.json
 
+    // check if /eventFolder & /people don't exist
+    if (!fs.existsSync(eventFolder)) {
+        fs.mkdirSync(eventFolder, { recursive: true });
+    }
     if (!fs.existsSync(peopleFolder)) {
-        return res.status(404).json({message: `Event with ID ${eventID} wasn't found...`});
+        fs.mkdirSync(peopleFolder);
+    }
+
+    // make sure a planner doesn't already exist
+    const plannerExists = fs.readdirSync(peopleFolder).some(file => {
+        const data = JSON.parse(fs.readFileSync(`${peopleFolder}/${file}`, 'utf8'));
+        return data.role === 'planner';
+    });
+
+    // check if planner exists
+    if (!plannerExists) {
+        // first login: set user as event planner
+        const plannerData = { username, password, role: 'planner' };
+        fs.writeFileSync(plannerFile, JSON.stringify(plannerData, null, 2));
+        return res.status(200).json({ message: `Welcome, ${username}! You are now the event planner.`, isPlanner: true });
+    }
+
+    // check if user is the event planner
+    const existingPlannerFile = fs.readdirSync(peopleFolder).find(file => {
+        const data = JSON.parse(fs.readFileSync(`${peopleFolder}/${file}`, 'utf8'));
+        return data.role === 'planner';
+    });
+    // gather user data
+    const existingPlannerData = JSON.parse(fs.readFileSync(`${peopleFolder}/${existingPlannerFile}`, 'utf8'));
+    // check if (pu == u)
+    if (existingPlannerData.username === username) {
+        // check (pp == p)
+        if (existingPlannerData.password === password) {
+            // they are the planner
+            return res.status(200).json({ message: `Welcome back, ${username}! You are the event planner.`, isPlanner: true });
+        } else {
+            // they are NOT the planner
+            return res.status(401).json({ message: 'Incorrect password for event planner.' });
+        }
     }
     const userFile = `${peopleFolder}${username}.json`;
     // check if userFile exists
     if (fs.existsSync(userFile)) {
-        // read user file
-        fs.readFile(userFile, 'utf8', (err, data) => {
-            if (err) {
-                console.error('Error reading user file:', err);
-                return res.status(500).json({message: 'Error reading user data...'});
-            }
-            const userData = JSON.parse(data);
-
-            // check if password matches
-            if (userData.password !== password) {
-                // incorrect password
-                return res.status(401).json({message: `Incorrect password... Try again`});
-            }
-            // correct password
-            return res.status(200).json({message: `User ${username} successfully logged in!`});
-        });
+        const userData = JSON.parse(fs.readFileSync(userFile, 'utf8'));
+        if (userData.password !== password) {
+            return res.status(401).json({ message: 'Incorrect password. Try again.' });
+        }
+        return res.status(200).json({ message: `Welcome back, ${username}!`, isPlanner: false });
     } else {
-        // new user, save data
-        const userData = {username, password};
-        
-        fs.writeFile(userFile, JSON.stringify(userData, null, 2), (err) => {
-            if (err) {
-                console.error('Error saving user file:', err);
-                return res.status(500).json({ message: 'Error saving user data.' });
-            }
-            console.log(`User data saved for ${username} in ${userFile}`);
-            res.status(200).json({message: `User ${username} successfully logged in.`});
-        });
+        // normal login logic
+        const userData = { username, password, role: 'user' };
+        fs.writeFileSync(userFile, JSON.stringify(userData, null, 2));
+        return res.status(200).json({ message: `Welcome, ${username}! Your account has been created.`, isPlanner: false });
     }
 });  
     
