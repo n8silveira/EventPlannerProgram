@@ -5,6 +5,33 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('EVENT ID MISSING!');
         return;
     }
+    
+    function loadAndGenerateSchedule(eventID) {
+        const eventData = {
+            eventID
+        };
+        fetch('http://localhost:8080/event', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(eventData),
+        })
+        .then(async (response) => {
+            const responseData = await response.json();
+            if (!response.ok) {
+                throw new Error(errorData.message);
+            }
+            const days = eventData.days; // parameter 1: "days": [] from events/eventID.json
+            const earliestTime = eventData.earliestTime; // parameter 2: "earliestTime": "" from events/eventID.json
+            const latestTime = eventData.latestTime; // parameter 3: "latestTime": "" from events/eventID.json
+            generateScheduleTables(days, earliestTime, latestTime); // call generateScheduleTables() with desired data taken from eventID.json
+        })
+        .catch(error => {
+            console.error('Error grabbing event data:', error);
+        });
+    }
+    loadAndGenerateSchedule(eventID);
 
     document.getElementById('login').addEventListener('click', (e) => {
         e.preventDefault();

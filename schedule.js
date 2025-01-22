@@ -62,10 +62,11 @@ function convertToMilit(time) {
 
 let raw_people = []
 
-function generateEvent(eventId) {
-    // grab all the people from events/eventId/people/*
-    raw_people = grabPeople(eventId);
-    console.log(raw_people);
+// lists people AND takes in array as schedule: [ [Array] ]
+function generateEvent(eventID) {
+    // grab all the people from events/eventID/people/*
+    raw_people = grabPeople(eventID);
+    // console.log(raw_people); // [{name: 'angel', schedule: [ ' 10:00am-11:00am' ]}, ...]
     const people = [];
 
     //convert all times into 24-hour time
@@ -86,5 +87,5 @@ function generateEvent(eventId) {
     return people;
 }
 const eventID = "EMZADlYxV242q";
-const people = generateEvent(eventID);
-// const people = grabPeople(eventID);
+const people = generateEvent(eventID); // [{name: 'angel', schedule: [ [Array] ] }, ...]
+console.log(people);
