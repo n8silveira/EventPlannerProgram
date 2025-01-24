@@ -1,3 +1,4 @@
+// previously app.js
 function create_random_url(string_length) {
     var random_string = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz00112233445566778899';
