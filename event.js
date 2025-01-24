@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(errorData.message);
             }
-            const days = eventData.days; // parameter 1: "days": [] from events/eventID.json
-            const earliestTime = eventData.earliestTime; // parameter 2: "earliestTime": "" from events/eventID.json
-            const latestTime = eventData.latestTime; // parameter 3: "latestTime": "" from events/eventID.json
+            const days = responseData.days; // parameter 1: "days": [] from events/eventID.json
+            const earliestTime = responseData.earliestTime; // parameter 2: "earliestTime": "" from events/eventID.json
+            const latestTime = responseData.latestTime; // parameter 3: "latestTime": "" from events/eventID.json
             generateScheduleTables(days, earliestTime, latestTime); // call generateScheduleTables() with desired data taken from eventID.json
         })
         .catch(error => {

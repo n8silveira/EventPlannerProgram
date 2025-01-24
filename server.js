@@ -1,3 +1,4 @@
+// previously app.js
 function create_random_url(string_length) {
     var random_string = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz00112233445566778899';
@@ -134,6 +135,10 @@ app.post('/event', (req, res) => {
     const data = req.body;
     const eventID = data.eventID;
     res.sendFile(path.join(__dirname, 'events', eventID, `${eventID}.json`));
+});
+
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'images', 'icon', 'favicon.ico'));
 });
 
 app.listen(8080, () => {
