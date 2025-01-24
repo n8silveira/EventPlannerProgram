@@ -7,6 +7,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  >
     <!-- favicon-->
     <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
@@ -34,12 +36,12 @@
         <!-- Event Name Input Form -->
         <form id="form" class="p-4 bg-white shadow rounded">
             <div class="mb-3">
-                <label for="event-name" class="form-label">Event Name:</label>
+                <label for="event-name" class="form-label">Event Name: <i class="bi bi-info-circle-fill info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Enter a name or short description for your event."></i></label>
                 <input type="text" class="form-control" name="eventName" id="event-name" placeholder="Type Event Name Here">
             </div>
             <!-- Day Selection Buttons -->
             <div class="mb-3">
-                <label class="form-label">Days:</label>
+                <label class="form-label">Days: <i class="bi bi-info-circle-fill info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Select all days that apply to your event."></i></label>
                 <div class="d-flex flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-secondary" id="b1" value="Sunday" data-selected="false">Sunday</button>
                     <button type="button" class="btn btn-outline-secondary" id="b2" value="Monday" data-selected="false">Monday</button>
@@ -52,7 +54,7 @@
             </div>
             <!-- Time Selection Dropdowns -->
             <div class="mb-3">
-                <label for="earliest-times" class="form-label">No earlier than:</label>
+                <label for="earliest-times" class="form-label">No earlier than: <i class="bi bi-info-circle-fill info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Choose the earliest start time for your event."></i></label>
                 <select class="form-select" name="earliest-times" id="earliest-times">
                     <option value="12am">12:00 AM</option>
                     <option value="1am">1:00 AM</option>
@@ -82,7 +84,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="latest-times" class="form-label">No later than:</label>
+                <label for="latest-times" class="form-label">No later than: <i class="bi bi-info-circle-fill info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Choose the latest end time for your event."></i></label>
                 <select class="form-select" name="latest-times" id="latest-times">
                     <option value="12am">12:00 AM</option>
                     <option value="1am">1:00 AM</option>
