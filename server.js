@@ -137,6 +137,10 @@ app.post('/event', (req, res) => {
     res.sendFile(path.join(__dirname, 'events', eventID, `${eventID}.json`));
 });
 
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'images', 'icon', 'favicon.ico'));
+});
+
 app.listen(8080, () => {
     console.log('Server running on http://localhost:8080');
 });
