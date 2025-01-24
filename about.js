@@ -1,4 +1,4 @@
-// Get the div in the "aboutMe.json" page where the team cards will go
+// Get the div in the " aboutMe.json " page where the team cards will go
 const teamContainer = document.getElementById("teamContainer");
 
 // Fetch the aboutMe.json file
@@ -22,7 +22,7 @@ fetch("aboutMe.json")
       // Create a header for the member's name
       const nameElm = document.createElement("h3");
       nameElm.textContent = element.name;
-      nameElm.classList.add("text-primary");
+      nameElm.classList.add("text-dark-blue");
       card.appendChild(nameElm);
 
       // Create a paragraph for the member's role

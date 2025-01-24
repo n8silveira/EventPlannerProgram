@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="styles.css">
 </head>
-
+<!--these create the buttons that take the user to the home and about page -->
 <body onload="get()">
     <a href="index.html"><button onclick="index.html"> Home </button></a>
     <a href="about.html"><button onclick="about.html"> About </button></a>
@@ -16,7 +16,7 @@
 
     <p id="savedText"> </p>
     <p id="openedText"> </p>
-
+<!-- this creates the elements that allow the user to type in their name, password and login with the "log in" button-->
     <div class="form" id = login_field>
         <br>
         <input type="text" name="username" placeholder="Your Name" autocomplete="off" class="your-name" id="username" required>
@@ -27,12 +27,14 @@
         <p>Name/password are only for this event.<br>New to this event? Make up a password.<br>Returning? Use the same name/password.</p>
         <!-- <a href="#" class="link">don't have an account? Register one</a> -->
     </div>
+<!-- this is a hidden element that allows the user to type in how many events they want, once it's been revealed -->
     <div id = "eventplanneroptions" hidden>
       <p> How many events do you want?</p>
       <input type = "text" name = "number-of-events" placeholder = "Number of events" autocomplete="off" id = "number-of-events" required >
       <br><br>     
       <button id = "generate">generate</button>
     </div>
+<!-- this is a hidden element that welcomes a user who has previously logged in-->
     <div id = "successfulLogin_field" hidden>
       Welcome back [insert name here]!
     </div>
@@ -42,6 +44,9 @@
 </body>
 <!-- <script src="script.js"></script> -->
 
+<!-- this is a hidden table which represent the user's schedules.
+     once revealed, the user can click on each box and it will toggle between
+     lightgreen and mistyrose, representing if they are available at the associated time-->
 <div id = "userschedule-div-1">
   <table  style = " border:solid" id = "userschedule-table" hidden>
        <tr id = "user-schedule-row1" style="background-Color:mistyrose" onclick= "changeColor(id)" >
@@ -68,12 +73,9 @@
   </table>
   </div>
 
-  
-
-
-
-
-
+<!-- this is a hidden table which represents the groups schedule. 
+     This will show the availablity of everyone who have put in their available times
+     once revealed and when the user inputs their own availablity-->
   <div id = "groupchedule-div-1">
     <table  style = " border:solid" id = "groupchedule-table" hidden>
          <tr style="background-Color:lightgrey">
@@ -101,15 +103,6 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
 <script>
     var storedName = localStorage.getItem("storedName")
     function save() {
@@ -121,6 +114,7 @@
         localStorage.getItem("storedName");
         document.getElementById("openedText").innerHTML = storedItem + " OPENED";
     }
+//this toggles the login_field and successfulLogin_field
     function successfulLogin(){
       var x = document.getElementById("login_field")
       var y = document.getElementById("successfulLogin_field")
@@ -133,7 +127,7 @@
       }
       
     }
-   
+//this toggles the background of an element between mistyrose and lightgreen
     function changeColor(id) { 
             const button = document.getElementById(id);
             if (button.style.backgroundColor === "mistyrose") {
@@ -144,30 +138,22 @@
                 button.dataset.selected = "false";
             }
         }
-        
+//this toggles the group and user schedules        
   function schedules(){
       var x = document.getElementById("groupchedule-table")
-      
       if(x.style.display !== "block"){
         x.style.display = "block"
-
       }else{
         x.style.display = "none"
-
       }
       var a = document.getElementById("userschedule-table")
-  
-      
       if(a.style.display !== "block"){
         a.style.display = "block"
-
       }else{
         a.style.display = "none"
-
       }
-
   }
-  
+//this toggles the "eventplanneroptions" element
 function howmanyevents(){
   var x = document.getElementById("eventplanneroptions")
   
@@ -178,63 +164,86 @@ function howmanyevents(){
   }
   
 }
-  
 </script>
 
+<!-- these are the buttons which, once pressed, call the associated functions-->
+<button id = "successfulLogin_button" onclick="successfulLogin()">Successful login</button>
+<button id = "schedules_button" onclick= "schedules()"> schedule</button>
+<button id = "how_many_events_button"onclick = "howmanyevents()"> How Many Events</button>
 
-<button onclick="successfulLogin()">Successful login</button>
-<button onclick= "schedules()"> schedule</button>
-<button onclick = "howmanyevents()"> How Many Events</button>
-
-
-<div>
+<!-- this button, once pressed, calls the slowDown function-->
+<div id = "genere_schedules_tables_button">
   <button onclick= "slowDown()">
     Generate Schedules
   </button>
 </div>
 <script>
+  
+//this functions generates the schedules for the user to mark their availablity based
+//on the days they selected, the start time and end time
  function generateScheduleTables(days = [], startTime, endTime){
-   //"sPM" and "ePM" stand for "startTime-PM" and "endTime-PM"
-   //these variables are meant to check if the start and end times are in the AM or PM
-   // 0 is false, 1 is true
-   var sPM = 0;
-   var ePM = 0;
-//This sets "s" (the start time) and "e" (the end time) to the number befor the semi-colon
-   var s = startTime.indexOf(":");
-   if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
+   var meridem;
+   var hour;
+    
+    var s = startTime.indexOf(":");
+    if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
               //by checking the current index of s (if it's not 1, it's a double digit)
-   s = startTime[0]+ startTime[1];
-   }else{
-     s = parseInt(startTime[0]);
-   }
+    s = startTime[0]+ startTime[1];
+    s = parseInt(s);
+    }else{
+      s = parseInt(startTime[0]);
+    }
    
-   var e = endTime.indexOf(":");
-   if (e!= 1){
-   e = endTime[0]+ endTime[1];
-   }else{
-     e = parseInt(endTime[0]);
-   }
-   
-   //this checks if the time is in the "PM"
-   for (let i = 5; i < 8; i++){
-     if (startTime[i] == "P"){
-       sPM = 1; 
-       console.log("this works");
-     }
-     if (endTime[i] == "P"){
-       ePM = 1;
-       console.log("this also works");
-     }
-   }
+    var e = endTime.indexOf(":");
+    if (e!= 1){
+    e = endTime[0]+ endTime[1];
+    e = parseInt(e);
+    }else{
+      e = parseInt(endTime[0]);
+    }
+
+    //This converts the start and end times to military times
+    if ((s == "12") && (startTime[6] == "A")){
+      s -= 12;
+    }else if ((s != 12) && ((startTime[5] == "P") || (startTime[6] == "P"))){
+      s += 12;
+    }
+    else{
+      s = s;
+    }
+    
+    if((e == "12") && (endTime[6] == "P")){
+      e = e;
+    }else if((e == "12") && (endTime[6] == "A")){
+      e -= 12;
+    }else if((e != "12") && ((endTime[5] == "P") || (endTime[6] == "P"))){
+      e += 12;
+    }
+    else{
+      e = e;
+    }
+    console.log(s);
+    console.log(e);
+
+
+
+
+
+
+
+
    
    //This creates n amount of tables based on the start and end times
    // for (i = s; i < e; i++){
    
-//This if statement checks if the startime and endtime are both AM or PM
-   if((sPM == 0 && ePM == 0)||(sPM == 1 && ePM == 1)){  
+   //This if statement checks if the startime and endtime are both AM or PM
+   
+   //this changes the value of e (the endtime) to represent military time if the
+   //start and end times go from "am"-"pm"
+
    //This loop sets the day and which day the following schedule is for
     for (let i = 0; i != days.length; i++){
-        var dow = days[i]; // dow (day.of.week) is the day associated with the current index of the "days" list
+        var dow = days[i]; // dow,(day.of.week), is the day associated with the current index of the "days" list
         const day = document.createElement("table"); //creates a table
         day.id = `${dow}`; //gives the table an id
         day.style = "float:left"; //makes the tables go towards the left
@@ -243,64 +252,303 @@ function howmanyevents(){
         document.body.appendChild(day); //adds the table (which is still empty) to the page
         //const test = document.createElement("div");
 
-//this creates the 'template' for the table
+        //this creates the 'template' for the table
         let template = `
-        <table   id = "table-table-1">
+                  <table>
  
-  <tr>
-    <th>   </th> <th style = "font-size:12px"> ${dow} </th>
-  </tr>
+            <tr id = "day-label-${i}">
+              <th id = "day-label-header${i}">   </th> <th id = "${dow}-header"style = "font-size:12px"> ${dow} </th>
+            </tr>
  
  
-</table>
-`;
-      day.innerHTML = template;  // this adds the template to empty table
+          </table>
+          `;
+       day.innerHTML = template;  // this adds the template to empty table
+       console.log(days[i]);
       
       //this loop creates the schedule for the associated day 
       //This works the same as the previous loop, except the conditions are different and the
       //template is different
-      for (let j = s; j != e; j++){
-        var time = j;
-        const table = document.createElement("table");
+      for (j = s; j != e; j++){
+        //if this is the first table
+        if (i == 0){
+          //if the time is before 12 PM
+          if(j < 12){
+          console.log(j + " AM");
+          hour = j; 
+          meridem = "AM";
+          const table = document.createElement("table");
         table.id = `${dow}`+ "-" + j;
-        //table.textContent = "";
+        table.textContent = "";
         document.body.appendChild(table);
         //const test = document.createElement("div");
+        
+        //this is the template for the table
         let template2 = `    
-        <table   id = "table-table-1">
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  
 
  
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${time} AM</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
- </tr>
- 
- <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
- </tr>
- 
- <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
- </tr>
- 
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-3" style = "text-align:right;font-size:12px"> <sub><small>${time + 1} AM</small></sub> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)"height = "5px" style = "border:solid;background-color:mistyrose"></td>
- </tr>
- 
-</table>
+ </table>
 `;
       day.innerHTML += template2; 
-   }
-   }    
-   }
- }
-   
+      //if the time is 12 PM
+        }else if(j == 12){
+          console.log(j +  " PM");
+          hour = j;
+          meridem = "PM";
+                  const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+
+        let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
  
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ 
+
+ 
+ </table>
+`;
+      day.innerHTML += template2; 
+      //if the time is after 12 PM
+        }else if (j > 12){
+          console.log((j-12) + " PM");
+          hour = j-12;
+          meridem = "PM";
+          const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+
+        let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ 
+
+ 
+ </table>
+`;
+      day.innerHTML += template2; 
+        }
+        
+        //if the current time is one less than the end time and the end time is before 12 PM
+        if (((j + 1) == e) && (e < 12)){
+          console.log(e + " AM");
+          hour = e;
+          meridem = "AM";
+          let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;
+        //if the current time is one less than the end time and the end time is 12 PM
+        }else if (((j + 1) == e) &&  e == 12){
+          console.log(e + " PM")
+          hour = e;
+          meridem = "PM";
+                    let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;
+        }
+        //if the current time is one less than the end time and the end time is after 12 PM
+        else if (((j + 1) == e) && (e > 12)){
+          console.log((e-12) + " PM");
+          hour = e -12;
+          meridem = "PM";
+                    let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;
+        }
+        }
+        
+        //This is the same as the previous code, except this prints the rest of the schedules without the times
+         if (i != 0){ 
+          if (j < 12){
+          console.log(j + " AM");
+          hour = j; 
+          meridem = "AM";
+                  const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+
+        let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ 
+
+ 
+ </table>
+`;
+      day.innerHTML += template2; 
+        }else if(j == 12){
+          console.log(j +  " PM");
+          hour = j;
+          meridem = "PM";
+                  const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+
+        let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ 
+
+ 
+ </table>
+`;
+      day.innerHTML += template2; 
+        }else if (j > 12){
+          console.log((j-12) + " PM")
+          hour = j-12;
+          meridem = "PM"
+                  const table = document.createElement("table");
+        table.id = `${dow}`+ "-" + j;
+        table.textContent = "";
+        document.body.appendChild(table);
+        //const test = document.createElement("div");
+
+        let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ 
+
+ 
+ </table>
+`;
+      day.innerHTML += template2; 
+        }
+        
+        
+        if (((j + 1) == e) && (e < 12)){
+          console.log(e + " AM");
+          hour = e;
+          meridem = "AM";
+          let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;  
+        }else if (((j + 1) == e) &&  e == 12){
+          console.log(e + " PM")
+          hour = e;
+          meridem = "PM";
+                    let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;
+        }
+        else if (((j + 1) == e) && (e > 12)){
+          console.log((e-12) + " PM");
+          hour = e -12;
+          meridem = "PM";
+                    let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+        day.innerHTML += template2;
+        }
+   }
+      }
+   }    
+ }
+ 
+   
+//this calls the generateScheduleTables function
  function slowDown(){
-   generateScheduleTables(["Monday", "Tuesday", "Friday"], "7:00 PM", "11:00 PM");
+   generateScheduleTables(["Tue","Thu", "Fri"], "5:00 AM", "5:00 PM");
  }
  
 
 </script>
 </html>
-

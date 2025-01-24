@@ -7,33 +7,40 @@
     <title>Team Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="about.css">
+     <!-- favicon-->
+     <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+     <link rel="icon" type="image/png" sizes="192x192" href="/images/icon/android-chrome-192x192.png">
+     <link rel="icon" type="image/png" sizes="512x512" href="/images/icon/android-chrome-512x512.png">
+     <link rel="apple-touch-icon" href="/images/icon/apple-touch-icon.png">
+     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body class="bg-light">
-    <header class="bg-dark text-white py-3">
+    <header class="text-white py-3" style="background-color: #001f3f;">
         <div class="container text-center">
             <h1 class="text-burgundy">Meet the Team</h1>
-            <p class="lead">The young brilliant minds behind <span style="color:#be0332 ;">Meetitude</span></p>
+            <p class="lead">The young brilliant minds behind Meetitude</p>
         </div>
     </header>
-
+    
     <!-- Navigation Buttons -->
     <nav class="container text-center my-4">
-        <button class="btn btn-primary mx-2" style="background-color: #002e5d; border-color: #002e5d" onclick="document.location = 'index.html'">Home</button>
-        <button class="btn btn-secondary mx-2" onclick="document.location = 'about.html'">About</button>
+        <button class="btn btn-primary mx-2" style="background-color: grey; border-color:grey" onclick="document.location = 'index.html'">Home</button>
+        <button class="btn btn-secondary mx-2" style="background-color: #002e5d; border-color: #002e5d" onclick="document.location = 'about.html'">About</button>
     </nav>
-
     <!-- Team Cards Container -->
     <section class="container my-5">
         <div class="row g-4" id="teamContainer">
             <!-- Team cards will be dynamically loaded here -->
         </div>
     </section>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Custom JS -->
     <script src="about.js"></script>
 </body>
 </html>
+

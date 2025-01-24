@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     function changeColor(id) {
         const button = document.getElementById(id);
-        if (button.style.backgroundColor === "gainsboro") {
-            button.style.backgroundColor = "lightgreen";
-            button.dataset.selected = "true";
-        } else {
-            button.style.backgroundColor = "gainsboro";
+        if (button.dataset.selected === "true") {
+            button.style.backgroundColor = "white";
+            button.style.color = "black";
             button.dataset.selected = "false";
+        } else {
+            button.style.backgroundColor = "lightgreen";
+            button.style.color = "black"; 
+            button.dataset.selected = "true";
         }
     }
     const dayButtons = document.querySelectorAll('button[id^="b"]');

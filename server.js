@@ -1,3 +1,4 @@
+// previously app.js
 function create_random_url(string_length) {
     var random_string = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSSTUVWXYZabcdefghijklmnopqrstuvwxyz00112233445566778899';
@@ -7,6 +8,7 @@ function create_random_url(string_length) {
     return random_string;
 }
 
+const { log } = require('console');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -80,7 +82,7 @@ app.post('/login', (req, res) => {
     // check if planner exists
     if (!plannerExists) {
         // first login: set user as event planner
-        const plannerData = { username, password, role: 'planner' };
+        const plannerData = { username, password, role: 'planner', schedule: [] };
         fs.writeFileSync(plannerFile, JSON.stringify(plannerData, null, 2));
         return res.status(200).json({ message: `Welcome, ${username}! You are now the event planner.`, isPlanner: true });
     }
@@ -117,8 +119,8 @@ app.post('/login', (req, res) => {
         fs.writeFileSync(userFile, JSON.stringify(userData, null, 2));
         return res.status(200).json({ message: `Welcome, ${username}! Your account has been created.`, isPlanner: false });
     }
-});  
-    
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
     // res.sendFile(path.join(__dirname, 'index.js'));
@@ -128,9 +130,15 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'about.html'));
 });
 
-app.get('/event', (req, res) => {
-    res.sendFile(path.join(__dirname, 'event.html'));
-    // res.sendFile(path.join(__dirname, 'event.js'));
+// give the user eventID.json (from req.body)
+app.post('/event', (req, res) => {
+    const data = req.body;
+    const eventID = data.eventID;
+    res.sendFile(path.join(__dirname, 'events', eventID, `${eventID}.json`));
+});
+
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'images', 'icon', 'favicon.ico'));
 });
 
 app.listen(8080, () => {
