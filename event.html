@@ -185,8 +185,10 @@ function howmanyevents(){
    var meridem;
    var hour;
     
-    var s = startTime.indexOf(":");
-    if (s!= 1){ //This checks if the number before the semi-colon is a double digit number
+    var s = startTime.indexOf("m");  
+    var smer = startTime.indexOf("m") - 1; //this varibale is set to the letter before "m" (could be "a" or "p")
+    var l = startTime.length;
+    if (l!= 3){ //This checks if the number before the semi-colon is a double digit number
               //by checking the current index of s (if it's not 1, it's a double digit)
     s = startTime[0]+ startTime[1];
     s = parseInt(s);
@@ -194,8 +196,9 @@ function howmanyevents(){
       s = parseInt(startTime[0]);
     }
    
-    var e = endTime.indexOf(":");
-    if (e!= 1){
+    var e = endTime.indexOf("m");
+    var emer = endTime.indexOf("m") - 1;
+    if (l!= 3){
     e = endTime[0]+ endTime[1];
     e = parseInt(e);
     }else{
@@ -203,36 +206,26 @@ function howmanyevents(){
     }
 
     //This converts the start and end times to military times
-    if ((s == "12") && (startTime[6] == "A")){
+    if ((s == "12") && (startTime[smer] == "a")){
       s -= 12;
-    }else if ((s != 12) && ((startTime[5] == "P") || (startTime[6] == "P"))){
+    }else if ((s != 12) && ((startTime[smer] == "p"))){
       s += 12;
     }
     else{
       s = s;
     }
     
-    if((e == "12") && (endTime[6] == "P")){
+    if((e == "12") && (endTime[emer] == "p")){
       e = e;
-    }else if((e == "12") && (endTime[6] == "A")){
+    }else if((e == "12") && (endTime[emer] == "a")){
       e -= 12;
-    }else if((e != "12") && ((endTime[5] == "P") || (endTime[6] == "P"))){
+    }else if((e != "12") && ((endTime[emer] == "p"))){
       e += 12;
     }
     else{
       e = e;
     }
-    console.log(s);
-    console.log(e);
 
-
-
-
-
-
-
-
-   
    //This creates n amount of tables based on the start and end times
    // for (i = s; i < e; i++){
    
@@ -250,22 +243,16 @@ function howmanyevents(){
         //day.textContent = "";
         //table.textContent = "";
         document.body.appendChild(day); //adds the table (which is still empty) to the page
-        //const test = document.createElement("div");
-
         //this creates the 'template' for the table
         let template = `
-                  <table>
- 
+          <table>
             <tr id = "day-label-${i}">
               <th id = "day-label-header${i}">   </th> <th id = "${dow}-header"style = "font-size:12px"> ${dow} </th>
             </tr>
- 
- 
           </table>
           `;
-       day.innerHTML = template;  // this adds the template to empty table
-       console.log(days[i]);
-      
+        day.innerHTML = template;  // this adds the template to empty table
+
       //this loop creates the schedule for the associated day 
       //This works the same as the previous loop, except the conditions are different and the
       //template is different
@@ -273,96 +260,108 @@ function howmanyevents(){
         //if this is the first table
         if (i == 0){
           //if the time is before 12 PM
-          if(j < 12){
+          if(j == 0){
           console.log(j + " AM");
-          hour = j; 
+          hour = j + 12; 
           meridem = "AM";
           const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-        
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+
         //this is the template for the table
-        let template2 = `    
-        <table>
+          let template2 = `    
+  <table>
   <tr>
    <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
   </tr>
  
   <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
   </tr>
  
   <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
- 
-
- 
  </table>
 `;
-      day.innerHTML += template2; 
+          day.innerHTML += template2; 
+        }
+        else if(j < 12){
+          console.log(j + " AM");
+          hour = j; 
+          meridem = "AM";
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+        //this is the template for the table
+          let template2 = `    
+  <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ </table>
+`;
+          day.innerHTML += template2; 
       //if the time is 12 PM
         }else if(j == 12){
           console.log(j +  " PM");
           hour = j;
           meridem = "PM";
-                  const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-
-        let template2 = `    
-        <table>
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+          let template2 = `    
+  <table>
   <tr>
    <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
   </tr>
  
   <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
   </tr>
  
   <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
- 
-
- 
  </table>
 `;
-      day.innerHTML += template2; 
+          day.innerHTML += template2; 
       //if the time is after 12 PM
         }else if (j > 12){
           console.log((j-12) + " PM");
           hour = j-12;
           meridem = "PM";
           const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-
-        let template2 = `    
-        <table>
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+          let template2 = `    
+  <table>
   <tr>
    <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
   </tr>
  
   <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
   </tr>
  
   <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
- 
-
- 
  </table>
 `;
-      day.innerHTML += template2; 
+          day.innerHTML += template2; 
         }
         
         //if the current time is one less than the end time and the end time is before 12 PM
@@ -377,133 +376,12 @@ function howmanyevents(){
   </tr>
         </table>
         `;
-        day.innerHTML += template2;
+          day.innerHTML += template2;
         //if the current time is one less than the end time and the end time is 12 PM
         }else if (((j + 1) == e) &&  e == 12){
           console.log(e + " PM")
           hour = e;
           meridem = "PM";
-                    let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-        day.innerHTML += template2;
-        }
-        //if the current time is one less than the end time and the end time is after 12 PM
-        else if (((j + 1) == e) && (e > 12)){
-          console.log((e-12) + " PM");
-          hour = e -12;
-          meridem = "PM";
-                    let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-        day.innerHTML += template2;
-        }
-        }
-        
-        //This is the same as the previous code, except this prints the rest of the schedules without the times
-         if (i != 0){ 
-          if (j < 12){
-          console.log(j + " AM");
-          hour = j; 
-          meridem = "AM";
-                  const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-
-        let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
- 
-  <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
-  </tr>
- 
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
-  </tr>
- 
-
- 
- </table>
-`;
-      day.innerHTML += template2; 
-        }else if(j == 12){
-          console.log(j +  " PM");
-          hour = j;
-          meridem = "PM";
-                  const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-
-        let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
- 
-  <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
-  </tr>
- 
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
-  </tr>
- 
-
- 
- </table>
-`;
-      day.innerHTML += template2; 
-        }else if (j > 12){
-          console.log((j-12) + " PM")
-          hour = j-12;
-          meridem = "PM"
-                  const table = document.createElement("table");
-        table.id = `${dow}`+ "-" + j;
-        table.textContent = "";
-        document.body.appendChild(table);
-        //const test = document.createElement("div");
-
-        let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
- 
-  <tr>
-   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
-  </tr>
- 
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
-  </tr>
- 
-
- 
- </table>
-`;
-      day.innerHTML += template2; 
-        }
-        
-        
-        if (((j + 1) == e) && (e < 12)){
-          console.log(e + " AM");
-          hour = e;
-          meridem = "AM";
           let template2 = `    
         <table>
   <tr>
@@ -511,44 +389,150 @@ function howmanyevents(){
   </tr>
         </table>
         `;
-        day.innerHTML += template2;  
-        }else if (((j + 1) == e) &&  e == 12){
-          console.log(e + " PM")
-          hour = e;
-          meridem = "PM";
-                    let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-        day.innerHTML += template2;
+          day.innerHTML += template2;
         }
+        //if the current time is one less than the end time and the end time is after 12 PM
         else if (((j + 1) == e) && (e > 12)){
           console.log((e-12) + " PM");
           hour = e -12;
           meridem = "PM";
-                    let template2 = `    
+          let template2 = `    
         <table>
   <tr>
    <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
   </tr>
         </table>
         `;
-        day.innerHTML += template2;
+          day.innerHTML += template2;
         }
-   }
-      }
-   }    
- }
+        }
+        
+        //This is the same as the previous code, except this prints the rest of the schedules without the times
+         if (i != 0){ 
+        // if the time is 12 AM
+          if(j == 0){
+          console.log(j + " AM");
+
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+
+        //this is the template for the table
+          let template2 = `    
+  <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px;padding:5.5px"> <sup> </sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
  
-   
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ </table>
+`;
+          day.innerHTML += template2; 
+        }else if (j < 12){
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+          let template2 = `    
+  <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px;padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ </table>
+`;
+          day.innerHTML += template2; 
+        }else if(j == 12){
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+          let template2 = `    
+  <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ </table>
+`;
+          day.innerHTML += template2; 
+        }else if (j > 12){
+          const table = document.createElement("table");
+          table.id = `${dow}`+ "-" + j;
+          table.textContent = "";
+          document.body.appendChild(table);
+          let template2 = `    
+  <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+ 
+  <tr>
+   <td  id = "${days[i]}-${j}-borderless-1" style = "padding:5.5px"> </td> <td id = "${days[i]}-${j}-1" onclick = "changeColor(id)" style = "border-bottom: dashed; border-left: solid; border-right: solid;background-color:mistyrose; border-top: solid;" height = "5px"></td>
+  </tr>
+ 
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+ </table>
+`;
+          day.innerHTML += template2; 
+        }
+        
+        
+        if (((j + 1) == e) && (e < 12)){
+          let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+          day.innerHTML += template2;  
+        }else if (((j + 1) == e) &&  e == 12){
+          let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+          day.innerHTML += template2;
+        }
+        else if (((j + 1) == e) && (e > 12)){
+          let template2 = `    
+        <table>
+  <tr>
+   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
+  </tr>
+        </table>
+        `;
+          day.innerHTML += template2;
+        } } }   }     }
 //this calls the generateScheduleTables function
  function slowDown(){
-   generateScheduleTables(["Tue","Thu", "Fri"], "5:00 AM", "5:00 PM");
+   generateScheduleTables(["Tue","Thu", "Fri"], "12am", "11pm");
  }
- 
-
 </script>
 </html>
