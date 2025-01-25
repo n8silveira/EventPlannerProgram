@@ -1,17 +1,23 @@
-document.addEventListener("DOMContentLoaded", function() {
-  // Get the container where the team cards will be displayed
+document.addEventListener("DOMContentLoaded", function () {
   const teamContainer = document.getElementById("teamContainer");
 
   // Fetch the aboutMe.json file
   fetch("aboutMe.json")
-    .then(response => response.json()) // Convert response to JSON
-    .then(data => {
-      // Loop through each team member and create a card
-      data.forEach(member => {
+    .then((response) => response.json())
+    .then((data) => {
+      // Create a row for the top 3 cards
+      const topRow = document.createElement("div");
+      topRow.classList.add("row", "g-4");
+
+      // Create a row for the bottom 2 centered cards
+      const bottomRow = document.createElement("div");
+      bottomRow.classList.add("row", "g-4", "justify-content-center");
+
+      data.forEach((member, index) => {
         // Create the card container
         const card = document.createElement("div");
         card.classList.add("team-card", "col-md-4", "text-center", "p-3");
-        
+
         // Member photo
         const img = document.createElement("img");
         img.src = member.photo;
@@ -59,18 +65,22 @@ document.addEventListener("DOMContentLoaded", function() {
         githubLink.textContent = "GitHub";
         socialLinks.appendChild(githubLink);
 
-        // Add social links to card, then card to container
+        // Add social links to card
         card.appendChild(socialLinks);
-        teamContainer.appendChild(card);
+
+        // Add the card to the appropriate row
+        if (index < 3) {
+          topRow.appendChild(card);
+        } else {
+          bottomRow.appendChild(card);
+        }
       });
+
+      // Append rows to the team container
+      teamContainer.appendChild(topRow);
+      teamContainer.appendChild(bottomRow);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error fetching the JSON data:", error);
     });
-
-  // Initialize Bootstrap tooltips on elements with data-bs-toggle="tooltip"
-  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-    new bootstrap.Tooltip(tooltipTriggerEl);
-  });
 });
