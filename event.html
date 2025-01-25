@@ -283,6 +283,10 @@ function howmanyevents(){
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
+
+    <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  </table>
 `;
           day.innerHTML += template2; 
@@ -309,6 +313,10 @@ function howmanyevents(){
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
+    
+    <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  </table>
 `;
           day.innerHTML += template2; 
@@ -334,6 +342,10 @@ function howmanyevents(){
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
+    
+    <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  </table>
 `;
           day.innerHTML += template2; 
@@ -358,6 +370,10 @@ function howmanyevents(){
  
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+    
+    <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
 `;
@@ -407,6 +423,7 @@ function howmanyevents(){
         }
         }
         
+        
         //This is the same as the previous code, except this prints the rest of the schedules without the times
          if (i != 0){ 
         // if the time is 12 AM
@@ -432,6 +449,9 @@ function howmanyevents(){
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
+      <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  </table>
 `;
           day.innerHTML += template2; 
@@ -452,6 +472,9 @@ function howmanyevents(){
  
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+      <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
 `;
@@ -474,6 +497,9 @@ function howmanyevents(){
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
+      <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
  </table>
 `;
           day.innerHTML += template2; 
@@ -494,6 +520,9 @@ function howmanyevents(){
  
   <tr>
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
+  </tr>
+      <tr>
+   <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
 `;
@@ -532,7 +561,7 @@ function howmanyevents(){
         } } }   }     }
 //this calls the generateScheduleTables function
  function slowDown(){
-   generateScheduleTables(["Tue","Thu", "Fri"], "12am", "11pm");
+   generateScheduleTables(["Sunday","Monday"], "1pm", "4pm");
  }
 </script>
 </html>
