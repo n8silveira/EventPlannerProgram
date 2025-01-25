@@ -123,24 +123,36 @@ nav.container .btn {
 }
 /* General Header Styling */
 header {
-  background-color: #001f3f; /* Navy Blue */
-  color: white; /* White text for contrast */
-  padding: 20px 0; /* Add vertical padding */
-  text-align: center; /* Center-align content */
+  background-color: #001f3f; 
+  color: white; 
+  padding: 20px 0; 
+  text-align: center; 
 }
 
 /* Title Styling (h1) */
 header h1 {
-  font-family: 'Montserrat', sans-serif; /* Modern, bold font */
-  font-weight: 700; /* Extra-bold for emphasis */
-  font-size: 3rem; /* Large font size for prominence */
-  margin: 0; /* Remove default margin */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 700; 
+  font-size: 3rem; 
+  margin: 0; 
 }
 
 /* Slogan Styling (p) */
 header p {
-  font-family: 'Roboto', sans-serif; /* Clean, professional font */
-  font-weight: 300; /* Light font weight for contrast */
-  font-size: 1.25rem; /* Smaller size than the title */
-  margin-top: 10px; /* Add slight spacing below the title */
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 300; 
+  font-size: 1.25rem; 
+  margin-top: 10px; 
+}
+
+.info-icon {
+  cursor: pointer;    
+  border-radius: 50%;   
+  transition: all 0.3s ease;  
+}
+
+.info-icon:hover {
+  background-color:white; 
+  color: #002e5d;              
+  padding: 0.3rem;            /
 }
