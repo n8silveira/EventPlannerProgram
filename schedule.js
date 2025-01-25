@@ -35,14 +35,62 @@ function grabPeople(eventID) {
     });
     return people;
 }
-function printPeople() {
-    people.forEach(person => {
-        const {name, schedule} = person;
-        console.log(name + ": " + schedule);
-    });
+
+/*
+  pull data from darren's schedule table and package into nice format
+  "schedule": ["monday; 9:00am-10:00am", "monday; 11:00am-1:00pm"] ["wednesday; 9:00am-11:00am"]
+  loop thru all 15 min increments; check to see if each  block is highlighted
+*/
+function packageSchedule(eventID) { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
+    // var hour = document.getElementById("");
+    // const folderPath = path.join(__dirname, 'events', eventID, `${eventID}.json`);
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const timeIntervals = ['00', '15', '30', '45'];
+
+    // practice example while darren still grinds
+    let mockExample = ['Sunday-11-0', 'Sunday-11-1', 'Sunday-11-3', 'Tuesday-16-2'];
+
+    const packagedSchedule = [];
+
+    // [i]: iterate thru days (Sunday -> Saturday)
+    for (let i = 0; i < days.length; i++) {
+        const currentDay = days[i];
+        let dayPortion = [];
+        // [j]: iterate through hours (11 -> 12)
+        for (let j = 0; j < 24; j++) {
+            let currentBlock = '';
+            // [k]: iterates thru 15-min increments
+            // 0 = :00-15; 1 = :15-30; 2 = :30-45; 3 = :45-00 
+            for (let k = 0; k < 3; k++) {
+                const correctLayout = `${currentDay}-${j}-${k}`; // right format
+                if (mockExample.includes(correctLayout)) {
+                    const formattedTime = `${j}:${timeIntervals[k].padStart(2, '0')}am`; // add 0 at the end
+                    if (!currentBlock) {
+                        currentBlock = formattedTime;
+                    }
+                } else if (currentBlock) {
+                    const endtime = `${j}:${timeIntervals[k].padStart(2, '0')}am`;
+                    dayPortion.push(`${currentBlock}-${endtime}`);
+                    currentBlock = '';
+                }
+            }
+            // pushes multiple days
+            if (currentBlock) {
+                // completes 15-min interval block
+                const endtime = `${j + 1}:00am`; // change to regex am/pm
+                dayPortion.push(`${currentBlock}-${endtime}`); 
+            }
+        }
+        if (dayPortion.length > 0) {
+            packagedSchedule.push(`${currentDay}; ${dayPortion.join(', ')}`);
+        }
+    }
+    return packagedSchedule;
 }
+
+// split by ;
 // convert string input times ("4:45pm") -> int military times (1645)
-function convertToMilit(time) {
+function numerizeSchedule(time) {
     // format input into proper convention: 1) hour, 2) mins, 3) am/pm
     const pattern = /^(\d{1,2}):(\d{2})([ap]m)$/i;
     const parts = time.match(pattern); // turns format into array of strings
@@ -87,5 +135,6 @@ function generateEvent(eventID) {
     return people;
 }
 const eventID = "EMZADlYxV242q";
-const people = generateEvent(eventID); // [{name: 'angel', schedule: [ [Array] ] }, ...]
-console.log(people);
+console.log(packageSchedule(eventID));
+// const people = generateEvent(eventID); // [{name: 'angel', schedule: [ [Array] ] }, ...]
+// console.log(people);
