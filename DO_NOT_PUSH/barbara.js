@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 const path = require('path');
 
 function grabPeople(eventID) {
@@ -32,7 +32,7 @@ function grabPeople(eventID) {
 }
 const grab = grabPeople("EMZADlYxV242q"); // after calling this...
 console.log(grab); // desired output -> ["barb","josh","nate"]
-
+/*
 
 
 //Josh logic
@@ -51,10 +51,13 @@ if their schedules overlap, draw an edge between A and B.
 */
 function schedulePeople(people, schedules, m, meetTime) {
     function findOverlap(scheduleA, scheduleB) {
+        //the total overlapping time between Schedule A and B
         let overlap = 0;
         
+        //calculate the overlapping time in minutes
         for (let i = 0; i < scheduleA.length; i++) {
             for (let j = 0; j < scheduleB.length; j++) {
+                //start and end times
                 const start = Math.max(scheduleA[i][0], scheduleB[j][0]);
                 const end = Math.min(scheduleA[i][1], scheduleB[j][1]);
                 if (start < end) {
@@ -62,13 +65,14 @@ function schedulePeople(people, schedules, m, meetTime) {
                 }
             }
         }
-        
+        // return overlapping time in minutes
         return overlap;
     }
-    
+  //const days = ["Sunday" , "Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday",]; 
   const n = people.length;
-  const p = Math.floor(n / m);  // Number of people per event
-  const graph = findCompatibleTimesGraph(people, schedules, meetTime);
+  const p = Math.floor(n / m);  // number of people per event= amount of people/Number of events 
+  const graph = findCompatibleTimesGraph(people, schedules, meetTime, findOverlap);
+  
 
   const pairs = [];
   
@@ -88,20 +92,24 @@ function schedulePeople(people, schedules, m, meetTime) {
   // Sort pairs by overlap in descending order
   pairs.sort((a, b) => b.overlap - a.overlap);
 
-  //creates empty events array
+  //creates empty events/m  array
   const events = Array.from({ length: m }, () => []); 
+  //keeps track of people who have already been scheduled into events
   const usedPeople = new Set();
   
   // Scheduling the pairs into events
   for (let i = 0; i < pairs.length; i++) {
       const [personA, personB] = pairs[i].pair;
       let isAvailable = true;
+      
 
+      //check if either person is already scheduled into an events
       if (usedPeople.has(personA) || usedPeople.has(personB)) {
           isAvailable = false; // Skip if either person has already been scheduled
       }
 
       if (isAvailable) {
+        // try to put the pairs in an event
           for (let j = 0; j < events.length; j++) {
               const event = events[j];
               
@@ -114,7 +122,8 @@ function schedulePeople(people, schedules, m, meetTime) {
                           break;
                       }
                   }
-                  
+
+                  // if they can join, add them to an event
                   if (canJoin) {
                       event.push(personA, personB);
                       usedPeople.add(personA);
@@ -126,27 +135,12 @@ function schedulePeople(people, schedules, m, meetTime) {
       }
   }
 
-  console.log("Scheduled Events:", events);
+ console.log("Scheduled Events:", events);
+
+
 }
 
-function findOverlap(scheduleA, scheduleB) {
-    let overlap = 0;
-    
-    for (let i = 0; i < scheduleA.length; i++) {
-        for (let j = 0; j < scheduleB.length; j++) {
-            const start = Math.max(scheduleA[i][0], scheduleB[j][0]);
-            const end = Math.min(scheduleA[i][1], scheduleB[j][1]);
-            if (start < end) {
-                overlap += end - start; // Add the overlapping times
-            }
-        }
-    }
-    
-    return overlap;
-}
-
-
-function findCompatibleTimesGraph(people, schedules, meetTime) {
+function findCompatibleTimesGraph(people, schedules, meetTime,findOverlap) {
   const graph = {};
   
   // Build the graph based on the overlap
@@ -170,6 +164,7 @@ function findCompatibleTimesGraph(people, schedules, meetTime) {
   return graph;
 }
 
+
 // Example data
 const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran"];
 const schedules = {
@@ -179,9 +174,10 @@ const schedules = {
   Diego: [[1600, 1800]],
   Emily: [[1300, 1400], [1500, 1600]],
   Fran: [[1400, 1800]]
-};
-const meetTime = 60;
-const m = 3; // Number of events  
+};  
+//
+const meetTime = 20; // the length of meet up in minutes
+const m = 2; // Number of events  
 
 // Run the scheduling function
 schedulePeople(people, schedules, m, meetTime);
