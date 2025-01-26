@@ -62,6 +62,19 @@ if their schedules overlap, draw an edge between A and B.
 
 function schedulePeople(people, schedules, m, meetTime) {
     // josh: modified function to return overlapping time slots
+     let hours = Math.floor(miliTime / 100);
+    let minutes = miliTime % 100;
+    let[hours, minutes] = time.split(":");
+     
+    minutes += numInMins;
+
+   hours += Math.floor(minutes / 60);
+   minutes = minutes % 60;
+
+   hours = hours % 24;
+
+   return (hours * 100) + minutes;
+}
     function findOverlap(scheduleA, scheduleB) {
         //the total overlapping times between Schedule A and B
         let overlap = [];
@@ -139,6 +152,7 @@ function schedulePeople(people, schedules, m, meetTime) {
 
   // josh modified: this shouldn't make pairs, should generate sets of size p
   // and p+1 if n%m != 0
+  
   // josh approach
   // if there's a closed loop of size p then add that pair
   // maybe: https://www.geeksforgeeks.org/cycles-of-length-n-in-an-undirected-and-connected-graph/
