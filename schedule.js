@@ -35,60 +35,92 @@ function grabPeople(eventID) {
     });
     return people;
 }
-
 /*
   pull data from darren's schedule table and package into nice format
   "schedule": ["monday; 9:00am-10:00am", "monday; 11:00am-1:00pm"] ["wednesday; 9:00am-11:00am"]
   loop thru all 15 min increments; check to see if each  block is highlighted
 */
-function packageSchedule(eventID) { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
-    // var hour = document.getElementById("");
-    // const folderPath = path.join(__dirname, 'events', eventID, `${eventID}.json`);
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const timeIntervals = ['00', '15', '30', '45'];
+// input: ['Sunday-11-0', ... 'Tuesday-16-2']
+// output: ['Sunday; 11:00am-11:15am', 'Tuesday; 4:30pm-4:45pm']
+function packageSchedule(eventID, eventData) { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
+    // pull "schedule:" from eventData
+    const scheduleArray = eventData.schedule;
+    const packagedSchedule = {};
 
-    // practice example while darren still grinds
-    let mockExample = ['Sunday-11-0', 'Sunday-11-1', 'Sunday-11-3', 'Tuesday-16-2'];
+    for (let i = 0; i < scheduleArray.length; i++) {
+        // separate each index as a "time block"
+        const timeBlock = scheduleArray[i];
+        const splitTimeBlock = timeBlock.split('-'); // divide it into three parts: [i]-[j]-[k]
 
-    const packagedSchedule = [];
-
-    // [i]: iterate thru days (Sunday -> Saturday)
-    for (let i = 0; i < days.length; i++) {
-        const currentDay = days[i];
-        let dayPortion = [];
+        // [i]: iterate thru days (Sunday -> Saturday)
+        const day = splitTimeBlock[0].toLowerCase();
         // [j]: iterate through hours (11 -> 12)
-        for (let j = 0; j < 24; j++) {
-            let currentBlock = '';
-            // [k]: iterates thru 15-min increments
-            // 0 = :00-15; 1 = :15-30; 2 = :30-45; 3 = :45-00 
-            for (let k = 0; k < 3; k++) {
-                const correctLayout = `${currentDay}-${j}-${k}`; // right format
-                if (mockExample.includes(correctLayout)) {
-                    const formattedTime = `${j}:${timeIntervals[k].padStart(2, '0')}am`; // add 0 at the end
-                    if (!currentBlock) {
-                        currentBlock = formattedTime;
-                    }
-                } else if (currentBlock) {
-                    const endtime = `${j}:${timeIntervals[k].padStart(2, '0')}am`;
-                    dayPortion.push(`${currentBlock}-${endtime}`);
-                    currentBlock = '';
-                }
-            }
-            // pushes multiple days
-            if (currentBlock) {
-                // completes 15-min interval block
-                const endtime = `${j + 1}:00am`; // change to regex am/pm
-                dayPortion.push(`${currentBlock}-${endtime}`); 
-            }
+        const hour = splitTimeBlock[1];
+        // [k]: iterates thru 15-min increments
+        const quarter = splitTimeBlock[2]; // 0 = :00-15; 1 = :15-30; 2 = :30-45; 3 = :45-00
+
+        // turn hour and quarter from strings to ints
+        const startOfHour = parseInt(hour, 10);
+        const startOfMinute = parseInt(quarter, 10) * 15; // 0*15 = 0(mins), 1*15=15; 2*15=30, 3*15=45
+
+        // create the new formatted time: hour:minute,meridian
+        const filledMinute = startOfMinute.toString().padStart(2, '0');
+        const formattedTime = `${startOfHour % 12 || 12}:${filledMinute}${startOfHour >= 12 ? 'pm' : 'am'}`; // '12:00pm'
+        
+        if (!packagedSchedule[day]) {
+            packagedSchedule[day] = [];
         }
-        if (dayPortion.length > 0) {
-            packagedSchedule.push(`${currentDay}; ${dayPortion.join(', ')}`);
-        }
+        // push all that correctly formatted data into day
+        packagedSchedule[day].push({hour: startOfHour, minute: startOfMinute, formatted: formattedTime});        
     }
-    return packagedSchedule;
+    console.log(packagedSchedule);
+
+    const newSchedule = []; // blank slate
+    // grab specifically the key attributes (Sunday, Tuesday etc)
+    const formattedKeys = Object.keys(packagedSchedule);
+    
+    for (let i = 0; i < formattedKeys.length; i++) {
+        const day = formattedKeys[i]; // iterate thru 
+        const times = packagedSchedule[day];
+        
+        // function to sort times array in chronological order
+        times.sort((a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute));
+
+        const ranges = [];
+        var startTime = null;
+
+        for (let j = 0; j < times.length; j++) {
+            const time = times[j];
+            const nextTime = times[j + 1]; // check following block of time (to see if selected)
+            if (startTime == null) {
+                startTime = time;
+            }
+            if (nextTime && ((nextTime.hour * 60 + nextTime.minute) - (time.hour * 60 + time.minute)) == 15) {
+                continue;
+            } else {
+                time.minute += 15;
+                if (time.minute >= 60) {
+                    time.hour += 1;
+                    time.minute = 0;
+                    if (time.hour >= 24) {
+                        time.hour = 0;
+                    }
+                }
+                const startOfHour = time.hour;
+                const startOfMinute = time.minute;
+                const filledMinute = startOfMinute.toString().padStart(2, '0');
+                const formattedTime = `${startOfHour % 12 || 12}:${filledMinute}${startOfHour >= 12 ? 'pm' : 'am'}`; // '12:00pm'
+        
+                ranges.push(`${startTime.formatted}-${formattedTime}`);
+                startTime = null;
+            }
+        }
+        newSchedule.push(`${day};${ranges.join(', ')}`);
+    }
+    return newSchedule;
 }
 
-// split by ;
+
 // convert string input times ("4:45pm") -> int military times (1645)
 function numerizeSchedule(time) {
     // format input into proper convention: 1) hour, 2) mins, 3) am/pm
@@ -135,6 +167,15 @@ function generateEvent(eventID) {
     return people;
 }
 const eventID = "EMZADlYxV242q";
-console.log(packageSchedule(eventID));
+// practice mock example while darren still grinds
+const eventData = {schedule: ['Sunday-11-0', 
+                                'Friday-20-3', 
+                                'Sunday-11-1',
+                                'Tuesday-16-0', 
+                                'Sunday-11-3',
+                                'Sunday-11-2',
+                                'Wednesday-23-3'
+                            ]};
+console.log(packageSchedule(eventID, eventData));
 // const people = generateEvent(eventID); // [{name: 'angel', schedule: [ [Array] ] }, ...]
 // console.log(people);
