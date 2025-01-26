@@ -115,6 +115,7 @@ nav.container {
   align-items: center;
   gap: 15px;
   margin-top: 20px;
+  
 }
 
 nav.container .btn {
@@ -155,4 +156,7 @@ header p {
   background-color:white; 
   color: #002e5d;
   padding: 0.3rem;            /
+}
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar */
 }

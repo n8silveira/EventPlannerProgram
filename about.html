@@ -29,10 +29,15 @@
     </header>
     
     <!-- Navigation Buttons -->
-    <nav class="nav.container ">
-        <button style="background-color: grey; border-color:grey" onclick="document.location = 'index.html'">Home</button>
-        <button style="background-color: #002e5d; border-color:#002e5d" onclick="document.location = 'about.html'">About</button>
+    <nav class="d-flex justify-content-center align-items-center py-3">
+        <button class="btn btn-primary me-2 fw-bold" 
+                style="background-color: #002e5d; border-color: #002e5d; width: 160px; height: 50px; font-size: 18px;" 
+                onclick="document.location = 'index.html'">Home</button>
+        <button class="btn btn-secondary fw-bold" 
+                style="background-color: grey; border-color: grey; width: 160px; height: 50px; font-size: 18px;" 
+                onclick="document.location = 'about.html'">About</button>
     </nav>
+    
     <!-- Team Cards Container -->
     <section class="container my-5">
         <div class="row g-4" id="teamContainer">
