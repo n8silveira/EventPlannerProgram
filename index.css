@@ -158,5 +158,21 @@ header p {
   padding: 0.3rem;            /
 }
 body {
-  overflow-y: scroll; /* Always show vertical scrollbar */
+  overflow-y: scroll; /* Ensures consistent scrollbar visibility */
+  scroll-behavior: smooth; /* Enables smooth scrolling for user actions */
+}
+
+::-webkit-scrollbar {
+  width: 12px; /* Adjust scrollbar width */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaa; /* Color for the scrollbar thumb */
+  border-radius: 6px; /* Rounded edges for a softer look */
+  border: 3px solid #f8f8f8; /* Adds spacing around the thumb */
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Light background for scrollbar track */
+  border-radius: 6px;
 }
