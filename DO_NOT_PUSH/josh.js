@@ -229,49 +229,16 @@ function schedulePeople(people, schedules, m, meetTime) {
   //    EVERYTHING ABOVE THIS IS FIXED    //
   //////////////////////////////////////////
 
-  return;
-  //creates empty events/m  array
-  const events = Array.from({ length: m }, () => []); 
-  //keeps track of people who have already been scheduled into events
-  const usedPeople = new Set();
   
-  // Scheduling the pairs into events
-  for (let i = 0; i < sets.length; i++) {
-      const [personA, personB] = sets[i].pair;
-      let isAvailable = true;
-      
 
-      //check if either person is already scheduled into an events
-      if (usedPeople.has(personA) || usedPeople.has(personB)) {
-          isAvailable = false; // Skip if either person has already been scheduled
-      }
-
-      if (isAvailable) {
-        // try to put the pairs in an event
-          for (let j = 0; j < events.length; j++) {
-              const event = events[j];
-              
-              // Check if both persons can join the event
-              if (event.length < p) {  // If there is space in the event
-                  let canJoin = true;
-                  for (let member of event) {
-                      if (!graph[member]?.includes(personA) || !graph[member]?.includes(personB)) {
-                          canJoin = false;
-                          break;
-                      }
-                  }
-
-                  // if they can join, add them to an event
-                  if (canJoin) {
-                      event.push(personA, personB);
-                      usedPeople.add(personA);
-                      usedPeople.add(personB);
-                      break;  // Once added to an event, move to the next pair
-                  }
-              }
-          }
-      }
-  }
+  //keeps track of people who have already been scheduled into events
+  var usedPeople = [];
+  var usedEvents = [];
+  
+  // 0. going through all the events...
+  // 1. make sure event is valid (not in usedPeople/usedEvents/etc.)
+  // 2. if so, choose that event (add it to usedPeople/usedEvents/etc.)
+  // 3. repeat steps 1&2 until we the end or 
 
  console.log("Scheduled Events:", events);
 
