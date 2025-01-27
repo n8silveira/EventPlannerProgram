@@ -5,60 +5,35 @@ http://localhost:8080/event.html?eventID=EMZADlYxV242q
 
 */
 
-/*const fs = require('fs');
-const path = require('path');
-
-function grabPeople(eventID) {
-    // events/eventId/people/*
-    const folderPath = path.join(__dirname, 'events', eventID, 'people');
-    const people = [];
-   
-   
-    if (!fs.existsSync(folderPath)) {
-        console.error('The "people" folder does not exist.');
-        return [];
-    }
-    // for every file in events/eventId/people/, add their name and push it to people
-    const files = fs.readdirSync(folderPath);
-   
-    // find out how to open a file in 
-    files.forEach((file) => {
-        const filePath = path.join(folderPath, file);
-        const data = fs.readFileSync(filePath, 'utf8'); 
-
-        try {
-            const personData = JSON.parse(data); 
-            if (personData.username) {
-                people.push(personData.username); 
-            }
-        } catch (err) {
-            console.error(`Error parsing file ${file}:`, err);
-        }
-    });
-    return people;
-}
-const grab = grabPeople("EMZADlYxV242q"); // after calling this...
-console.log(grab); // desired output -> ["barb","josh","nate"]
-/*
-
-
-//Josh logic
-/*
-Input: List of people with schedules, number of events(m)
-convert each person's schedule into integer intervals
-bulid a digraph:
-for each pair of people:
-if their schedules overlap, draw an edge between A and B.
-4. Group people:
-   Use an algorithm to form groups of compatible people.
-5. Distribute groups into m Bible Talks:
-   Ensure groups are evenly distributed across BTs.
-   Avoid assigning the same time slot to multiple BTs.
-6. Output the list of Bible Talks with assigned people and time slots.
-*/
-
 // josh note: we should definitely move away from doing things by name
 // and instead generate nameIDs just so that we don't trust users too much
+
+// we need another helper function that finds the minutes between milit time
+function minutesBtwMilit(startTime, endTime) {
+    minutes = 60; // temp
+
+    return minutes;
+}
+
+// helper function barb made to add minutes to military time
+function addToMiliTime(miliTime, numInMins){
+    //convert military time to hours and mins
+    let hours = Math.floor(miliTime / 100);
+    let minutes = miliTime % 100;
+     
+    //add numInMins to mins
+    minutes += numInMins;
+
+  //add the total mins to the hours if its over 60 and takes remainder
+   hours += Math.floor(minutes / 60);
+   minutes = minutes % 60;
+ 
+   //doesnt allow hours to go pass 24hours
+   hours = hours % 24;
+
+ // returns the new military time
+   return (hours * 100) + minutes;
+}
 
 function schedulePeople(people, schedules, m, meetTime) {
     // josh: modified function to return overlapping time slots
@@ -81,14 +56,13 @@ function schedulePeople(people, schedules, m, meetTime) {
                     // temp fix will just be find 1 hour increment, in the future
                     // make a helper function that converts minutes to milit with add
                     // and subtract method
-                    if(end-start >= 100) {
+                    if(minutesBtwMilit(start, end) >= meetTime) {
                         var tempStart = start;
                         while(tempStart < end) {
-                            var tempEnd = tempStart+100; // addToMilit(tempStart, meetTime)
-                            overlap.push([tempStart, tempEnd]);
-                            tempStart += 100;
+                            var tempEnd = addToMiliTime(tempStart, meetTime);
+                            overlap.push([scheduleA[i][0], tempStart, tempEnd]);
+                            tempStart = addToMiliTime(tempStart, meetTime);
                         }
-                        //overlap.push([start,end]); // Add the overlapping times
                     }
                 }
             }
@@ -100,8 +74,9 @@ function schedulePeople(people, schedules, m, meetTime) {
   const n = people.length;
   const p = Math.floor(n / m);  // number of people per event= amount of people/Number of events 
   const unevenP = n%m!=0;
-  console.log("n: %d\nm: %d\np: %d\n unevenP:%d\n", n, m, p, unevenP);
+  console.log("n: %d\nm: %d\np: %d\nunevenP:%d\n", n, m, p, unevenP);
   
+  console.log(schedules);
   //console.log(findOverlap(schedules[people[1]], schedules[people[2]]));
   const graph = findCompatibleTimesGraph(people, schedules, meetTime, findOverlap);
   
@@ -128,9 +103,9 @@ function schedulePeople(people, schedules, m, meetTime) {
     // If all elements are equal, the lists are identical
     return true;
   }
-  function hasDuplicate(list, element) {
-    for(let i = 0; i < list.length; i++) {
-        if(areIdentical(list[i], element)) {
+  function hasDuplicate(sets, element) {
+    for(let i = 0; i < sets.length; i++) {
+        if(areIdentical(sets[i].set, element)) {
             return true;
         }
     }
@@ -141,7 +116,7 @@ function schedulePeople(people, schedules, m, meetTime) {
   // and p+1 if n%m != 0
   // josh approach
   // if there's a closed loop of size p then add that pair
-  // maybe: https://www.geeksforgeeks.org/cycles-of-length-n-in-an-undirected-and-connected-graph/
+  // credit: https://www.geeksforgeeks.org/cycles-of-length-n-in-an-undirected-and-connected-graph/
   const keys = Object.keys(graph);
   var V = keys.length;
   var count = 0; // this is not needed, just for debug ig
@@ -159,10 +134,7 @@ function schedulePeople(people, schedules, m, meetTime) {
         //console.log("marking false:"+keys[vert]);
         // if vertex vert end with vertex start
         //console.log("start:"+keys[start]+" end:"+keys[vert]);
-        //console.log(pairBuilder);
-        //console.log("includes?:"+graph[keys[start]].includes(keys[vert]));
-        // this condition needs to check everyone in the set
-        // instead of graph[keys[start]].includes(keys[vert])
+        //console.log(setBuilder);
         var validSet = true;
         for(let i = 0; i < setBuilder.length; i++) {
             for(let j = 0; j < setBuilder.length; j++) {
@@ -184,9 +156,25 @@ function schedulePeople(people, schedules, m, meetTime) {
             var rawSet = structuredClone(setBuilder);
             rawSet.sort();
             if(!hasDuplicate(sets, rawSet)) {
-                var overlap = []; // remember to set this appropiately
+                var masterOverlap = [];
+                var anchorSched = schedules[rawSet[0]];
+                anchorSched.forEach(element => {
+                    masterOverlap.push(JSON.parse(JSON.stringify(element)));
+                });
+                //var tempOverlap = structuredClone(keys.indexOf(rawSet[0]));
+                for(let i = 1; i < rawSet.length; i++) {
+                    let newOverlap = findOverlap(masterOverlap, schedules[rawSet[i]]);
+                    var tempOverlap = [];
+                    newOverlap.forEach(element => {
+                        tempOverlap.push(JSON.parse(JSON.stringify(element)));
+                    });
+                    masterOverlap = tempOverlap;
+                }
+                var overlap = masterOverlap; // remember to set this appropiately
                 var setToPush = { set: rawSet, overlap: overlap};
-                sets.push(setToPush);
+                if(overlap.length != 0) {
+                    sets.push(setToPush);
+                }
             }
             setBuilder.pop();
             count++;
@@ -227,17 +215,20 @@ function schedulePeople(people, schedules, m, meetTime) {
   if(unevenP) {
     cycles(graph, p+1);
   }
-  
-  console.log(sets);
 
-  //////////////////////////////////////////
-  //    EVERYTHING ABOVE THIS IS FIXED    //
-  //////////////////////////////////////////
+  
   
   // Sort sets by size in descending order
   sets.sort((a, b) => b.set.length - a.set.length);
 
-  console.log(sets);
+  sets.forEach(element => {
+    console.log(element);
+  });
+
+  //////////////////////////////////////////
+  //    EVERYTHING ABOVE THIS IS FIXED    //
+  //////////////////////////////////////////
+
   return;
   //creates empty events/m  array
   const events = Array.from({ length: m }, () => []); 
