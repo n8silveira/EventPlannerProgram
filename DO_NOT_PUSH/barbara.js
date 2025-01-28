@@ -50,6 +50,23 @@ if their schedules overlap, draw an edge between A and B.
 6. Output the list of Bible Talks with assigned people and time slots.
 */
 function schedulePeople(people, schedules, m, meetTime) {
+    function addToMiliTime(miliTime, numInMins){
+        let hours = Math.floor(miliTime / 100);
+        let minutes = miliTime % 100;
+         
+        minutes += numInMins;
+
+       hours += Math.floor(minutes / 60);
+       minutes = minutes % 60;
+
+       hours = hours % 24;
+
+       return (hours * 100) + minutes;
+    }
+
+       console.log(addToMiliTime(1130, 95));
+
+    
     function findOverlap(scheduleA, scheduleB) {
         //the total overlapping time between Schedule A and B
         let overlap = 0;
@@ -67,6 +84,9 @@ function schedulePeople(people, schedules, m, meetTime) {
         }
         // return overlapping time in minutes
         return overlap;
+        //store as a list of strings;
+        //makes it possible for days
+        //return  
     }
   //const days = ["Sunday" , "Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday",]; 
   const n = people.length;
@@ -138,6 +158,7 @@ function schedulePeople(people, schedules, m, meetTime) {
  console.log("Scheduled Events:", events);
 
 
+
 }
 
 function findCompatibleTimesGraph(people, schedules, meetTime,findOverlap) {
@@ -168,16 +189,16 @@ function findCompatibleTimesGraph(people, schedules, meetTime,findOverlap) {
 // Example data
 const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran"];
 const schedules = {
-  Alex: [[1300, 1400]],      
-  Barbara: [[1300, 1500], [1700, 1800]],
-  Chris: [[1300, 1500]],
+  Alex: [[1000, 1400], [1000, 1400]],     
+  Barbara: [[100, 1500], [1700, 2400]], 
+  Chris: [[800, 1090]],
   Diego: [[1600, 1800]],
-  Emily: [[1300, 1400], [1500, 1600]],
-  Fran: [[1400, 1800]]
+  Emily: [[1100, 2000], [1900, 2200]],
+  Fran: [[1400, 1500]]
 };  
 //
-const meetTime = 20; // the length of meet up in minutes
-const m = 2; // Number of events  
+const meetTime = 60; // the length of meet up in minutes
+const m = 4; // Number of events  
 
 // Run the scheduling function
 schedulePeople(people, schedules, m, meetTime);

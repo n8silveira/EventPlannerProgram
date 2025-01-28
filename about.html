@@ -10,13 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="about.css">
-     <!-- favicon-->
+     <!--Favicon-->
      <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
      <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
      <link rel="icon" type="image/png" sizes="192x192" href="/images/icon/android-chrome-192x192.png">
      <link rel="icon" type="image/png" sizes="512x512" href="/images/icon/android-chrome-512x512.png">
      <link rel="apple-touch-icon" href="/images/icon/apple-touch-icon.png">
      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    </style>
+
 </head>
 <body class="bg-light">
     <header class="text-white py-3" style="background-color: #001f3f;">
@@ -26,20 +28,25 @@
         </div>
     </header>
     
-    <!-- Navigation Buttons -->
-    <nav class="container text-center my-4">
-        <button class="btn btn-primary mx-2" style="background-color: grey; border-color:grey" onclick="document.location = 'index.html'">Home</button>
-        <button class="btn btn-secondary mx-2" style="background-color: #002e5d; border-color: #002e5d" onclick="document.location = 'about.html'">About</button>
+    <!--Navigation Buttons-->
+    <nav class="d-flex justify-content-center align-items-center py-3">
+        <button class="btn btn-primary me-3 fw-bold" 
+                style="background-color: grey; border-color: grey; padding: 12px 20px; width: 180px; font-size: 18px; border-radius: 8px;" 
+                onclick="document.location = 'index.html'">Homepage</button>
+        <button class="btn btn-secondary fw-bold" 
+                style="background-color: #002e5d; border-color: #002e5d; padding: 12px 20px; width: 180px; font-size: 18px; border-radius: 8px;" 
+                onclick="document.location = 'about.html'">About Us</button>
     </nav>
-    <!-- Team Cards Container -->
-    <section class="container my-5">
+    
+    <!--Team Cards Container-->
+    <section class="container my-4">
         <div class="row g-4" id="teamContainer">
-            <!-- Team cards will be dynamically loaded here -->
+            <!--Team cards will be dynamically loaded here-->
         </div>
     </section>
-    <!-- Bootstrap JS -->
+    <!--Bootstrap Js-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- Custom JS -->
+    <!--Custom JS-->
     <script src="about.js"></script>
 </body>
 </html>
