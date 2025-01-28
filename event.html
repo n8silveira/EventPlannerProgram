@@ -194,6 +194,7 @@ function howmanyevents(){
     s = parseInt(s);
     }else{
       s = parseInt(startTime[0]);
+      console.log(s);
     }
    
     var e = endTime.indexOf("m");
@@ -203,6 +204,7 @@ function howmanyevents(){
     e = parseInt(e);
     }else{
       e = parseInt(endTime[0]);
+      console.log(e);
     }
 
     //This converts the start and end times to military times
@@ -284,7 +286,7 @@ function howmanyevents(){
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
 
-    <tr>
+    <tr id = "woohoo ${j}">
    <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
@@ -314,7 +316,7 @@ function howmanyevents(){
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
     
-    <tr>
+    <tr id = "woohoo ${j}">
    <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
@@ -343,7 +345,7 @@ function howmanyevents(){
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
     
-    <tr>
+    <tr id = "woohoo ${j}">
    <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
@@ -372,7 +374,7 @@ function howmanyevents(){
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
     
-    <tr>
+    <tr >
    <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
@@ -382,44 +384,38 @@ function howmanyevents(){
         
         //if the current time is one less than the end time and the end time is before 12 PM
         if (((j + 1) == e) && (e < 12)){
+          var eT = document.getElementById(`${days[i]}-${j}-borderless-3`)
           console.log(e + " AM");
           hour = e;
           meridem = "AM";
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;
-        //if the current time is one less than the end time and the end time is 12 PM
+        
+         
+          eT.innerHTML = `<td ><sup>${hour} ${meridem}</sup></td>`; 
+          eT.style = "padding:0px";"font-size:2px";
+          eT.style = "font-size:10px";
+            //if the current time is one less than the end time and the end time is 12 PM
         }else if (((j + 1) == e) &&  e == 12){
+          var eT = document.getElementById(`${days[i]}-${j}-borderless-3`)
           console.log(e + " PM")
           hour = e;
           meridem = "PM";
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;
-        }
+
+          eT.innerHTML = `<td><sup>${hour} ${meridem}</sup>`; 
+          eT.style = "padding:0px";
+          eT.style = "font-size:10px";
+       
+          }
         //if the current time is one less than the end time and the end time is after 12 PM
         else if (((j + 1) == e) && (e > 12)){
+          var eT = document.getElementById(`${days[i]}-${j}-borderless-3`)
           console.log((e-12) + " PM");
           hour = e -12;
           meridem = "PM";
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px"> <sup> ${hour} ${meridem}</sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;
+
+        
+          eT.innerHTML = ` <td><sup>${hour} ${meridem}</sup></td> `;        
+          eT.style = "padding:0px";
+          eT.style = "font-size:10px";
         }
         }
         
@@ -530,38 +526,10 @@ function howmanyevents(){
         }
         
         
-        if (((j + 1) == e) && (e < 12)){
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;  
-        }else if (((j + 1) == e) &&  e == 12){
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;
-        }
-        else if (((j + 1) == e) && (e > 12)){
-          let template2 = `    
-        <table>
-  <tr>
-   <td id = "${days[i]}-${j}-borderless-0" style = "text-align:right; font-size:10px; padding:5.5px"> <sup></sup> </td> <td id = "${days[i]}-${j}-end-0" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose;  height = "5x" width = 10px> </td>
-  </tr>
-        </table>
-        `;
-          day.innerHTML += template2;
-        } } }   }     }
+ } }   }     }
 //this calls the generateScheduleTables function
  function slowDown(){
-   generateScheduleTables(["Sunday","Monday"], "9am", "11pm");
+   generateScheduleTables(["Sunday","Monday"], "7am", "9am");
  }
 </script>
 </html>
