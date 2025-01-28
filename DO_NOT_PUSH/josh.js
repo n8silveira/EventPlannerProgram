@@ -44,6 +44,7 @@ function schedulePeople(people, schedules, m, meetTime) {
         //calculate the overlapping time in minutes
         for (let i = 0; i < scheduleA.length; i++) {
             for (let j = 0; j < scheduleB.length; j++) {
+                // skip if not the same day
                 if(scheduleA[i][0] != scheduleB[j][0]) {
                     continue;
                 }
@@ -78,7 +79,7 @@ function schedulePeople(people, schedules, m, meetTime) {
   
   console.log(schedules);
   //console.log(findOverlap(schedules[people[1]], schedules[people[2]]));
-  const graph = findCompatibleTimesGraph(people, schedules, meetTime, findOverlap);
+  const graph = findCompatibleTimesGraph(people, schedules, findOverlap);
   
   //console.log(schedules);
 
@@ -220,11 +221,11 @@ function schedulePeople(people, schedules, m, meetTime) {
   
   // Sort sets by size in descending order
   sets.sort((a, b) => b.set.length - a.set.length);
-
+  /*
   sets.forEach(element => {
     console.log(element);
-  });
-
+  });*/
+  console.log(sets);
   //////////////////////////////////////////
   //    EVERYTHING ABOVE THIS IS FIXED    //
   //////////////////////////////////////////
@@ -235,17 +236,44 @@ function schedulePeople(people, schedules, m, meetTime) {
   var usedPeople = [];
   var usedEvents = [];
   
+  // initialize desiredLength to appropiate (p or p+1);
+  var desiredLength = unevenP ? p+1 : p;
+  var triedOverlapIndex = 0;
+  
+  function inUsedPeople(set, usedPeople) {
+
+  }
+
+  for(let i = 0; i < sets.length; i++) {
+    var fail = false;
+
+    // as long as its not in used people
+    if(!inUsedPeople(sets[i], usedPeople)) {
+        fail = true;
+    }
+    // as long as its not an already made bible talk
+
+
+    if(fail) {
+        continue;
+    } else {
+        // do things
+    }
+  }
+  return;
   // 0. going through all the events...
   // 1. make sure event is valid (not in usedPeople/usedEvents/etc.)
   // 2. if so, choose that event (add it to usedPeople/usedEvents/etc.)
   // 3. repeat steps 1&2 until we the end or 
+  
 
- console.log("Scheduled Events:", events);
+  
+  console.log("Scheduled Events:", events);
 
 
 }
 
-function findCompatibleTimesGraph(people, schedules, meetTime,findOverlap) {
+function findCompatibleTimesGraph(people, schedules,findOverlap) {
   const graph = {};
   
   // Build the graph based on the overlap
