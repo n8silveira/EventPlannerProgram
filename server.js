@@ -130,6 +130,10 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'about.html'));
 });
 
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'images', 'icon', 'favicon.ico'));
+});
+
 // give the user eventID.json (from req.body)
 app.post('/event', (req, res) => {
     const data = req.body;
@@ -137,8 +141,11 @@ app.post('/event', (req, res) => {
     res.sendFile(path.join(__dirname, 'events', eventID, `${eventID}.json`));
 });
 
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, 'images', 'icon', 'favicon.ico'));
+// assigning schedules
+app.post('/schedule', (req, res) => {
+    // accept user's username, password, event, AND schedule
+    // check if user/pass valid. if yes, then save schedule in schedule field. if no, "schedule assignment failed"
+    
 });
 
 app.listen(8080, () => {

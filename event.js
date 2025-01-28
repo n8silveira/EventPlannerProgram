@@ -32,9 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     loadAndGenerateSchedule(eventID);
     // const scheduleIDs = document.querySelectorAll('button[id^="b"]');
-    const selectedDays = Array.from(document.querySelectorAll('table[data-selected="true"]')).map(table => table.value);
+    // make string formatted correctly:
 
-    console.log(selectedDays);
+    document.getElementById('save-button').addEventListener('click', (e) => {
+        const formattedSchedule = packageSchedule();
+        console.log(formattedSchedule);
+    });
 
     document.getElementById('login').addEventListener('click', (e) => {
         e.preventDefault();
@@ -110,9 +113,9 @@ function activateNormalUser(username) {
 */
 // input: ['Sunday-11-0', ... 'Tuesday-16-2']
 // output: ['Sunday; 11:00am-11:15am', 'Tuesday; 4:30pm-4:45pm']
-function packageSchedule(eventID, eventData) { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
+function packageSchedule() { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
     // pull "schedule:" from eventData
-    const scheduleArray = eventData.schedule;
+    const scheduleArray = Array.from(document.querySelectorAll('td[data-selected="true"]')).map(table => table.getAttribute('id'));
     const packagedSchedule = {};
 
     for (let i = 0; i < scheduleArray.length; i++) {
@@ -183,25 +186,11 @@ function packageSchedule(eventID, eventData) { // eventData: ['Sunday-11-0', ...
                 startTime = null;
             }
         }
-        newSchedule.push(`${day};${ranges.join(', ')}`);
+        ranges.forEach(range => {
+            newSchedule.push(`${day};${range}`);
+        });
+        // newSchedule.push(`${day};${ranges.join(', ')}`);
     }
     return newSchedule;
 }
-// const eventID = "EMZADlYxV242q";
-// // practice mock example while darren still grinds
-// const eventData = {schedule: ['Sunday-11-0', 
-//                                 'Friday-20-3', 
-//                                 'Sunday-11-1',
-//                                 'Tuesday-16-0', 
-//                                 'Sunday-11-3',
-//                                 'Sunday-11-2',
-//                                 'Wednesday-23-3'
-//                             ]};
-// console.log(packageSchedule(eventID, eventData));
-
-/* loop thru all blocks
-    take all 
-*/
-const selectedDays = Array.from(document.querySelectorAll('table[data-selected="true"]')).map(table => table.value);
-
-console.log(selectedDays);
+const eventID = "EMZADlYxV242q";
