@@ -236,30 +236,7 @@ function schedulePeople(people, schedules, m, meetTime) {
   var usedPeople = [];
   var usedEvents = [];
   
-  // initialize desiredLength to appropiate (p or p+1);
-  var desiredLength = unevenP ? p+1 : p;
-  var triedOverlapIndex = 0;
   
-  function inUsedPeople(set, usedPeople) {
-
-  }
-
-  for(let i = 0; i < sets.length; i++) {
-    var fail = false;
-
-    // as long as its not in used people
-    if(!inUsedPeople(sets[i], usedPeople)) {
-        fail = true;
-    }
-    // as long as its not an already made bible talk
-
-
-    if(fail) {
-        continue;
-    } else {
-        // do things
-    }
-  }
   return;
   // 0. going through all the events...
   // 1. make sure event is valid (not in usedPeople/usedEvents/etc.)
