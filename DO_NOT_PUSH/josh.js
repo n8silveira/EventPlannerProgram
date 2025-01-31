@@ -7,6 +7,10 @@ http://localhost:8080/event.html?eventID=EMZADlYxV242q
 
 // josh note: we should definitely move away from doing things by name
 // and instead generate nameIDs just so that we don't trust users too much
+// other josh note: if there isn't a solution found, the algo is kinda useless
+// so instead we should cache the highest percentage of attendance
+
+
 
 // we need another helper function that finds the minutes between milit time
 function minutesBtwMilit(startTime, endTime) {
@@ -225,11 +229,6 @@ function schedulePeople(people, schedules, m, meetTime) {
     console.log(element);
   });
   //console.log(sets);
-  //////////////////////////////////////////
-  //    EVERYTHING ABOVE THIS IS FIXED    //
-  //////////////////////////////////////////
-
-
   
   // helper function to see if the current set is in usedPeople
   function inUsedPeople(set, usedPeople) {
@@ -365,10 +364,20 @@ function schedulePeople(people, schedules, m, meetTime) {
     }
   }
 
+  
+
   console.log("=====final results=====");
   for(let i = 0; i < usedEvents.length; i++) {
     console.log(usedEvents[i]+" meeting at "+usedEventTimes[i]);
   }
+
+  // we should formally package our event with some params such as:
+  // finish_reason: "success/fail/compromise"
+  // events: set and meeting time in dict
+  // if the user calls generate event and they set compromise to true
+  // then it will just return the best case scenario even if all people
+  // can't make the event
+
 
   return;
   // 0. going through all the events...
@@ -455,7 +464,9 @@ schedulePeople(people, schedules, m, meetTime);
 
 
 
-/////////////////////
+//////////////////////////////////////////
+//    EVERYTHING ABOVE THIS IS FIXED    //
+//////////////////////////////////////////
 
 
 
