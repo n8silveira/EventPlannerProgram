@@ -274,11 +274,22 @@ function schedulePeople(people, schedules, m, meetTime) {
         }
         // iterate appropiately and continue or success
         if(fail) {
+            // check if anchorIndex is max, ultimate fail condition
+            console.log("anchorIndex:"+anchorIndex);
+            if(anchorIndex >= sets.length-1) {
+                console.log("=====NO SOLUTION=====");
+                usedPeople = [];
+                usedEventTimes = [];
+                usedEvents = [];
+                i = sets.length+1;
+                continue;
+            }
             // reset appropiately
             // if there are more meettime possibilites then choose next one
             if(triedEvent[anchorIndex] < sets[anchorIndex].overlap.length-1) {
                 // save value, reset and input value
                 console.log("try next event possibility for "+sets[anchorIndex].set);
+                triedEvent[anchorIndex]++;
                 var tempTriedEventVal = triedEvent[anchorIndex];
                 triedEvent = Array(sets.length).fill(0);
                 triedEvent[anchorIndex] = tempTriedEventVal;
@@ -324,6 +335,7 @@ function schedulePeople(people, schedules, m, meetTime) {
             skip = true;
         } else {
             // check this i again with differring triedEvent index
+            console.log("checking next meettime for "+sets[i].set);
             triedEvent[i]++;
             continue;
         }
@@ -398,7 +410,7 @@ function findCompatibleTimesGraph(people, schedules,findOverlap) {
 
 // Example data
 
-const people = ["Alice", "Bob", "Charlie", "Diana", "Ethan", "Fiona", "George"];
+/*const people = ["Alice", "Bob", "Charlie", "Diana", "Ethan", "Fiona", "George"];
 const schedules = {
   Alice: [[0, 900, 1100], [1, 1300, 1500]],   
   Bob: [[0, 1000, 1200], [1, 1400, 1600]],    
@@ -407,7 +419,7 @@ const schedules = {
   Ethan: [[0, 900, 1000], [0, 1500, 1700], [1, 1000, 1200]], 
   Fiona: [[0, 1300, 1400], [1, 900, 1000], [1, 1600, 1700]],  
   George: [[0, 1000, 1200], [1, 1300, 1500]]
-};
+};*/
 
 /*const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
 const schedules = {
@@ -418,7 +430,16 @@ const schedules = {
   Emily: [[0, 1300, 1400], [0, 1500, 1600]],
   Fran: [[0, 1400, 1800]],
   Greg: [[0, 1500,1600]]
-};  */
+};*/
+
+const people = ["Alex", "Barbara", "Chris", "Diego"];
+const schedules = {
+    Alex: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],   
+    Barbara: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],
+    Chris: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],
+    Diego: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]]
+};
+
 /*const people = ["Alex", "Barbara", "Chris"];
 const schedules = {
     Alex: [[1,900,1000], [1, 1100,1300],[3,900,1100]],
@@ -427,7 +448,7 @@ const schedules = {
 };*/
 //
 const meetTime = 60; // the length of meet up in minutes
-const m = 3; // Number of events  
+const m = 4; // Number of events  
 
 // Run the scheduling function
 schedulePeople(people, schedules, m, meetTime);
