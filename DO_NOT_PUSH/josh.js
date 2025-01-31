@@ -262,7 +262,7 @@ function schedulePeople(people, schedules, m, meetTime) {
   var desiredSetLength = unevenP ? p+1 : p;
   var anchorIndex = 0;
   var i = 0;
-
+  console.log("begining algorithm");
   while(i <= sets.length) {
     // end-of-loop check to see if we succeeded
     if(i == sets.length) {
@@ -271,16 +271,27 @@ function schedulePeople(people, schedules, m, meetTime) {
         if(usedPeople.length != keys.length) {
             console.log("FAIL condition: not everyone used");
             fail = true;
-            anchorIndex++;
         }
         // iterate appropiately and continue or success
         if(fail) {
             // reset appropiately
+            // if there are more meettime possibilites then choose next one
+            if(triedEvent[anchorIndex] < sets[anchorIndex].overlap.length-1) {
+                // save value, reset and input value
+                console.log("try next event possibility for "+sets[anchorIndex].set);
+                var tempTriedEventVal = triedEvent[anchorIndex];
+                triedEvent = Array(sets.length).fill(0);
+                triedEvent[anchorIndex] = tempTriedEventVal;
+            } else {
+                // otherwise, increment anchorIndex and reset triedEvent
+                console.log("all events tried for anchor:"+sets[anchorIndex].set);
+                triedEvent = Array(sets.length).fill(0);
+                anchorIndex++;
+            }
             console.log("reseting starting at index:"+anchorIndex);
             usedPeople = [];
             usedEventTimes = [];
             usedEvents = [];
-            triedEvent = Array(sets.length).fill(0);
             desiredSetLength = unevenP ? p+1 : p;
             i = anchorIndex;
             continue;
