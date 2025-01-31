@@ -262,7 +262,7 @@ function schedulePeople(people, schedules, m, meetTime) {
   var desiredSetLength = unevenP ? p+1 : p;
   var anchorIndex = 0;
   var i = 0;
-  console.log("begining algorithm");
+  console.log("=====begining algorithm=====");
   while(i <= sets.length) {
     // end-of-loop check to see if we succeeded
     if(i == sets.length) {
@@ -288,7 +288,7 @@ function schedulePeople(people, schedules, m, meetTime) {
                 triedEvent = Array(sets.length).fill(0);
                 anchorIndex++;
             }
-            console.log("reseting starting at index:"+anchorIndex);
+            console.log("reseting starting at anchorIndex:"+anchorIndex);
             usedPeople = [];
             usedEventTimes = [];
             usedEvents = [];
@@ -398,7 +398,18 @@ function findCompatibleTimesGraph(people, schedules,findOverlap) {
 
 // Example data
 
-const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
+const people = ["Alice", "Bob", "Charlie", "Diana", "Ethan", "Fiona", "George"];
+const schedules = {
+  Alice: [[0, 900, 1100], [1, 1300, 1500]],   
+  Bob: [[0, 1000, 1200], [1, 1400, 1600]],    
+  Charlie: [[0, 1100, 1300], [1, 900, 1100]], 
+  Diana: [[0, 1400, 1700], [1, 1200, 1400]],  
+  Ethan: [[0, 900, 1000], [0, 1500, 1700], [1, 1000, 1200]], 
+  Fiona: [[0, 1300, 1400], [1, 900, 1000], [1, 1600, 1700]],  
+  George: [[0, 1000, 1200], [1, 1300, 1500]]
+};
+
+/*const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
 const schedules = {
   Alex: [[0, 1300, 1400]],   
   Barbara: [[0, 1300, 1500], [0, 1700, 1800]],
@@ -407,7 +418,7 @@ const schedules = {
   Emily: [[0, 1300, 1400], [0, 1500, 1600]],
   Fran: [[0, 1400, 1800]],
   Greg: [[0, 1500,1600]]
-};  
+};  */
 /*const people = ["Alex", "Barbara", "Chris"];
 const schedules = {
     Alex: [[1,900,1000], [1, 1100,1300],[3,900,1100]],
