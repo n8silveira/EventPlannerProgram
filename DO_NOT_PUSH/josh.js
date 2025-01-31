@@ -221,11 +221,10 @@ function schedulePeople(people, schedules, m, meetTime) {
   
   // Sort sets by size in descending order
   sets.sort((a, b) => b.set.length - a.set.length);
-  /*
   sets.forEach(element => {
     console.log(element);
-  });*/
-  console.log(sets);
+  });
+  //console.log(sets);
   //////////////////////////////////////////
   //    EVERYTHING ABOVE THIS IS FIXED    //
   //////////////////////////////////////////
@@ -270,26 +269,28 @@ function schedulePeople(people, schedules, m, meetTime) {
         var fail = false;
         console.log("final check");
         if(usedPeople.length != keys.length) {
-            console.log("fail condition: not everyone used");
+            console.log("FAIL condition: not everyone used");
             fail = true;
             anchorIndex++;
         }
         // iterate appropiately and continue or success
         if(fail) {
             // reset appropiately
+            console.log("reseting starting at index:"+anchorIndex);
             usedPeople = [];
             usedEventTimes = [];
             usedEvents = [];
             triedEvent = Array(sets.length).fill(0);
-            desiredSetLength = p+1;
+            desiredSetLength = unevenP ? p+1 : p;
             i = anchorIndex;
             continue;
         } else {
-            console.log("success");
+            console.log("SUCCESS");
             i = sets.length+1;
             continue;
         }
     }
+    //console.log("checking "+sets[i].set+" at time:"+sets[i].overlap[triedEvent[i]]);
     var skip = false;
 
     // if this set length is not the desired, skip it
@@ -305,8 +306,10 @@ function schedulePeople(people, schedules, m, meetTime) {
     }
     // as long as its not an already made bible talk
     if(!skip && inUsedEvents(sets[i].overlap[triedEvent[i]], usedEventTimes)) {
+        console.log("skipping because meettime for "+sets[i].set+":"+sets[i].overlap[triedEvent[i]]+" in usedEvents...");
         // check event times until we've exhausted all options
-        if(triedEvent[i] >= sets[i].overlap.length) {
+        if(triedEvent[i] >= sets[i].overlap.length-1) {
+            console.log("exhausted all event options here");
             skip = true;
         } else {
             // check this i again with differring triedEvent index
@@ -323,7 +326,7 @@ function schedulePeople(people, schedules, m, meetTime) {
     } else {
         // if we're not skipping...
         // add this configuration to usedEvents/usedPeople
-        console.log("adding "+sets[i].set+" with time: "+sets[i].overlap[triedEvent[i]]);
+        console.log("ADDING "+sets[i].set+" with time: "+sets[i].overlap[triedEvent[i]]);
         usedEventTimes.push(sets[i].overlap[triedEvent[i]]);
         sets[i].set.forEach(person => {
             usedPeople.push(person);
@@ -383,16 +386,23 @@ function findCompatibleTimesGraph(people, schedules,findOverlap) {
 
 
 // Example data
-const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
+
+const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran"];
 const schedules = {
   Alex: [[0, 1300, 1400]],   
   Barbara: [[0, 1300, 1500], [0, 1700, 1800]],
   Chris: [[0, 1300, 1500]],
   Diego: [[0, 1600, 1800]],
   Emily: [[0, 1300, 1400], [0, 1500, 1600]],
-  Fran: [[0, 1400, 1800]],
-  Greg: [[0, 1500,1600]]
+  Fran: [[0, 1400, 1800]]
+  //Greg: [[0, 1500,1600]]
 };  
+/*const people = ["Alex", "Barbara", "Chris"];
+const schedules = {
+    Alex: [[1,900,1000], [1, 1100,1300],[3,900,1100]],
+    Barbara: [[1,1100,1200],[3,900,1000],[3,1200,1300]],
+    Chris: [[3,1200,1300]]
+};*/
 //
 const meetTime = 60; // the length of meet up in minutes
 const m = 3; // Number of events  
