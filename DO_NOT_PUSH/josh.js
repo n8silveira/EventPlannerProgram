@@ -264,10 +264,10 @@ function schedulePeople(people, schedules, m, meetTime) {
   var i = 0;
 
   while(i <= sets.length) {
-    // final check to see if we succeeded
+    // end-of-loop check to see if we succeeded
     if(i == sets.length) {
         var fail = false;
-        console.log("final check");
+        console.log("end-of-loop check...");
         if(usedPeople.length != keys.length) {
             console.log("FAIL condition: not everyone used");
             fail = true;
@@ -387,15 +387,15 @@ function findCompatibleTimesGraph(people, schedules,findOverlap) {
 
 // Example data
 
-const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran"];
+const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
 const schedules = {
   Alex: [[0, 1300, 1400]],   
   Barbara: [[0, 1300, 1500], [0, 1700, 1800]],
   Chris: [[0, 1300, 1500]],
   Diego: [[0, 1600, 1800]],
   Emily: [[0, 1300, 1400], [0, 1500, 1600]],
-  Fran: [[0, 1400, 1800]]
-  //Greg: [[0, 1500,1600]]
+  Fran: [[0, 1400, 1800]],
+  Greg: [[0, 1500,1600]]
 };  
 /*const people = ["Alex", "Barbara", "Chris"];
 const schedules = {
