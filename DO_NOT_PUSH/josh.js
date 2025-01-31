@@ -16,7 +16,7 @@ function minutesBtwMilit(startTime, endTime) {
 }
 
 // helper function barb made to add minutes to military time
-function addToMiliTime(miliTime, numInMins){
+function addToMilitTime(miliTime, numInMins){
     //convert military time to hours and mins
     let hours = Math.floor(miliTime / 100);
     let minutes = miliTime % 100;
@@ -60,9 +60,9 @@ function schedulePeople(people, schedules, m, meetTime) {
                     if(minutesBtwMilit(start, end) >= meetTime) {
                         var tempStart = start;
                         while(tempStart < end) {
-                            var tempEnd = addToMiliTime(tempStart, meetTime);
+                            var tempEnd = addToMilitTime(tempStart, meetTime);
                             overlap.push([scheduleA[i][0], tempStart, tempEnd]);
-                            tempStart = addToMiliTime(tempStart, meetTime);
+                            tempStart = addToMilitTime(tempStart, meetTime);
                         }
                     }
                 }
@@ -230,13 +230,120 @@ function schedulePeople(people, schedules, m, meetTime) {
   //    EVERYTHING ABOVE THIS IS FIXED    //
   //////////////////////////////////////////
 
+
   
+  // helper function to see if the current set is in usedPeople
+  function inUsedPeople(set, usedPeople) {
+    for(let i = 0; i < set.set.length; i++) {
+        if(usedPeople.includes(set.set[i])) {
+            return true;
+        }
+    }
+    return false;
+  }
+  // helper function that checks if event is in usedEvents
+  // for now just checks if they are exact...
+  function inUsedEvents(event, usedEvents) {
+    for(let i = 0; i < usedEvents.length; i++) {
+        if(event[0] == usedEvents[i][0] && event[1] == usedEvents[i][1] && event[2] == usedEvents[i][2]) {
+            return true;
+        }
+    }
+    return false;
+  }
+  //return;
 
   //keeps track of people who have already been scheduled into events
   var usedPeople = [];
+  var usedEventTimes = [];
   var usedEvents = [];
+  var triedEvent = Array(sets.length).fill(0);
   
-  
+  // initialize desiredLength to appropiate (p or p+1);
+  var desiredSetLength = unevenP ? p+1 : p;
+  var anchorIndex = 0;
+  var i = 0;
+
+  while(i <= sets.length) {
+    // final check to see if we succeeded
+    if(i == sets.length) {
+        var fail = false;
+        console.log("final check");
+        if(usedPeople.length != keys.length) {
+            console.log("fail condition: not everyone used");
+            fail = true;
+            anchorIndex++;
+        }
+        // iterate appropiately and continue or success
+        if(fail) {
+            // reset appropiately
+            usedPeople = [];
+            usedEventTimes = [];
+            usedEvents = [];
+            triedEvent = Array(sets.length).fill(0);
+            desiredSetLength = p+1;
+            i = anchorIndex;
+            continue;
+        } else {
+            console.log("success");
+            i = sets.length+1;
+            continue;
+        }
+    }
+    var skip = false;
+
+    // if this set length is not the desired, skip it
+    if(sets[i].set.length != desiredSetLength) {
+        console.log("skipping because desiredSetLength="+desiredSetLength);
+        skip = true;
+    }
+
+    // as long as its not in used people
+    if(!skip && inUsedPeople(sets[i], usedPeople)) {
+        console.log("skipping because "+sets[i].set + " is in usedPeople:"+usedPeople);
+        skip = true;
+    }
+    // as long as its not an already made bible talk
+    if(!skip && inUsedEvents(sets[i].overlap[triedEvent[i]], usedEventTimes)) {
+        // check event times until we've exhausted all options
+        if(triedEvent[i] >= sets[i].overlap.length) {
+            skip = true;
+        } else {
+            // check this i again with differring triedEvent index
+            triedEvent[i]++;
+            continue;
+        }
+        
+    }
+
+    if(skip) {
+        // iterate i and continue(redundant) 
+        i++;
+        continue;
+    } else {
+        // if we're not skipping...
+        // add this configuration to usedEvents/usedPeople
+        console.log("adding "+sets[i].set+" with time: "+sets[i].overlap[triedEvent[i]]);
+        usedEventTimes.push(sets[i].overlap[triedEvent[i]]);
+        sets[i].set.forEach(person => {
+            usedPeople.push(person);
+        });
+        usedEvents.push(sets[i].set);
+        // if desiredSetLength was p+1, set it back to p
+        if(desiredSetLength == p+1) {
+            console.log("found p+1, setting to p now");
+            desiredSetLength = p;
+        }
+        // finally iterate i
+        i++;
+    }
+  }
+
+  console.log("=====final results=====");
+  for(let i = 0; i < usedEvents.length; i++) {
+    console.log(usedEvents[i]+" meeting at "+usedEventTimes[i]);
+  }
+
   return;
   // 0. going through all the events...
   // 1. make sure event is valid (not in usedPeople/usedEvents/etc.)
