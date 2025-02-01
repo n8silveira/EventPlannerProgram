@@ -7,6 +7,9 @@ function create_random_url(string_length) {
     }
     return random_string;
 }
+function createUser(username, password, role) {
+    return { username, password, role, schedule: [] };
+}
 
 const { log } = require('console');
 const express = require('express');
@@ -82,7 +85,7 @@ app.post('/login', (req, res) => {
     // check if planner exists
     if (!plannerExists) {
         // first login: set user as event planner
-        const plannerData = { username, password, role: 'planner', schedule: [] };
+        const plannerData = createUser(username, password, "planner");
         fs.writeFileSync(plannerFile, JSON.stringify(plannerData, null, 2));
         return res.status(200).json({ message: `Welcome, ${username}! You are now the event planner.`, isPlanner: true });
     }
@@ -92,6 +95,7 @@ app.post('/login', (req, res) => {
         const data = JSON.parse(fs.readFileSync(`${peopleFolder}/${file}`, 'utf8'));
         return data.role === 'planner';
     });
+
     // gather user data
     const existingPlannerData = JSON.parse(fs.readFileSync(`${peopleFolder}/${existingPlannerFile}`, 'utf8'));
     // check if (pu == u)
@@ -115,7 +119,7 @@ app.post('/login', (req, res) => {
         return res.status(200).json({ message: `Welcome back, ${username}!`, isPlanner: false });
     } else {
         // normal login logic
-        const userData = { username, password, role: 'user' };
+        const userData = createUser(username, password, "user");
         fs.writeFileSync(userFile, JSON.stringify(userData, null, 2));
         return res.status(200).json({ message: `Welcome, ${username}! Your account has been created.`, isPlanner: false });
     }
