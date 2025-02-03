@@ -37,7 +37,7 @@ function grabPeople(eventID) {
 }
 
 // convert string input times ("4:45pm") -> int military times (1645)
-function numerizeSchedule(time) {
+function convertToMilit(time) {
     // format input into proper convention: 1) hour, 2) mins, 3) am/pm
     const pattern = /^(\d{1,2}):(\d{2})([ap]m)$/i;
     const parts = time.match(pattern); // turns format into array of strings
@@ -67,20 +67,48 @@ function generateEvent(eventID) {
     //convert all times into 24-hour time
     raw_people.forEach(person => {
         const {name, schedule} = person;
-
         const timeSlots = [];
 
         // unpack their schedule and then use convertToMilit(time)
+        // "sunday;11:00am-2:00pm" -> [0, 1100, 1400]
         schedule.forEach(timeSlot => {
-            const [startTime, endTime] = timeSlot.split("-"); // take out hyphen
-            const militStartTime = convertToMilit(startTime); // update start time
-            const militEndTime = convertToMilit(endTime); // update end time
-            timeSlots.push([militStartTime, militEndTime]);
+            const [dayAndStartTime, endTime] = timeSlot.split("-"); // "sunday;11:00am", "2:00pm"
+            
+            const [day, startTime] = dayAndStartTime.split(";"); // "sunday", "11:00am"
+            const dayID = getDayID(day.trim().toLowerCase());
+
+            const militStartTime = convertToMilit(startTime.trim()); // update start time
+            const militEndTime = convertToMilit(endTime.trim()); // update end time
+
+            timeSlots.push([dayID, militStartTime, militEndTime]);
         });
         people.push({name, schedule: timeSlots});
     });
     return people;
 }
+
+// helper function uses switch case to turn sunday=0, monday=1, ...
+function getDayID(day) {
+    switch (day) {
+        case 'sunday':
+            return 0;
+        case 'monday':
+            return 1;
+        case 'tuesday':
+            return 2;
+        case 'wednesday':
+            return 3;
+        case 'thursday':
+            return 4;
+        case 'friday':
+            return 5;
+        case 'saturday':
+            return 6;
+        default:
+            return -1;
+    }
+}
+
 // const eventID = "EMZADlYxV242q";
 // // practice mock example while darren still grinds
 // const eventData = {schedule: ['Sunday-11-0', 

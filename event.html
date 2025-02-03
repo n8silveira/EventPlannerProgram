@@ -108,7 +108,7 @@
     function save() {
         var item = document.getElementById("username").value;
         localStorage.setItem("storedName", item)
-        document.getElementsById("savedText").innerHTML = item + " SAVED";
+        document.getElementById("savedText").innerHTML = item + " SAVED";
     }
     function get() {
         localStorage.getItem("storedName");
