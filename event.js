@@ -1,3 +1,77 @@
+function loadAndGenerateSchedule(eventID) {
+    const eventData = {
+        eventID
+    };
+    fetch('http://localhost:8080/event', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData),
+    })
+    .then(async (response) => {
+        const responseData = await response.json();
+        if (!response.ok) {
+            throw new Error(errorData.message);
+        }
+        const days = responseData.days; // parameter 1: "days": [] from events/eventID.json
+        const earliestTime = responseData.earliestTime; // parameter 2: "earliestTime": "" from events/eventID.json
+        const latestTime = responseData.latestTime; // parameter 3: "latestTime": "" from events/eventID.json
+        generateScheduleTables(days, earliestTime, latestTime); // call generateScheduleTables() with desired data taken from eventID.json
+    })
+    .catch(error => {
+        console.error('Error grabbing event data:', error);
+    });
+}
+
+document.getElementById('save-button').addEventListener('click', (e) => {
+    const formattedSchedule = packageSchedule();
+    console.log(formattedSchedule);
+});
+
+document.getElementById('login').addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+        alert('Username and password are required foo');
+        return;
+    }
+    console.log('User data:', {username, password, eventID});
+
+    const userData = {
+        username,
+        password,
+        eventID,
+    };
+
+    fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+    })
+    .then(async (response) => {
+        const responseData = await response.json();
+        if (!response.ok) {
+            throw new Error(errorData.message);
+        }
+        alert(responseData.message);
+        if (responseData.isPlanner) {
+            activateEventPlanner(username);
+        } else {
+            activateNormalUser(username);
+        }
+    })
+    .catch(error => {
+        console.error('Error logging in:', error);
+        alert('Incorrect password...');
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const eventID = new URLSearchParams(window.location.search).get('eventID');
     console.log('Event ID:', eventID);
@@ -5,82 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('EVENT ID MISSING!');
         return;
     }
-    function loadAndGenerateSchedule(eventID) {
-        const eventData = {
-            eventID
-        };
-        fetch('http://localhost:8080/event', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(eventData),
-        })
-        .then(async (response) => {
-            const responseData = await response.json();
-            if (!response.ok) {
-                throw new Error(errorData.message);
-            }
-            const days = responseData.days; // parameter 1: "days": [] from events/eventID.json
-            const earliestTime = responseData.earliestTime; // parameter 2: "earliestTime": "" from events/eventID.json
-            const latestTime = responseData.latestTime; // parameter 3: "latestTime": "" from events/eventID.json
-            generateScheduleTables(days, earliestTime, latestTime); // call generateScheduleTables() with desired data taken from eventID.json
-        })
-        .catch(error => {
-            console.error('Error grabbing event data:', error);
-        });
-    }
+    
     loadAndGenerateSchedule(eventID);
     // const scheduleIDs = document.querySelectorAll('button[id^="b"]');
     // make string formatted correctly:
 
-     document.getElementById('save-button').addEventListener('click', (e) => {
-         const formattedSchedule = packageSchedule();
-         console.log(formattedSchedule);
-     });
-
-    document.getElementById('login').addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (!username || !password) {
-            alert('Username and password are required foo');
-            return;
-        }
-        console.log('User data:', {username, password, eventID});
-
-        const userData = {
-            username,
-            password,
-            eventID,
-        };
-
-        fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        })
-        .then(async (response) => {
-            const responseData = await response.json();
-            if (!response.ok) {
-                throw new Error(errorData.message);
-            }
-            alert(responseData.message);
-            if (responseData.isPlanner) {
-                activateEventPlanner(username);
-            } else {
-                activateNormalUser(username);
-            }
-        })
-        .catch(error => {
-            console.error('Error logging in:', error);
-            alert('Incorrect password...');
-        });
-    });
 });
 
 function activateEventPlanner(username) {
@@ -193,4 +196,3 @@ function packageSchedule() { // eventData: ['Sunday-11-0', ... 'Tuesday-16-2']
     }
     return newSchedule;
 }
-const eventID = "EMZADlYxV242q";
