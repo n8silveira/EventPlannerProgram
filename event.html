@@ -187,25 +187,27 @@ function howmanyevents(){
     
     var s = startTime.indexOf("m");  
     var smer = startTime.indexOf("m") - 1; //this varibale is set to the letter before "m" (could be "a" or "p")
-    var l = startTime.length;
-    if (l!= 3){ //This checks if the number before the semi-colon is a double digit number
+    var length_startTime = startTime.length;
+    if (length_startTime != 3){ //This checks if the number before the semi-colon is a double digit number
               //by checking the current index of s (if it's not 1, it's a double digit)
     s = startTime[0]+ startTime[1];
     s = parseInt(s);
     }else{
       s = parseInt(startTime[0]);
-      console.log(s);
     }
-   
+    var length_endTime = endTime.length;
     var e = endTime.indexOf("m");
     var emer = endTime.indexOf("m") - 1;
-    if (l!= 3){
+    if (length_endTime != 3){
     e = endTime[0]+ endTime[1];
+    console.log(e);
     e = parseInt(e);
+    console.log(e);
     }else{
       e = parseInt(endTime[0]);
-      console.log(e);
+      console.log("error")
     }
+    console.log(e);
 
     //This converts the start and end times to military times
     if ((s == "12") && (startTime[smer] == "a")){
@@ -227,6 +229,8 @@ function howmanyevents(){
     else{
       e = e;
     }
+    console.log(s);
+    console.log(e);
 
    //This creates n amount of tables based on the start and end times
    // for (i = s; i < e; i++){
@@ -316,7 +320,7 @@ function howmanyevents(){
    <td id = "${days[i]}-${j}-borderless-2" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-2" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
     
-    <tr id = "woohoo ${j}">
+    <tr id = "woohoo ${j}"> 
    <td id = "${days[i]}-${j}-borderless-3" style= "padding:5.5px"> </td> <td id = "${days[i]}-${j}-3" onclick = "changeColor(id)" style = "border:solid;background-color:mistyrose" height = "5px"></td>
   </tr>
  </table>
@@ -390,9 +394,10 @@ function howmanyevents(){
           meridem = "AM";
         
          
-          eT.innerHTML = `<td ><sup>${hour} ${meridem}</sup></td>`; 
-          eT.style = "padding:0px";"font-size:2px";
+          eT.innerHTML = `<td ><sub>${hour} ${meridem}</sub></td>`; 
+          eT.style = "padding:0px";
           eT.style = "font-size:10px";
+          //eT.style = "text-align:right";
             //if the current time is one less than the end time and the end time is 12 PM
         }else if (((j + 1) == e) &&  e == 12){
           var eT = document.getElementById(`${days[i]}-${j}-borderless-3`)
@@ -400,10 +405,10 @@ function howmanyevents(){
           hour = e;
           meridem = "PM";
 
-          eT.innerHTML = `<td><sup>${hour} ${meridem}</sup>`; 
+          eT.innerHTML = `<td><sub>${hour} ${meridem}</sub>`; 
           eT.style = "padding:0px";
           eT.style = "font-size:10px";
-       
+          //eT.style = "text-align:right";
           }
         //if the current time is one less than the end time and the end time is after 12 PM
         else if (((j + 1) == e) && (e > 12)){
@@ -413,9 +418,10 @@ function howmanyevents(){
           meridem = "PM";
 
         
-          eT.innerHTML = ` <td><sup>${hour} ${meridem}</sup></td> `;        
+          eT.innerHTML = ` <td><sub>${hour} ${meridem}</sub></td> `;        
           eT.style = "padding:0px";
           eT.style = "font-size:10px";
+          //eT.style = "text-align:right";
         }
         }
         
@@ -529,7 +535,7 @@ function howmanyevents(){
  } }   }     }
 //this calls the generateScheduleTables function
  function slowDown(){
-   generateScheduleTables(["Sunday","Monday"], "7am", "9am");
+   generateScheduleTables(["Sunday","Monday", "Tuesday"], "1am", "12pm");
  }
 </script>
 </html>
