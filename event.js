@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // const scheduleIDs = document.querySelectorAll('button[id^="b"]');
     // make string formatted correctly:
 
-    // document.getElementById('save-button').addEventListener('click', (e) => {
-    //     const formattedSchedule = packageSchedule();
-    //     console.log(formattedSchedule);
-    // });
+     document.getElementById('save-button').addEventListener('click', (e) => {
+         const formattedSchedule = packageSchedule();
+         console.log(formattedSchedule);
+     });
 
     document.getElementById('login').addEventListener('click', (e) => {
         e.preventDefault();

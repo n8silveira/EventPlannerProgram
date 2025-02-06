@@ -103,6 +103,7 @@
     </div>
 
 
+
 <script>
     var storedName = localStorage.getItem("storedName")
     function save() {
@@ -167,16 +168,20 @@ function howmanyevents(){
 </script>
 
 <!-- these are the buttons which, once pressed, call the associated functions-->
-<button id = "successfulLogin_button" onclick="successfulLogin()">Successful login</button>
+<!--<button id = "successfulLogin_button" onclick="successfulLogin()">Successful login</button>
 <button id = "schedules_button" onclick= "schedules()"> schedule</button>
 <button id = "how_many_events_button"onclick = "howmanyevents()"> How Many Events</button>
-
+-->
 <!-- this button, once pressed, calls the slowDown function-->
+ <!--
 <div id = "genere_schedules_tables_button">
   <button onclick= "slowDown()">
     Generate Schedules
   </button>
+-->
+  <button style="position:absolute; bottom:20px; left:100px"> Save</button>
 </div>
+
 <script>
   
 //this functions generates the schedules for the user to mark their availablity based
