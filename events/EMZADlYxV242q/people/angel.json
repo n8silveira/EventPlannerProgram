@@ -1,5 +1,6 @@
 {
   "username": "angel",
   "password": "123",
-  "schedule": ["10:00am-11:00am"]
+  "role": "user",
+  "schedule": ["sunday;10:00am-11:00am"]
 }

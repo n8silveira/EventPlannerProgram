@@ -1,0 +1,14 @@
+{
+    "playerName": "Josh",
+    "playerHealth": 20,
+    "inventory": [
+        {
+            "itemName":"Sword",
+            "itemDamage":5
+        },
+        {
+            "itemName":"Bow",
+            "itemDamage":7
+        }
+    ]
+}

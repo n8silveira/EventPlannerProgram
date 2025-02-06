@@ -1,8 +1,7 @@
 {
   "eventName": "Josh's Birthday",
   "days": [
-    "Sunday",
-    "Monday"
+    "Sunday"
   ],
   "earliestTime": "9am",
   "latestTime": "5pm",
