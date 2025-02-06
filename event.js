@@ -24,53 +24,7 @@ function loadAndGenerateSchedule(eventID) {
     });
 }
 
-document.getElementById('save-button').addEventListener('click', (e) => {
-    const formattedSchedule = packageSchedule();
-    console.log(formattedSchedule);
-});
 
-document.getElementById('login').addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (!username || !password) {
-        alert('Username and password are required foo');
-        return;
-    }
-    console.log('User data:', {username, password, eventID});
-
-    const userData = {
-        username,
-        password,
-        eventID,
-    };
-
-    fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-    })
-    .then(async (response) => {
-        const responseData = await response.json();
-        if (!response.ok) {
-            throw new Error(errorData.message);
-        }
-        alert(responseData.message);
-        if (responseData.isPlanner) {
-            activateEventPlanner(username);
-        } else {
-            activateNormalUser(username);
-        }
-    })
-    .catch(error => {
-        console.error('Error logging in:', error);
-        alert('Incorrect password...');
-    });
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     const eventID = new URLSearchParams(window.location.search).get('eventID');
@@ -80,7 +34,56 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    loadAndGenerateSchedule(eventID);
+    document.getElementById('save-button').addEventListener('click', (e) => {
+        // test with http://localhost:8080/event.html?eventID=R55lD20cbTibW
+        const formattedSchedule = packageSchedule();
+        console.log(formattedSchedule);
+    });
+    
+    document.getElementById('login').addEventListener('click', (e) => {
+        e.preventDefault();
+    
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+    
+        if (!username || !password) {
+            alert('Username and password are required foo');
+            return;
+        }
+        console.log('User data:', {username, password, eventID});
+    
+        const userData = {
+            username,
+            password,
+            eventID,
+        };
+    
+        fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+        .then(async (response) => {
+            const responseData = await response.json();
+            if (!response.ok) {
+                throw new Error(errorData.message);
+            }
+            alert(responseData.message);
+            if (responseData.isPlanner) {
+                activateEventPlanner(username);
+            } else {
+                activateNormalUser(username);
+            }
+
+            loadAndGenerateSchedule(eventID);
+        })
+        .catch(error => {
+            console.error('Error logging in:', error);
+            alert('Incorrect password...');
+        });
+    });
     // const scheduleIDs = document.querySelectorAll('button[id^="b"]');
     // make string formatted correctly:
 
