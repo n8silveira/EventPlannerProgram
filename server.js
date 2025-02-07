@@ -148,8 +148,29 @@ app.post('/event', (req, res) => {
 // assigning schedules
 app.post('/schedule', (req, res) => {
     // accept user's username, password, event, AND schedule
-    // check if user/pass valid. if yes, then save schedule in schedule field. if no, "schedule assignment failed"
-    
+    console.log(req.body);
+    const {username, password, eventID, schedule} = req.body;
+
+    // check if necessary fields exist
+    if (!eventID) { // check if eventID attributes even exists at all
+        return res.status(400).json({message: 'No eventID found...'});
+    }
+    if (!username) {
+        return res.status(400).json({message: 'No username found...'});
+    }
+    if (!password) {
+        return res.status(400).json({message: 'No password found...'});
+    }
+    if (!schedule) {
+        return res.status(400).json({message: 'No schedule found...'});
+    }
+    const folderPath = path.join(__dirname, 'events', eventID);
+    fs.stat(folderPath, (err, stats) => {
+        if (err || !stats.isDirectory()) {
+            return res.status(400).json({ message: 'Invalid eventID: not found' });
+        }
+        return res.status(200).json({ message: 'Success' })
+    });
 });
 
 app.listen(8080, () => {

@@ -84,6 +84,7 @@ function generateEvent(eventID) {
         });
         people.push({name, schedule: timeSlots});
     });
+    console.log(people);
     return people;
 }
 
@@ -109,7 +110,7 @@ function getDayID(day) {
     }
 }
 
-// const eventID = "EMZADlYxV242q";
+const eventID = "EMZADlYxV242q";
 // // practice mock example while darren still grinds
 // const eventData = {schedule: ['Sunday-11-0', 
 //                                 'Friday-20-3', 
