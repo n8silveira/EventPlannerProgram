@@ -2,5 +2,5 @@
   "username": "darren",
   "password": "123",
   "role": "planner",
-  "schedule": []
+  "schedule": ["sunday;1:00pm-3:00pm"]
 }

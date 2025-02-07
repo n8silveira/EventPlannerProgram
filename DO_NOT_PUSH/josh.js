@@ -13,14 +13,14 @@ http://localhost:8080/event.html?eventID=EMZADlYxV242q
 
 
 // we need another helper function that finds the minutes between milit time
-function minutesBtwMilit(startTime, endTime) {
+function minutesBtwMilit(startTime, endTime) { // 1330, 1400 -> 30 minutes
     minutes = 60; // temp
 
     return minutes;
 }
 
 // helper function barb made to add minutes to military time
-function addToMilitTime(miliTime, numInMins){
+function addToMilitTime(miliTime, numInMins){ // 930 + 45 minutes => 1015 (normal math: 975)
     //convert military time to hours and mins
     let hours = Math.floor(miliTime / 100);
     let minutes = miliTime % 100;
@@ -91,8 +91,6 @@ function schedulePeople(people, schedules, m, meetTime) {
 
   const sets = [];
 
-  
-  
   // helper function for lists
   function areIdentical(list1, list2) {
     // Check if the lengths are the same
@@ -209,7 +207,6 @@ function schedulePeople(people, schedules, m, meetTime) {
         marked[i] = true;
         //console.log("marking true:"+keys[i]);
     }
-    //return Math.floor(count/2);
     if(n == 2) {
         return count;
     }
@@ -325,6 +322,7 @@ function schedulePeople(people, schedules, m, meetTime) {
         console.log("skipping because "+sets[i].set + " is in usedPeople:"+usedPeople);
         skip = true;
     }
+
     // as long as its not an already made bible talk
     if(!skip && inUsedEvents(sets[i].overlap[triedEvent[i]], usedEventTimes)) {
         console.log("skipping because meettime for "+sets[i].set+":"+sets[i].overlap[triedEvent[i]]+" in usedEvents...");
@@ -430,7 +428,7 @@ const schedules = {
   George: [[0, 1000, 1200], [1, 1300, 1500]]
 };*/
 
-/*const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
+const people = ["Alex", "Barbara", "Chris", "Diego", "Emily", "Fran", "Greg"];
 const schedules = {
   Alex: [[0, 1300, 1400]],   
   Barbara: [[0, 1300, 1500], [0, 1700, 1800]],
@@ -439,15 +437,15 @@ const schedules = {
   Emily: [[0, 1300, 1400], [0, 1500, 1600]],
   Fran: [[0, 1400, 1800]],
   Greg: [[0, 1500,1600]]
-};*/
-
+};
+/*
 const people = ["Alex", "Barbara", "Chris", "Diego"];
 const schedules = {
     Alex: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],   
     Barbara: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],
     Chris: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]],
     Diego: [[0, 900, 1000], [0, 1100, 1200], [0, 1300, 1400]]
-};
+};*/
 
 /*const people = ["Alex", "Barbara", "Chris"];
 const schedules = {
@@ -457,7 +455,7 @@ const schedules = {
 };*/
 //
 const meetTime = 60; // the length of meet up in minutes
-const m = 4; // Number of events  
+const m = 2; // Number of events  
 
 // Run the scheduling function
 schedulePeople(people, schedules, m, meetTime);

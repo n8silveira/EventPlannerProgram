@@ -1,0 +1,11 @@
+{
+  "eventName": "alignment",
+  "days": [
+    "Sunday",
+    "Tuesday"
+  ],
+  "earliestTime": "11am",
+  "latestTime": "1pm",
+  "timestamp": "2025-02-06T18:41:35.196Z",
+  "eventID": "rwY9ruTTkCyrJ"
+}
